@@ -6,11 +6,12 @@ import {
 } from './endpoints';
 
 const Api = {
-  login: async () => {
+  login: async userPayload => {
     try {
-      const response = await axios.post(`${loginEndpoint}`);
-      if (response.data.data) {
-        return response.data.data;
+      const response = await axios.post(`${loginEndpoint}`, userPayload);
+      if (response.data.code === 200) {
+        localStorage.setItem('accessToken', response.data.token);
+        return response.data;
       } else {
         console.log('no login');
       }
