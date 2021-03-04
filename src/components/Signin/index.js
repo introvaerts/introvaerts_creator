@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 
-const Signin = ({ token, getToken }) => {
+const Signin = () => {
+  //for storing token
+  const [token, setToken] = useState('');
+
   //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
     email: '',
@@ -28,13 +31,13 @@ const Signin = ({ token, getToken }) => {
     const data = Api.login(userPayload);
     console.log(data);
 
-    getToken(localStorage.getItem('accessToken'));
+    setToken(localStorage.getItem('accessToken'));
   };
 
   //deleting token from local storage & resetting state
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
-    getToken('');
+    setToken('');
   };
 
   return (

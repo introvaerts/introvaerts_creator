@@ -1,8 +1,13 @@
 const Signout = () => {
+  //deleting token from local storage
+  const handleLogOut = () => {
+    localStorage.removeItem('accessToken');
+  };
+
   return (
-    <div>
-      <h2>Signout</h2>
-    </div>
+    <button type="button" onClick={handleLogOut}>
+      Log Out
+    </button>
   );
 };
 

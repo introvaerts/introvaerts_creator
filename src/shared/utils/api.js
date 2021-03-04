@@ -19,6 +19,7 @@ const Api = {
       console.error('login: ', error);
     }
   },
+
   createUser: async (urlStr, setImgStrVar) => {
     try {
       const response = await axios.post(`${createUserEndpoint}`);
