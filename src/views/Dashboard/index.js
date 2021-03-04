@@ -7,9 +7,9 @@ import {
   Route
 } from "react-router-dom";
 
-import Design from "./Design/";
-import Content from "./Content/";
-import Settings from "./Settings/";
+import Design from "./Design";
+import Content from "./Content";
+import Settings from "./Settings";
 
 const Dashboard = () => {
   let { path, url } = useRouteMatch();

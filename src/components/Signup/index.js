@@ -1,6 +1,8 @@
 const Singup = () => {
   return (
-    <div>Singup</div>
+    <div>
+      <h2>Signup</h2>
+    </div>
   );
 };
 

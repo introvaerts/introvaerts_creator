@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Signin from "../views/Signin";
-import Signup from "../views/Signup";
+import Signin from "../components/Signin";
+import Signup from "../components/Signup";
 import Dashboard from "../views/Dashboard";
 
 const MainRouter = () => (
