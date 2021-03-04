@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 
-const Signin = () => {
+const Signin = ({ token, getToken }) => {
+  //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
     email: '',
     password: '',
     message: null,
   });
 
-  const [token, setToken] = useState('');
-
+  //for reading input from login form
   const handleChange = e => {
     const { id, value } = e.target;
     setUserLogIn(prevState => ({
@@ -18,6 +18,7 @@ const Signin = () => {
     }));
   };
 
+  //submitting login credentials & storing token
   const handleLogIn = e => {
     e.preventDefault();
     const userPayload = {
@@ -25,16 +26,16 @@ const Signin = () => {
       password: userLogIn.password,
     };
     const data = Api.login(userPayload);
+    console.log(data);
 
-    setToken(localStorage.getItem('accessToken'));
+    getToken(localStorage.getItem('accessToken'));
   };
 
+  //deleting token from local storage & resetting state
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
+    getToken('');
   };
-
-  let hola = localStorage.getItem('accessToken');
-  console.log(hola);
 
   return (
     <div>
@@ -63,13 +64,14 @@ const Signin = () => {
         <button type="submit" onClick={handleLogIn}>
           Submit
         </button>
-        <button type="submit" onClick={handleLogOut}>
-          Log Out
-        </button>
       </form>
-      {token !== '' ? (
+      {/* testing the token & logout fx */}
+      {token ? (
         <div style={{ marginTop: '30px' }}>
           <h3>you are in!</h3>
+          <button type="button" onClick={handleLogOut}>
+            Log Out
+          </button>
           <p> here is your token: </p>
           {token}
         </div>
