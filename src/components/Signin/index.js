@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
+import useTokenContext from '../../shared/utils/context.js';
 
 const Signin = () => {
-  //for storing token
-  const [token, setToken] = useState('');
+  // //for storing token
+  // const [token, setToken] = useState(
+  //   localStorage.getItem('accessToken') ? true : false
+  // );
+
+  //token context
+  const { token, setToken } = useTokenContext();
+
+  console.log('BuildSignInToken' + token);
 
   //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
@@ -29,15 +37,16 @@ const Signin = () => {
       password: userLogIn.password,
     };
     const data = await Api.login(userPayload);
-    console.log(data);
-
-    setToken(localStorage.getItem('accessToken'));
+    // const jwtToken = data.token;
+    // console.log(data.token);
+    setToken(true);
+    console.log('SignInToken' + token);
   };
 
   //deleting token from local storage & resetting state
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
-    setToken('');
+    setToken(false);
   };
 
   return (
@@ -75,8 +84,6 @@ const Signin = () => {
           <button type="button" onClick={handleLogOut}>
             Log Out
           </button>
-          <p> here is your token: </p>
-          {token}
         </div>
       ) : null}
     </div>
