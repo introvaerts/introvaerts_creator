@@ -18,13 +18,13 @@ const Signin = () => {
     }));
   };
 
-  const handleLogIn = e => {
+  const handleLogIn = async e => {
     e.preventDefault();
     const userPayload = {
       email: userLogIn.email,
       password: userLogIn.password,
     };
-    const data = Api.login(userPayload);
+    const data = await Api.login(userPayload);
 
     setToken(localStorage.getItem('accessToken'));
   };
@@ -32,9 +32,6 @@ const Signin = () => {
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
   };
-
-  let hola = localStorage.getItem('accessToken');
-  console.log(hola);
 
   return (
     <div>
