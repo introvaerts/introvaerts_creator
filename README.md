@@ -55,7 +55,7 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 
 - Sing in
 - Sing Out
-- Sign in
+- Log in
 - create a portfolio on a subdomain
 
 ## Resources
