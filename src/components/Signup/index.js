@@ -11,7 +11,7 @@ const Singup = () => {
     e.preventDefault();
     const { email, password } = userCredentials;
     // TODO: validation
-    //email
+    // email
     // password: Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
     Api.createUser(email, password);
   };
@@ -44,6 +44,8 @@ const Singup = () => {
           name="password"
           id="password"
           placeholder="password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
+          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % ^ & *)"
           required
           onChange={handleUserInput}
         />
