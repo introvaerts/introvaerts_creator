@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+/* import { useHistory } from 'react-router-dom'; */
 import Api from '../../shared/utils/api.js';
 
 const Singup = props => {
@@ -45,8 +45,6 @@ const Singup = props => {
 
   const redirectLogIn = token => {
     console.log('redirect to dashboard');
-    console.log(token);
-    //useHistory
     props.history.push('/dashboard');
   };
 
@@ -60,6 +58,8 @@ const Singup = props => {
           id="email"
           placeholder="email"
           value={userInput.email}
+          pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+          title="Please put in a valid email address: accountname@domainname.domain"
           required
           onChange={handleUserInput}
         />

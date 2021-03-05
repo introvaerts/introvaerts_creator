@@ -5,7 +5,6 @@ import {
   createUserEndpoint,
   uploadImageEndpoint,
 } from './endpoints';
-import { storeToken } from './helpers.js';
 
 const Api = {
   login: async userPayload => {
