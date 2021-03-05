@@ -22,13 +22,13 @@ const Signin = () => {
   };
 
   //submitting login credentials & storing token
-  const handleLogIn = e => {
+  const handleLogIn = async e => {
     e.preventDefault();
     const userPayload = {
       email: userLogIn.email,
       password: userLogIn.password,
     };
-    const data = Api.login(userPayload);
+    const data = await Api.login(userPayload);
     console.log(data);
 
     setToken(localStorage.getItem('accessToken'));
