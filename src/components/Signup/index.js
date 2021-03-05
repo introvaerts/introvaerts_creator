@@ -1,30 +1,45 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Api from '../../shared/utils/api.js';
 
 const Singup = () => {
-  const [userCredentials, setUserCredentials] = useState({
+  const [userInput, setUserInput] = useState({
     email: '',
     password: '',
+    confirmPassword: ``,
   });
+
+  const sendCredentialsToServer = () => {
+    const { email, password } = userInput;
+    if (email && password) {
+      Api.createUser(email, password)
+        .then(res => {
+          console.log('---', res);
+          if (res.data.code === 201) redirectLogIn(email, password);
+          else console.log('User is not created, please singup again.');
+        })
+        .catch(error => console.error(error));
+    } else console.log('User is not created, please singup again.');
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { email, password } = userCredentials;
-    // TODO: validation
-    // email
-    // password: Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
-    Api.createUser(email, password);
+    if (userInput.password === userInput.confirmPassword)
+      sendCredentialsToServer();
+    else console.log('Passwords do not match');
   };
 
   const handleUserInput = e => {
-    console.log(e.target.value);
     const { name, value } = e.target;
 
-    setUserCredentials(userCredentials => ({
-      ...userCredentials,
+    setUserInput(userInput => ({
+      ...userInput,
       [name]: value,
     }));
-    console.log(userCredentials);
+  };
+
+  const redirectLogIn = () => {
+    console.log('redirect to login');
   };
 
   return (
@@ -36,6 +51,7 @@ const Singup = () => {
           name="email"
           id="email"
           placeholder="email"
+          value={userInput.email}
           required
           onChange={handleUserInput}
         />
@@ -44,8 +60,20 @@ const Singup = () => {
           name="password"
           id="password"
           placeholder="password"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
-          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % ^ & *)"
+          value={userInput.password}
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
+          required
+          onChange={handleUserInput}
+        />
+        <input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          placeholder="confirm password"
+          value={userInput.confirmPassword}
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
           required
           onChange={handleUserInput}
         />
