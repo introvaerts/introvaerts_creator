@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { storeToken } from './helpers';
 import {
   loginEndpoint,
   createUserEndpoint,
@@ -11,7 +12,7 @@ const Api = {
     try {
       const response = await axios.post(`${loginEndpoint}`, userPayload);
       if (response.data.code === 200) {
-        localStorage.setItem('accessToken', response.data.token);
+        storeToken(response.data.token);
         return response.data;
       } else {
         console.log('no login');
