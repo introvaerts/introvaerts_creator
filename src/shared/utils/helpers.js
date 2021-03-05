@@ -1,4 +1,3 @@
-
 export const moveItemWithinArray = (arr, item, newIndex) => {
   const arrClone = [...arr];
   const oldIndex = arrClone.indexOf(item);
@@ -24,3 +23,7 @@ export const updateArrayItemById = (arr, itemId, fields) => {
 
 export const sortByNewest = (items, sortField) =>
   items.sort((a, b) => -a[sortField].localeCompare(b[sortField]));
+
+export const storeToken = token => {
+  localStorage.setItem('accessToken', token);
+};
