@@ -21,13 +21,12 @@ const Api = {
   },
   createUser: async (email, password) => {
     try {
-      console.log('userData: ', email, password);
       const response = await axios.post(`${createUserEndpoint}`, {
         email,
         password,
       });
-      if (response.data.code === 200) console.log('Successful SignUp');
-      console.log(response);
+      if (response.data.code === 201) console.log('Successful SignUp');
+      console.log('response in api', response);
     } catch (error) {
       console.log('createUser: ', error);
     }
