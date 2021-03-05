@@ -25,6 +25,7 @@ const Api = {
         email,
         password,
       });
+      if (response.data.code === 200) console.log('Successful SignUp');
       console.log(response);
     } catch (error) {
       console.log('createUser: ', error);
