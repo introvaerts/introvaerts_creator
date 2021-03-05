@@ -4,6 +4,7 @@ import {
   createUserEndpoint,
   uploadImageEndpoint,
 } from './endpoints';
+import { storeToken } from './helpers.js';
 
 const Api = {
   login: async userPayload => {
@@ -25,8 +26,11 @@ const Api = {
         email,
         password,
       });
-      if (response.data.code === 201) console.log('Successful SignUp');
-      console.log('response in api', response);
+      console.log(response.data);
+      if (response.data.code === 201) {
+        storeToken(response.data.token);
+      }
+      return response.data;
     } catch (error) {
       console.log('createUser: ', error);
     }
