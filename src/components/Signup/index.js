@@ -2,24 +2,29 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Api from '../../shared/utils/api.js';
 
-const Singup = () => {
+const Singup = props => {
   const [userInput, setUserInput] = useState({
     email: '',
     password: '',
     confirmPassword: ``,
   });
 
-  const sendCredentialsToServer = () => {
+  const sendCredentialsToServer = async () => {
     const { email, password } = userInput;
     if (email && password) {
-      Api.createUser(email, password)
-        .then(res => {
-          console.log('---', res);
-          if (res.data.code === 201) redirectLogIn(email, password);
-          else console.log('User is not created, please singup again.');
-        })
-        .catch(error => console.error(error));
-    } else console.log('User is not created, please singup again.');
+      const response = await Api.createUser(email, password);
+      switch (response.code) {
+        case 201:
+          redirectLogIn(response.token);
+          break;
+        case 11000:
+          console.log('User does already exists!');
+          break;
+        default:
+          console.log('User is not created, please singup again.');
+          break;
+      }
+    } else console.log('Please fill in the form.');
   };
 
   const handleSubmit = e => {
@@ -38,8 +43,11 @@ const Singup = () => {
     }));
   };
 
-  const redirectLogIn = () => {
-    console.log('redirect to login');
+  const redirectLogIn = token => {
+    console.log('redirect to dashboard');
+    console.log(token);
+    //useHistory
+    props.history.push('/dashboard');
   };
 
   return (
