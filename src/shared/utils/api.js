@@ -19,9 +19,15 @@ const Api = {
       console.error('login: ', error);
     }
   },
-  createUser: async (urlStr, setImgStrVar) => {
+  createUser: async (email, password) => {
     try {
-      const response = await axios.post(`${createUserEndpoint}`);
+      console.log('userData: ', email, password);
+      const response = await axios.post(`${createUserEndpoint}`, {
+        email,
+        password,
+      });
+      if (response.data.code === 200) console.log('Successful SignUp');
+      console.log(response);
     } catch (error) {
       console.log('createUser: ', error);
     }
