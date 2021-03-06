@@ -22,7 +22,6 @@ const Signin = () => {
     }));
   };
 
-
   //submitting login credentials & storing token
   const handleLogIn = async e => {
     e.preventDefault();
@@ -30,21 +29,15 @@ const Signin = () => {
       email: userLogIn.email,
       password: userLogIn.password,
     };
-    const data = await Api.login(userPayload);
+    await Api.login(userPayload);
     setToken(localStorage.getItem('accessToken') ? true : false);
-  };
-
-  //deleting token from local storage & resetting state
-  const handleLogOut = () => {
-    localStorage.removeItem('accessToken');
-    setToken(false);
   };
 
   return (
     <div>
       <h2>Sign In</h2>
       <form method="POST">
-        <label for="email">
+        <label htmlFor="email">
           email:{' '}
           <input
             type="email"
@@ -54,7 +47,7 @@ const Signin = () => {
             onChange={handleChange}
           ></input>
         </label>
-        <label for="password">
+        <label htmlFor="password">
           password:{' '}
           <input
             type="password"

@@ -22,22 +22,22 @@ function App() {
       return <Signout />;
     }
   };
-  
+
   return (
     <div className="App">
       {/* making token available globally */}
-     <TokenContext.Provider value={{ token: token, setToken: setToken }}>
-      <h1>introvÆrts</h1>
-      <BrowserRouter>
-        <Link to={ROOT}>Home</Link>
-        <Link to={SIGNIN}>Signin</Link>
-        <Link to={SIGNUP}>Signup</Link>
-        <Link to={SIGNOUT}>Signout</Link>
-        <Link to={DASHBOARD}>Dashboard</Link>
-        {logOutButton()}
-        <MainRouter />
-      </BrowserRouter>
-     </TokenContext.Provider>
+      <TokenContext.Provider value={{ token: token, setToken: setToken }}>
+        <h1>introvÆrts</h1>
+        <BrowserRouter>
+          <Link to={ROOT}>Home</Link>
+          <Link to={SIGNIN}>Signin</Link>
+          <Link to={SIGNUP}>Signup</Link>
+          <Link to={SIGNOUT}>Signout</Link>
+          <Link to={DASHBOARD}>Dashboard</Link>
+          {logOutButton()}
+          <MainRouter />
+        </BrowserRouter>
+      </TokenContext.Provider>
     </div>
   );
 }
