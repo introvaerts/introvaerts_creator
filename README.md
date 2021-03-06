@@ -1,8 +1,93 @@
-# Getting Started with Create React App
+![IntrovAErstlogo](https://user-images.githubusercontent.com/74352389/110111032-f6e6c600-7daf-11eb-9f65-b3b548a1e203.png)
+
+Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.com/memocan40), [Montaser](https://github.com/monoamro) and [Avril](https://github.com/AvrilAvril)
+
+### Table of Contents
+
+- [Description](#Description)
+- [Objectives](#Objectives)
+- [Workflow](#Workflow)
+- [Project Requirements](#Project-Requirements)
+- [Tools](#tools)
+- [Wireframe](#wireframe)
+- [Resources](#Resources)
+
+#### Description
+
+- Create a web tool that provides a solution for independent and creative introverts to build an online portfolio easy and fast.
+
+#### Objectives
+
+- With introvÆrts those people will be able to exhibit their great work by creating a portfolio in a very easy-to-use tool that's as easy as filling a form.
+- Timeline: 1.March - 18.March.2021 (3 weeks-project)
+- [introvÆrts]()
+
+#### Workflow
+
+- Write User Stories
+- Create Trelloboard for Project Management: translate each user story info defined tasks for Sprint 1, 2 and 3.
+- Create a Wire Frame and a Mockup.
+- Define the Architechture of the App (frontend)
+
+#### Project Requirements
+
+- Initiate a Repo on Github and set-up collaborators and set as an organization. [We recomend to follow this guide.](https://github.com/Elie-Soued/TodoList_React/blob/main/doc/git.md)
+- Initiate/Create a new a React Project. The installations requires [Node.js](https://nodejs.org/en/) for further info: [Follow the steps.](https://reactjs.org/docs/create-a-new-react-app.html) more info [below](https://github.com/AvrilAvril/the-foo-dnetwork/blob/main/README.md#getting-started-with-create-react-app)
+
+### Tools
+
+- Frontend: HTML, CSS, JS, JSX, REACT,
+- Backend: MongoDB, AP.
+- [Postman](https://www.postman.com/)
+
+## Get started with introvÆrts:
+
+### Portfolio:
+
+- Views & Components:
+  ![Introvaerts_wireframe_portfolio_web](https://user-images.githubusercontent.com/74352389/110110003-7d9aa380-7dae-11eb-996f-a546abcfab8c.png)
+
+  ### Admin:
+
+  ![Introvaerts_wireframe_admin web](https://user-images.githubusercontent.com/74352389/110110135-afac0580-7dae-11eb-97bb-e8a3c88dc149.png)
+
+  ## Core functionalities:
+
+- Sing in
+- Sing Out
+- Log in
+- create a portfolio on a subdomain
+
+## Resources
+
+### Design & Usage
+
+- [FORMAT]()
+- [Jira Clone](https://github.com/oldboyxx/jira_clone)
+
+## Technical
+
+### React
+
+- [building inline editable UI](https://blog.logrocket.com/the-complete-guide-to-building-inline-editable-ui-in-react/)
+- [How to Share React UI Components between Projects and Apps](https://blog.bitsrc.io/how-to-easily-share-react-components-between-projects-3dd42149c09)
+- [React file Upload](https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/)
+- [react-library](https://www.npmjs.com/package/create-react-library)
+- - [React Router](https://reactrouter.com/web/example/url-params)
+- [Writing middleware for use in Express apps](https://expressjs.com/en/guide/writing-middleware.html#:~:text=Overview,the%20application%27s%20request%2Dresponse%20cycle.&text=Middleware%20functions%20can%20perform%20the,request%20and%20the%20response%20objects)
+
+## Legal Stuff
+
+### Imprint
+
+- [abcdinamo](https://abcdinamo.com/imprint)
+- []()
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 

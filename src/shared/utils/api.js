@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { storeToken } from './helpers';
 import {
   loginEndpoint,
   createUserEndpoint,
@@ -10,7 +11,7 @@ const Api = {
     try {
       const response = await axios.post(`${loginEndpoint}`, userPayload);
       if (response.data.code === 200) {
-        localStorage.setItem('accessToken', response.data.token);
+        storeToken(response.data.token);
         return response.data;
       } else {
         console.log('no login');
@@ -20,9 +21,17 @@ const Api = {
     }
   },
 
-  createUser: async (urlStr, setImgStrVar) => {
+  createUser: async (email, password) => {
     try {
-      const response = await axios.post(`${createUserEndpoint}`);
+      const response = await axios.post(`${createUserEndpoint}`, {
+        email,
+        password,
+      });
+      console.log(response.data);
+      if (response.data.code === 201) {
+        storeToken(response.data.token);
+      }
+      return response.data;
     } catch (error) {
       console.log('createUser: ', error);
     }
