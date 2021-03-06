@@ -3,11 +3,11 @@ import React, { useContext } from 'react';
 //Token Context
 export const TokenContext = React.createContext({
   token: localStorage.getItem('accessToken') ? true : false,
+  // token: null,
   setToken: data => {},
 });
 
 //Use Token Context
-export default function useTokenContext() {
-  console.log('ContextToken' + TokenContext.token);
+export function useTokenContext() {
   return useContext(TokenContext);
 }

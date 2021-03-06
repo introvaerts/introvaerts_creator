@@ -1,17 +1,10 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
-import useTokenContext from '../../shared/utils/context.js';
+import { useTokenContext } from '../../shared/utils/context.js';
 
 const Signin = () => {
-  // //for storing token
-  // const [token, setToken] = useState(
-  //   localStorage.getItem('accessToken') ? true : false
-  // );
-
-  //token context
+  //getting token from context
   const { token, setToken } = useTokenContext();
-
-  console.log('BuildSignInToken' + token);
 
   //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
@@ -37,10 +30,7 @@ const Signin = () => {
       password: userLogIn.password,
     };
     const data = await Api.login(userPayload);
-    // const jwtToken = data.token;
-    // console.log(data.token);
-    setToken(true);
-    console.log('SignInToken' + token);
+    setToken(localStorage.getItem('accessToken') ? true : false);
   };
 
   //deleting token from local storage & resetting state
@@ -77,7 +67,7 @@ const Signin = () => {
           Submit
         </button>
       </form>
-      {/* testing the token & logout fx */}
+      {/* testing the token & log fx */}
       {token ? (
         <div style={{ marginTop: '30px' }}>
           <h3>you are in!</h3>
