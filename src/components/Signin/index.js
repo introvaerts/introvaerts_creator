@@ -71,9 +71,6 @@ const Signin = () => {
       {token ? (
         <div style={{ marginTop: '30px' }}>
           <h3>you are in!</h3>
-          <button type="button" onClick={handleLogOut}>
-            Log Out
-          </button>
         </div>
       ) : null}
     </div>
