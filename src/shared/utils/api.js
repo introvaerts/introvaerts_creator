@@ -20,6 +20,7 @@ const Api = {
       console.error('login: ', error);
     }
   },
+
   createUser: async (email, password) => {
     try {
       const response = await axios.post(`${createUserEndpoint}`, {

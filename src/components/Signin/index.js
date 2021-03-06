@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
+import { useTokenContext } from '../../shared/utils/context.js';
 
 const Signin = () => {
+  //getting token from context
+  const { token, setToken } = useTokenContext();
+
+  //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
     email: '',
     password: '',
     message: null,
   });
 
-  const [token, setToken] = useState('');
-
+  //for reading input from login form
   const handleChange = e => {
     const { id, value } = e.target;
     setUserLogIn(prevState => ({
@@ -18,6 +22,8 @@ const Signin = () => {
     }));
   };
 
+
+  //submitting login credentials & storing token
   const handleLogIn = async e => {
     e.preventDefault();
     const userPayload = {
@@ -25,12 +31,13 @@ const Signin = () => {
       password: userLogIn.password,
     };
     const data = await Api.login(userPayload);
-
-    setToken(localStorage.getItem('accessToken'));
+    setToken(localStorage.getItem('accessToken') ? true : false);
   };
 
+  //deleting token from local storage & resetting state
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
+    setToken(false);
   };
 
   return (
@@ -60,15 +67,11 @@ const Signin = () => {
         <button type="submit" onClick={handleLogIn}>
           Submit
         </button>
-        <button type="submit" onClick={handleLogOut}>
-          Log Out
-        </button>
       </form>
-      {token !== '' ? (
+      {/* testing the token & log fx */}
+      {token ? (
         <div style={{ marginTop: '30px' }}>
           <h3>you are in!</h3>
-          <p> here is your token: </p>
-          {token}
         </div>
       ) : null}
     </div>

@@ -1,4 +1,6 @@
 // Router
+import { useState } from 'react';
+import { TokenContext } from './shared/utils/context.js';
 import { BrowserRouter, Link } from 'react-router-dom';
 import {
   ROOT,
@@ -8,10 +10,23 @@ import {
   DASHBOARD,
 } from './navigation/CONSTANTS';
 import MainRouter from './navigation/MainRouter';
+import Signout from './components/Signout';
 
 function App() {
+  //for storing token globally
+  const [token, setToken] = useState(null);
+
+  //global logout button for testing
+  const logOutButton = () => {
+    if (token) {
+      return <Signout />;
+    }
+  };
+  
   return (
     <div className="App">
+      {/* making token available globally */}
+     <TokenContext.Provider value={{ token: token, setToken: setToken }}>
       <h1>introvÆrts</h1>
       <BrowserRouter>
         <Link to={ROOT}>Home</Link>
@@ -19,9 +34,10 @@ function App() {
         <Link to={SIGNUP}>Signup</Link>
         <Link to={SIGNOUT}>Signout</Link>
         <Link to={DASHBOARD}>Dashboard</Link>
-
+        {logOutButton()}
         <MainRouter />
       </BrowserRouter>
+     </TokenContext.Provider>
     </div>
   );
 }

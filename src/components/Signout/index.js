@@ -1,8 +1,19 @@
+import { useTokenContext } from '../../shared/utils/context.js';
+
 const Signout = () => {
+  //getting token from context
+  const { setToken } = useTokenContext();
+
+  //deleting token from local storage
+  const handleSignOut = () => {
+    localStorage.removeItem('accessToken');
+    setToken(false);
+  };
+
   return (
-    <div>
-      <h2>Signout</h2>
-    </div>
+    <button type="button" onClick={handleSignOut}>
+      Log Out
+    </button>
   );
 };
 
