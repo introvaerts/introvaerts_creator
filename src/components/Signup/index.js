@@ -1,6 +1,7 @@
 import { useState } from 'react';
 /* import { useHistory } from 'react-router-dom'; */
 import Api from '../../shared/utils/api.js';
+import { useTokenContext } from '../../shared/utils/context.js';
 
 const Singup = props => {
   const [userInput, setUserInput] = useState({
@@ -8,6 +9,7 @@ const Singup = props => {
     password: '',
     confirmPassword: ``,
   });
+  const { token, setToken } = useTokenContext();
 
   const sendCredentialsToServer = async () => {
     const { email, password } = userInput;
@@ -15,7 +17,8 @@ const Singup = props => {
       const response = await Api.createUser(email, password);
       switch (response.code) {
         case 201:
-          redirectLogIn(response.token);
+          setToken(localStorage.getItem('accessToken') ? true : false);
+          redirectAfterSignUp(response.token);
           break;
         case 11000:
           console.log('User does already exists!');
@@ -43,9 +46,11 @@ const Singup = props => {
     }));
   };
 
-  const redirectLogIn = token => {
-    console.log('redirect to dashboard');
-    props.history.push('/dashboard');
+  const redirectAfterSignUp = token => {
+    if (token) {
+      console.log('redirect to dashboard');
+      props.history.push('/dashboard');
+    } else console.log('redirection forbidden, no token available');
   };
 
   return (
