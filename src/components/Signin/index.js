@@ -2,7 +2,9 @@ import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
 
+import { SignInContainer } from './Styles';
 import Button from '../../shared/components/Button';
+import FormRow from '../../shared/components/FormRow';
 
 const Signin = () => {
   //getting token from context
@@ -36,38 +38,37 @@ const Signin = () => {
   };
 
   return (
-    <div>
+    <SignInContainer>
       <h2>Sign In</h2>
       <form method="POST">
-        <label htmlFor="email">
-          email:{' '}
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={userLogIn.email}
-            onChange={handleChange}
-          ></input>
-        </label>
-        <label htmlFor="password">
-          password:{' '}
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={userLogIn.password}
-            onChange={handleChange}
-          ></input>
-        </label>
+        <FormRow
+          htmlFor="email"
+          label="email"
+          type="email"
+          id="email"
+          name="email"
+          value={userLogIn.email}
+          handleChange={handleChange}
+        />
+        <FormRow
+          htmlFor="password"
+          label="password"
+          type="password"
+          id="password"
+          name="password"
+          value={userLogIn.password}
+          handleChange={handleChange}
+        />
         <Button type="submit" handleClick={handleLogIn} text="Submit" />
       </form>
+
       {/* testing the token & log fx */}
       {token ? (
         <div style={{ marginTop: '30px' }}>
           <h3>you are in!</h3>
         </div>
       ) : null}
-    </div>
+    </SignInContainer>
   );
 };
 

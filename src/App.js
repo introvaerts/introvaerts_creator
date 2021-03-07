@@ -39,7 +39,6 @@ function App() {
           <Link to={ROOT}>Home</Link>
           <Link to={SIGNIN}>Signin</Link>
           <Link to={SIGNUP}>Signup</Link>
-          <Link to={SIGNOUT}>Signout</Link>
           <Link to={DASHBOARD}>Dashboard</Link>
           {logOutButton()}
           <MainRouter />

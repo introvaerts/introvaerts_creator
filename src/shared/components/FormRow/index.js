@@ -1,16 +1,20 @@
-import { StyledLabel, StyledInput } from './Styles';
+import { Row, StyledLabel, StyledInput } from './Styles';
 
-const FormRow = ({ forLabel, label, type, id, name, value, handleChange }) => {
+const FormRow = ({ htmlFor, label, type, id, name, value, handleChange }) => {
   return (
-    <StyledLabel for={forLabel}>
-      {label}:
-      <StyledInput
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={handleChange}
-      ></StyledInput>
-    </StyledLabel>
+    <Row>
+      <StyledLabel htmlFor={htmlFor}>
+        {label}
+        <StyledInput
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onChange={handleChange}
+        ></StyledInput>
+      </StyledLabel>
+    </Row>
   );
 };
+
+export default FormRow;
