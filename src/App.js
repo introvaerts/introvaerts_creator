@@ -12,6 +12,9 @@ import {
 import MainRouter from './navigation/MainRouter';
 import Signout from './components/Signout';
 
+import NormaliseStyles from './shared/styles/NormaliseStyles';
+import BaseStyles from './shared/styles/BaseStyles.js';
+
 function App() {
   //for storing token globally
   const [token, setToken] = useState(null);
@@ -22,22 +25,26 @@ function App() {
       return <Signout />;
     }
   };
-  
+
   return (
     <div className="App">
+      {/* global styles */}
+      <NormaliseStyles />
+      <BaseStyles />
+
       {/* making token available globally */}
-     <TokenContext.Provider value={{ token: token, setToken: setToken }}>
-      <h1>introvÆrts</h1>
-      <BrowserRouter>
-        <Link to={ROOT}>Home</Link>
-        <Link to={SIGNIN}>Signin</Link>
-        <Link to={SIGNUP}>Signup</Link>
-        <Link to={SIGNOUT}>Signout</Link>
-        <Link to={DASHBOARD}>Dashboard</Link>
-        {logOutButton()}
-        <MainRouter />
-      </BrowserRouter>
-     </TokenContext.Provider>
+      <TokenContext.Provider value={{ token: token, setToken: setToken }}>
+        <h1>introvÆrts</h1>
+        <BrowserRouter>
+          <Link to={ROOT}>Home</Link>
+          <Link to={SIGNIN}>Signin</Link>
+          <Link to={SIGNUP}>Signup</Link>
+          <Link to={SIGNOUT}>Signout</Link>
+          <Link to={DASHBOARD}>Dashboard</Link>
+          {logOutButton()}
+          <MainRouter />
+        </BrowserRouter>
+      </TokenContext.Provider>
     </div>
   );
 }

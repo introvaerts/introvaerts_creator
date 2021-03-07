@@ -1,4 +1,5 @@
 import { useTokenContext } from '../../shared/utils/context.js';
+import Button from '../../shared/components/Button/';
 
 const Signout = () => {
   //getting token from context
@@ -11,9 +12,9 @@ const Signout = () => {
   };
 
   return (
-    <button type="button" onClick={handleSignOut}>
-      Log Out
-    </button>
+    <>
+      <Button text="Log Out" handleClick={handleSignOut} />
+    </>
   );
 };
 

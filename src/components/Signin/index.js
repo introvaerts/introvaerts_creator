@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
 
+import Button from '../../shared/components/Button';
+
 const Signin = () => {
   //getting token from context
   const { token, setToken } = useTokenContext();
@@ -21,7 +23,6 @@ const Signin = () => {
       [id]: value,
     }));
   };
-
 
   //submitting login credentials & storing token
   const handleLogIn = async e => {
@@ -64,9 +65,7 @@ const Signin = () => {
             onChange={handleChange}
           ></input>
         </label>
-        <button type="submit" onClick={handleLogIn}>
-          Submit
-        </button>
+        <Button type="submit" handleClick={handleLogIn} text="Submit" />
       </form>
       {/* testing the token & log fx */}
       {token ? (
