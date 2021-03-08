@@ -11,7 +11,7 @@ const Api = {
     try {
       const response = await axios.post(`${loginEndpoint}`, userPayload);
       if (response.data.code === 200) {
-        storeToken(response.data.token);
+        storeToken(response.data.data.token);
         return response.data;
       } else {
         console.log('no login');
@@ -28,7 +28,7 @@ const Api = {
         password,
       });
       if (response.data.code === 201) {
-        storeToken(response.data.token);
+        storeToken(response.data.data.token);
       }
       return response.data;
     } catch (error) {
