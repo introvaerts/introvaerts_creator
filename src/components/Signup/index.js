@@ -1,11 +1,15 @@
 import { useState } from 'react';
 /* import { useHistory } from 'react-router-dom'; */
+import { Link } from 'react-router-dom';
+import { SIGNIN } from '../../navigation/CONSTANTS';
+
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
 import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 import { SignUpContainer } from './Styles';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
+import LinkModule from '../../shared/components/LinkModule';
 
 const Singup = props => {
   const [userInput, setUserInput] = useState({
@@ -59,7 +63,7 @@ const Singup = props => {
 
   return (
     <SignUpContainer>
-      <h1>Signup</h1>
+      <h1>Sign Up</h1>
 
       <form method="POST" onSubmit={handleSubmit}>
         <FormRow
@@ -97,6 +101,7 @@ const Singup = props => {
         />
         <Button type="submit" id="submit" text="Submit" />
       </form>
+      <LinkModule text="sign in" linkTo={SIGNIN} />
     </SignUpContainer>
   );
 };

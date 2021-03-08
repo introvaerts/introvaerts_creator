@@ -3,10 +3,13 @@ import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
 import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 
+import { SIGNUP } from '../../navigation/CONSTANTS';
+
 import { SignInContainer } from './Styles';
 // import SectionContainer from '../../shared/components/SectionContainer';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
+import LinkModule from '../../shared/components/LinkModule';
 
 const Signin = props => {
   //getting token from context
@@ -37,6 +40,9 @@ const Signin = props => {
       email: userLogIn.email,
       password: userLogIn.password,
     };
+
+    console.log('hola again');
+
     const response = await Api.login(userPayload);
     setToken(getToken() ? true : false);
   };
@@ -76,13 +82,7 @@ const Signin = props => {
         />
         <Button type="submit" text="Submit" />
       </form>
-
-      {/* testing the token & log fx */}
-      {token ? (
-        <div style={{ marginTop: '30px' }}>
-          <h3>you are in!</h3>
-        </div>
-      ) : null}
+      <LinkModule text="sign up" linkTo={SIGNUP} />
     </SignInContainer>
   );
 };

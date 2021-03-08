@@ -13,6 +13,10 @@ export default createGlobalStyle`
         margin-bottom: 2rem;
       }
 
+h3 {
+        ${font.regular};
+        ${font.size(0.875)}
+}
   a {
     color: ${colour.primary};
     &:hover {
@@ -20,7 +24,6 @@ export default createGlobalStyle`
         }
     text-decoration: none;    
         
-    margin: 1rem;
-    }
+        }
 
   `;
