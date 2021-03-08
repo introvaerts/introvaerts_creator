@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { storeToken } from './helpers';
+import { storeToken, getToken } from './helpers';
 import {
   loginEndpoint,
+  getUsersAccountEndpoint,
   createUserEndpoint,
+  createGalleryEndpoint,
   uploadImageEndpoint,
 } from './endpoints';
 
@@ -27,13 +29,31 @@ const Api = {
         email,
         password,
       });
-      console.log(response.data);
       if (response.data.code === 201) {
         storeToken(response.data.token);
       }
       return response.data;
     } catch (error) {
       console.log('createUser: ', error);
+    }
+  },
+  getUsersAccount: async () => {},
+  createGallery: async name => {
+    try {
+      console.log(getToken());
+      // TODO: check how many galleries do already exist, max 3 galleries allowed for now
+      const response = await axios.post(
+        `${createGalleryEndpoint}`,
+        { name },
+        {
+          headers: {
+            Authorization: getToken(),
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log('createGallery: ', error);
     }
   },
   uploadImage: async () => {
