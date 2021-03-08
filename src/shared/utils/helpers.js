@@ -27,3 +27,5 @@ export const sortByNewest = (items, sortField) =>
 export const storeToken = token => {
   localStorage.setItem('accessToken', token);
 };
+
+export const getToken = () => localStorage.getItem('accessToken');

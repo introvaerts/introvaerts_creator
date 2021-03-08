@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
+import { getToken } from '../../shared/utils/helpers';
 
 import { SignInContainer } from './Styles';
+// import SectionContainer from '../../shared/components/SectionContainer';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
 
@@ -34,13 +36,13 @@ const Signin = () => {
       password: userLogIn.password,
     };
     await Api.login(userPayload);
-    setToken(localStorage.getItem('accessToken') ? true : false);
+    setToken(getToken() ? true : false);
   };
 
   return (
     <SignInContainer>
       <h2>Sign In</h2>
-      <form method="POST">
+      <form method="POST" onSubmit={handleLogIn}>
         <FormRow
           htmlFor="email"
           label="email"
@@ -49,7 +51,6 @@ const Signin = () => {
           name="email"
           value={userLogIn.email}
           handleChange={handleChange}
-          required
         />
         <FormRow
           htmlFor="password"
@@ -59,18 +60,8 @@ const Signin = () => {
           name="password"
           value={userLogIn.password}
           handleChange={handleChange}
-          required
         />
-
-        <input
-          type="email"
-          name="email"
-          pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-          title="Please put in a valid email address: accountname@domainname.domain"
-          required
-        ></input>
-
-        <Button type="submit" handleClick={handleLogIn} text="Submit" />
+        <Button type="submit" text="Submit" />
       </form>
 
       {/* testing the token & log fx */}

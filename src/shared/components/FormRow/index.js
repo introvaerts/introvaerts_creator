@@ -25,6 +25,7 @@ const FormRow = ({
           pattern={pattern}
           title={title}
           onChange={handleChange}
+          required
         ></StyledInput>
       </StyledLabel>
     </Row>
