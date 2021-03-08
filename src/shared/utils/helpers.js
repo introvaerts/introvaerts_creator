@@ -24,6 +24,9 @@ export const updateArrayItemById = (arr, itemId, fields) => {
 export const sortByNewest = (items, sortField) =>
   items.sort((a, b) => -a[sortField].localeCompare(b[sortField]));
 
+// localStorage Token
 export const storeToken = token => {
   localStorage.setItem('accessToken', token);
 };
+
+export const getToken = () => localStorage.getItem('accessToken');
