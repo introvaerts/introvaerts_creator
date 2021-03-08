@@ -27,7 +27,6 @@ const Api = {
         email,
         password,
       });
-      console.log(response.data);
       if (response.data.code === 201) {
         storeToken(response.data.token);
       }
