@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
-import { getToken } from '../../shared/utils/helpers';
+import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 
 import { SignInContainer } from './Styles';
 // import SectionContainer from '../../shared/components/SectionContainer';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
 
-const Signin = () => {
+const Signin = props => {
   //getting token from context
   const { token, setToken } = useTokenContext();
+
+  console.log('props: ', props);
 
   //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
@@ -35,13 +37,24 @@ const Signin = () => {
       email: userLogIn.email,
       password: userLogIn.password,
     };
-    await Api.login(userPayload);
+    const response = await Api.login(userPayload);
     setToken(getToken() ? true : false);
   };
 
+  if (token) {
+    redirectAfterAuth(getToken(), 'dashboard', props);
+  }
+
+  /*   const redirectAfterAuth = token => {
+    if (token) {
+      console.log('redirect to dashboard');
+      props.history.push('/dashboard');
+    } else console.log('redirection forbidden, no token available');
+  }; */
+
   return (
     <SignInContainer>
-      <h2>Sign In</h2>
+      <h1>Sign In</h1>
       <form method="POST" onSubmit={handleLogIn}>
         <FormRow
           htmlFor="email"

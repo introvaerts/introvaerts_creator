@@ -7,6 +7,12 @@ export default createGlobalStyle`
       ${font.regular};
       }
 
+      h1 {
+        ${font.regular};
+        ${font.size(1.4)}
+        margin-bottom: 2rem;
+      }
+
   a {
     color: ${colour.primary};
     &:hover {
