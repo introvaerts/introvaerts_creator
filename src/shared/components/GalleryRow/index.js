@@ -1,11 +1,6 @@
 const GalleryRow = props => {
   console.log(props);
-  return (
-    <div>
-      <h4>GalleryRow</h4>
-      <div>{props.galleryName}</div>
-    </div>
-  );
+  return <div>{props.galleryName}</div>;
 };
 
 export default GalleryRow;
