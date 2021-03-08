@@ -2,6 +2,10 @@ import { useState } from 'react';
 /* import { useHistory } from 'react-router-dom'; */
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
+import { getToken } from '../../shared/utils/helpers';
+import { SignUpContainer } from './Styles';
+import Button from '../../shared/components/Button';
+import FormRow from '../../shared/components/FormRow';
 
 const Singup = props => {
   const [userInput, setUserInput] = useState({
@@ -9,7 +13,7 @@ const Singup = props => {
     password: '',
     confirmPassword: ``,
   });
-  const { token, setToken } = useTokenContext();
+  const { setToken } = useTokenContext();
 
   const sendCredentialsToServer = async () => {
     const { email, password } = userInput;
@@ -17,7 +21,7 @@ const Singup = props => {
       const response = await Api.createUser(email, password);
       switch (response.code) {
         case 201:
-          setToken(localStorage.getItem('accessToken') ? true : false);
+          setToken(getToken() ? true : false);
           redirectAfterSignUp(response.token);
           break;
         case 11000:
@@ -54,45 +58,48 @@ const Singup = props => {
   };
 
   return (
-    <div>
+    <SignUpContainer>
       <h2>Signup</h2>
       <form method="POST" onSubmit={handleSubmit}>
-        <input
+        <FormRow
           type="email"
           name="email"
+          label="email"
           id="email"
           placeholder="email"
           value={userInput.email}
           pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
           title="Please put in a valid email address: accountname@domainname.domain"
           required
-          onChange={handleUserInput}
+          handleChange={handleUserInput}
         />
-        <input
+        <FormRow
           type="password"
           name="password"
+          label="password"
           id="password"
           placeholder="password"
           value={userInput.password}
           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
           title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
           required
-          onChange={handleUserInput}
+          handleChange={handleUserInput}
         />
-        <input
+        <FormRow
           type="password"
           name="confirmPassword"
+          label="confirm password"
           id="confirmPassword"
           placeholder="confirm password"
           value={userInput.confirmPassword}
           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
           title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
           required
-          onChange={handleUserInput}
+          handleChange={handleUserInput}
         />
-        <input type="submit" id="submit" value="Submit" />
+        <Button type="submit" id="submit" text="Submit" />
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
