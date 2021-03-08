@@ -49,6 +49,7 @@ const Signin = () => {
           name="email"
           value={userLogIn.email}
           handleChange={handleChange}
+          required
         />
         <FormRow
           htmlFor="password"
@@ -58,7 +59,17 @@ const Signin = () => {
           name="password"
           value={userLogIn.password}
           handleChange={handleChange}
+          required
         />
+
+        <input
+          type="email"
+          name="email"
+          pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+          title="Please put in a valid email address: accountname@domainname.domain"
+          required
+        ></input>
+
         <Button type="submit" handleClick={handleLogIn} text="Submit" />
       </form>
 
