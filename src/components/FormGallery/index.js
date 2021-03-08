@@ -1,18 +1,29 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import GalleryRow from '../../shared/components/GalleryRow';
+import { GalleryFormContainer } from './Styles';
+// import SectionContainer from '../../shared/components/SectionContainer';
+import Button from '../../shared/components/Button';
+import FormRow from '../../shared/components/FormRow';
 
-const FormGallery = props => {
+const FormGallery = () => {
   const [userInput, setUserInput] = useState({
     galleryName: '',
   });
+  const [galleries, setGalleries] = useState([
+    { _id: 1, name: 'paintings' },
+    { _id: 2, name: 'photographs' },
+  ]);
 
   const sendCredentialsToServer = async () => {
     const { galleryName } = userInput;
     if (galleryName) {
       const response = await Api.createGallery(galleryName);
       // TODO: Errorhandling
-      console.log(`${response.data.gallery.name} was created successfully`);
+      console.log(response);
+      console.log(
+        `Your Gallery "${response.data.gallery.name}" was created successfully`
+      );
     } else console.log('Please fill in the form.');
   };
 
@@ -30,23 +41,30 @@ const FormGallery = props => {
   };
 
   return (
-    <div>
+    <GalleryFormContainer>
       <h3>FormGallery</h3>
       <form method="POST" onSubmit={handleSubmit}>
-        <input
+        <FormRow
+          htmlFor="galleryName"
+          label="Gallery Name"
           type="text"
-          name="galleryName"
           id="galleryName"
-          placeholder="galleryName"
+          name="galleryName"
           value={userInput.galleryName}
-          title="Please put in a valid gallery name."
-          required
-          onChange={handleUserInput}
+          handleChange={handleUserInput}
         />
-        <input type="submit" id="submit" value="Submit" />
+        <Button type="submit" text="Submit" />
       </form>
-      <GalleryRow galleryName={props.galleryName} />
-    </div>
+      {galleries ? (
+        galleries.map(gallery => {
+          return <GalleryRow key={gallery._id} galleryName={gallery.name} />;
+        })
+      ) : (
+        <div>
+          <b>no gallery</b>
+        </div>
+      )}
+    </GalleryFormContainer>
   );
 };
 

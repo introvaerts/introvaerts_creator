@@ -40,7 +40,6 @@ const Api = {
   getUsersAccount: async () => {},
   createGallery: async name => {
     try {
-      console.log(getToken());
       // TODO: check how many galleries do already exist, max 3 galleries allowed for now
       const response = await axios.post(
         `${createGalleryEndpoint}`,
@@ -51,7 +50,7 @@ const Api = {
           },
         }
       );
-      console.log(response);
+      return response.data;
     } catch (error) {
       console.log('createGallery: ', error);
     }
