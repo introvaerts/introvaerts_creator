@@ -22,7 +22,7 @@ const Singup = props => {
       switch (response.code) {
         case 201:
           setToken(getToken() ? true : false);
-          redirectAfterSignUp(response.token);
+          redirectAfterSignUp(response.data.token);
           break;
         case 11000:
           console.log('User does already exists!');
