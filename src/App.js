@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { TokenContext } from './shared/utils/context.js';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { ROOT, SIGNIN, SIGNUP, DASHBOARD } from './navigation/CONSTANTS';
+
 import MainRouter from './navigation/MainRouter';
 import Signout from './components/Signout';
+import Wrapper from './shared/components/Wrapper';
 import { getToken } from './shared/utils/helpers';
 
 import NormaliseStyles from './shared/styles/NormaliseStyles';
@@ -22,7 +23,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Wrapper>
       {/* global styles */}
       <NormaliseStyles />
       <BaseStyles />
@@ -35,7 +36,7 @@ function App() {
           <MainRouter />
         </BrowserRouter>
       </TokenContext.Provider>
-    </div>
+    </Wrapper>
   );
 }
 
