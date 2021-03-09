@@ -19,13 +19,6 @@ const Singup = props => {
   });
   const { setToken } = useTokenContext();
 
-  /*   const redirectAfterAuth = token => {
-    if (token) {
-      console.log('redirect to dashboard');
-      props.history.push('/dashboard');
-    } else console.log('redirection forbidden, no token available');
-  }; */
-
   const sendCredentialsToServer = async () => {
     const { email, password } = userInput;
     if (email && password) {

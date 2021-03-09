@@ -30,9 +30,8 @@ export const storeToken = token => {
 
 export const getToken = () => localStorage.getItem('accessToken');
 
-export const redirectAfterAuth = (token, route, props) => {
-  console.log(props.history);
+export const redirectAfterAuth = (token, route, { history }) => {
   if (token) {
-    props.history.push(`/${route}`);
+    history.push(`/${route}`);
   } else console.log('redirection forbidden, no token available');
 };

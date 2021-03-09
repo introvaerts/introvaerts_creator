@@ -44,12 +44,13 @@ const Signin = props => {
     console.log('hola again');
 
     const response = await Api.login(userPayload);
-    setToken(getToken() ? true : false);
-  };
 
-  if (token) {
-    redirectAfterAuth(getToken(), 'dashboard', props);
-  }
+    setToken(response.data.token ? true : false);
+
+    if (response.data.token) {
+      redirectAfterAuth(response.data.token, 'dashboard', props);
+    }
+  };
 
   /*   const redirectAfterAuth = token => {
     if (token) {
