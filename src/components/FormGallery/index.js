@@ -7,37 +7,27 @@ import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
 
 const FormGallery = () => {
-  const [userInput, setUserInput] = useState({
-    galleryName: '',
-  });
-  const [galleries, setGalleries] = useState([
-    { _id: 1, name: 'paintings' },
-    { _id: 2, name: 'photographs' },
-  ]);
+  const [galleries, setGalleries] = useState([]);
 
-  const sendCredentialsToServer = async () => {
-    const { galleryName } = userInput;
-    if (galleryName) {
-      const response = await Api.createGallery(galleryName);
-      // TODO: Errorhandling
-      console.log(response);
-      console.log(
-        `Your Gallery "${response.data.gallery.name}" was created successfully`
-      );
+  const saveGalleries = async () => {
+    console.log(galleries);
+    if (galleries) {
+      console.log('galleries');
     } else console.log('Please fill in the form.');
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    sendCredentialsToServer();
+    saveGalleries();
   };
 
   const handleUserInput = e => {
     const { name, value } = e.target;
-    setUserInput(userInput => ({
-      ...userInput,
+    setGalleries(galleries => ({
+      ...galleries,
       [name]: value,
     }));
+    console.log(galleries);
   };
 
   return (
@@ -50,20 +40,21 @@ const FormGallery = () => {
           type="text"
           id="galleryName"
           name="galleryName"
-          value={userInput.galleryName}
+          value={galleries.galleryName || ''}
           handleChange={handleUserInput}
         />
         <Button type="submit" text="Submit" />
       </form>
-      {galleries ? (
-        galleries.map(gallery => {
-          return <GalleryRow key={gallery._id} galleryName={gallery.name} />;
+      {console.log(galleries)}
+      {/*       {galleries ? (
+        galleries.map((gallery, i) => {
+          return <GalleryRow key={i} galleryName={gallery.galleryName} />;
         })
       ) : (
         <div>
           <b>no gallery</b>
         </div>
-      )}
+      )} */}
     </GalleryFormContainer>
   );
 };
