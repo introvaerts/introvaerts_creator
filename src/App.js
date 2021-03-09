@@ -31,10 +31,6 @@ function App() {
       <TokenContext.Provider value={{ token: token, setToken: setToken }}>
         <h1>introvÆrts</h1>
         <BrowserRouter>
-          <Link to={ROOT}>Home</Link>
-          <Link to={SIGNIN}>Signin</Link>
-          <Link to={SIGNUP}>Signup</Link>
-          <Link to={DASHBOARD}>Dashboard</Link>
           {logOutButton()}
           <MainRouter />
         </BrowserRouter>

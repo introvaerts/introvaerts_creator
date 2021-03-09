@@ -1,8 +1,8 @@
 const Content = () => {
   return (
-    <div>
+    <form>
       <h2>Content</h2>
-    </div>
+    </form>
   );
 };
 
