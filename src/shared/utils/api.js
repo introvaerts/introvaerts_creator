@@ -4,6 +4,8 @@ import {
   loginEndpoint,
   getUsersAccountEndpoint,
   createUserEndpoint,
+  createSubdomainEndpoint,
+  getSubdomainEndpoint,
   createGalleryEndpoint,
   uploadImageEndpoint,
 } from './endpoints';
@@ -16,7 +18,7 @@ const Api = {
         storeToken(response.data.data.token);
         return response.data;
       } else {
-        console.log('no login');
+        console.log('no login', response.data);
       }
     } catch (error) {
       console.error('login: ', error);
@@ -34,10 +36,38 @@ const Api = {
       }
       return response.data;
     } catch (error) {
-      console.log('createUser: ', error);
+      console.error('createUser: ', error);
     }
   },
-  getUsersAccount: async () => {},
+  /*   createSubdomain: async (token, data) => {
+    {} = data;
+    try {
+      const response = await axios.post(`${createSubdomainEndpoint}`, {
+        //put in data
+      }, {
+        headers: {
+          Authorization: getToken(),
+        },
+      });
+      console.log('createSubdomain', response);
+      return response.data;
+    } catch (error) {
+      console.error('createSubdomain: ', error);
+    }
+  }, */
+  getUsersAccount: async () => {
+    try {
+      const response = await axios.get(`${getUsersAccountEndpoint}`, {
+        headers: {
+          Authorization: getToken(),
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error('getUsersAccount: ', error);
+    }
+  },
   createGallery: async name => {
     try {
       // TODO: check how many galleries do already exist, max 3 galleries allowed for now
@@ -52,7 +82,7 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.log('createGallery: ', error);
+      console.error('createGallery: ', error);
     }
   },
   uploadImage: async () => {
