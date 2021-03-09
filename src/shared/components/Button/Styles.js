@@ -16,4 +16,6 @@ export const StyledButton = styled.button`
   ${font.label};
   text-transform: uppercase;
   font-size: 1rem;
+
+  margin: 1rem 0 0 2rem;
 `;

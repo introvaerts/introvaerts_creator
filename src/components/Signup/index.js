@@ -1,11 +1,15 @@
 import { useState } from 'react';
 /* import { useHistory } from 'react-router-dom'; */
+import { Link } from 'react-router-dom';
+import { SIGNIN } from '../../navigation/CONSTANTS';
+
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
-import { getToken } from '../../shared/utils/helpers';
+import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 import { SignUpContainer } from './Styles';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
+import LinkModule from '../../shared/components/LinkModule';
 
 const Singup = props => {
   const [userInput, setUserInput] = useState({
@@ -22,7 +26,7 @@ const Singup = props => {
       switch (response.code) {
         case 201:
           setToken(getToken() ? true : false);
-          redirectAfterSignUp(response.data.token);
+          redirectAfterAuth(response.data.token, 'dashboard', props);
           break;
         case 11000:
           console.log('User does already exists!');
@@ -50,23 +54,16 @@ const Singup = props => {
     }));
   };
 
-  const redirectAfterSignUp = token => {
-    if (token) {
-      console.log('redirect to dashboard');
-      props.history.push('/dashboard');
-    } else console.log('redirection forbidden, no token available');
-  };
-
   return (
     <SignUpContainer>
-      <h2>Signup</h2>
+      <h1>Sign Up</h1>
+
       <form method="POST" onSubmit={handleSubmit}>
         <FormRow
           type="email"
           name="email"
           label="email"
           id="email"
-          placeholder="email"
           value={userInput.email}
           pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
           title="Please put in a valid email address: accountname@domainname.domain"
@@ -78,7 +75,6 @@ const Singup = props => {
           name="password"
           label="password"
           id="password"
-          placeholder="password"
           value={userInput.password}
           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
           title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
@@ -90,7 +86,6 @@ const Singup = props => {
           name="confirmPassword"
           label="confirm password"
           id="confirmPassword"
-          placeholder="confirm password"
           value={userInput.confirmPassword}
           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
           title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
@@ -99,6 +94,7 @@ const Singup = props => {
         />
         <Button type="submit" id="submit" text="Submit" />
       </form>
+      <LinkModule text="sign in" linkTo={SIGNIN} />
     </SignUpContainer>
   );
 };

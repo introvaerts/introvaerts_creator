@@ -7,6 +7,16 @@ export default createGlobalStyle`
       ${font.regular};
       }
 
+      h1 {
+        ${font.regular};
+        ${font.size(1.4)}
+        margin-bottom: 2rem;
+      }
+
+h3 {
+        ${font.regular};
+        ${font.size(0.875)}
+}
   a {
     color: ${colour.primary};
     &:hover {
@@ -14,7 +24,6 @@ export default createGlobalStyle`
         }
     text-decoration: none;    
         
-    margin: 1rem;
-    }
+        }
 
   `;
