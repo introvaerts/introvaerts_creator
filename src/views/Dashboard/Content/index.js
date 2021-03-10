@@ -28,6 +28,8 @@ const Content = () => {
     addGallery();
     createSubdomain();
     createGalleries();
+    console.log('show galleries state after handleSubmit');
+    console.log(galleries);
   };
 
   const handleUserInput = e => {
@@ -36,7 +38,6 @@ const Content = () => {
       ...userInput,
       [name]: value,
     }));
-    console.log(userInput);
     // TODO: check if subdomain is available b/c it is unique
   };
 
