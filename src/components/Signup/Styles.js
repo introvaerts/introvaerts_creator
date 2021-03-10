@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SignUpContainer = styled.div`
-  margin: 15rem auto;
-  width: 25rem;
+  margin: 15% auto;
+  width: 100%;
   text-align: center;
 `;

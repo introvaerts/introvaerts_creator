@@ -10,6 +10,7 @@ import { SignInContainer } from './Styles';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
 import LinkModule from '../../shared/components/LinkModule';
+import SectionContainer from '../../shared/components/SectionContainer';
 
 const Signin = props => {
   //getting token from context
@@ -45,22 +46,17 @@ const Signin = props => {
 
     const response = await Api.login(userPayload);
 
-    setToken(response.data.token ? true : false);
+    if (response) {
+      setToken(response.data.token ? true : false);
 
-    if (response.data.token) {
-      redirectAfterAuth(response.data.token, 'dashboard', props);
+      if (response.data.token) {
+        redirectAfterAuth(response.data.token, 'dashboard', props);
+      }
     }
   };
 
-  /*   const redirectAfterAuth = token => {
-    if (token) {
-      console.log('redirect to dashboard');
-      props.history.push('/dashboard');
-    } else console.log('redirection forbidden, no token available');
-  }; */
-
   return (
-    <SignInContainer>
+    <SectionContainer width="20" margin="15% auto">
       <h1>Sign In</h1>
       <form method="POST" onSubmit={handleLogIn}>
         <FormRow
@@ -71,6 +67,7 @@ const Signin = props => {
           name="email"
           value={userLogIn.email}
           handleChange={handleChange}
+          required={true}
         />
         <FormRow
           htmlFor="password"
@@ -80,11 +77,12 @@ const Signin = props => {
           name="password"
           value={userLogIn.password}
           handleChange={handleChange}
+          required={false}
         />
-        <Button type="submit" text="Submit" />
+        <Button type="submit" text="Submit" marginTop="5" />
       </form>
-      <LinkModule text="sign up" linkTo={SIGNUP} />
-    </SignInContainer>
+      <LinkModule text="sign up" marginTop="20" linkTo={SIGNUP} />
+    </SectionContainer>
   );
 };
 

@@ -11,23 +11,22 @@ const FormRow = ({
   pattern,
   title,
   handleChange,
+  required,
 }) => {
   return (
     <Row>
-      <StyledLabel htmlFor={htmlFor}>
-        {label}
-        <StyledInput
-          type={type}
-          id={id}
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          pattern={pattern}
-          title={title}
-          onChange={handleChange}
-          required
-        ></StyledInput>
-      </StyledLabel>
+      <StyledInput
+        type={type}
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        pattern={pattern}
+        title={title}
+        onChange={handleChange}
+        required={required}
+      ></StyledInput>
+      <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
     </Row>
   );
 };
