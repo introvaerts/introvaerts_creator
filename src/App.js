@@ -15,13 +15,6 @@ function App() {
   //for storing token globally
   const [token, setToken] = useState(getToken() ? true : false);
 
-  //global logout button for testing
-  const logOutButton = () => {
-    if (token) {
-      return <Signout />;
-    }
-  };
-
   return (
     <Wrapper>
       {/* global styles */}
@@ -30,9 +23,8 @@ function App() {
 
       {/* making token available globally */}
       <TokenContext.Provider value={{ token: token, setToken: setToken }}>
-        <h1>introvÆrts</h1>
         <BrowserRouter>
-          {logOutButton()}
+          {/* {logOutButton()} */}
           <MainRouter />
         </BrowserRouter>
       </TokenContext.Provider>

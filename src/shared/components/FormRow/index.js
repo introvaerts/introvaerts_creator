@@ -1,4 +1,4 @@
-import { Row, StyledLabel, StyledInput } from './Styles';
+import { RowContainer, Row, StyledLabel, StyledInput } from './Styles';
 
 const FormRow = ({
   htmlFor,
@@ -14,20 +14,22 @@ const FormRow = ({
   required,
 }) => {
   return (
-    <Row>
-      <StyledInput
-        type={type}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        pattern={pattern}
-        title={title}
-        onChange={handleChange}
-        required={required}
-      ></StyledInput>
-      <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
-    </Row>
+    <RowContainer width="25">
+      <Row>
+        <StyledInput
+          type={type}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          pattern={pattern}
+          title={title}
+          onChange={handleChange}
+          required={required}
+        ></StyledInput>
+        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
+      </Row>
+    </RowContainer>
   );
 };
 

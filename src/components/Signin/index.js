@@ -5,8 +5,8 @@ import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 
 import { SIGNUP } from '../../navigation/CONSTANTS';
 
-import { SignInContainer } from './Styles';
-// import SectionContainer from '../../shared/components/SectionContainer';
+// import { SignInContainer } from './Styles';
+import Header from '../Header';
 import Button from '../../shared/components/Button';
 import FormRow from '../../shared/components/FormRow';
 import LinkModule from '../../shared/components/LinkModule';
@@ -56,33 +56,36 @@ const Signin = props => {
   };
 
   return (
-    <SectionContainer width="20" margin="15% auto">
-      <h1>Sign In</h1>
-      <form method="POST" onSubmit={handleLogIn}>
-        <FormRow
-          htmlFor="email"
-          label="email"
-          type="email"
-          id="email"
-          name="email"
-          value={userLogIn.email}
-          handleChange={handleChange}
-          required={true}
-        />
-        <FormRow
-          htmlFor="password"
-          label="password"
-          type="password"
-          id="password"
-          name="password"
-          value={userLogIn.password}
-          handleChange={handleChange}
-          required={false}
-        />
-        <Button type="submit" text="Submit" marginTop="5" />
-      </form>
-      <LinkModule text="sign up" marginTop="20" linkTo={SIGNUP} />
-    </SectionContainer>
+    <>
+      <Header />
+      <SectionContainer width="20" margin="15% auto">
+        <h1>Sign In</h1>
+        <form method="POST" onSubmit={handleLogIn}>
+          <FormRow
+            htmlFor="email"
+            label="email"
+            type="email"
+            id="email"
+            name="email"
+            value={userLogIn.email}
+            handleChange={handleChange}
+            required={true}
+          />
+          <FormRow
+            htmlFor="password"
+            label="password"
+            type="password"
+            id="password"
+            name="password"
+            value={userLogIn.password}
+            handleChange={handleChange}
+            required={false}
+          />
+          <Button type="submit" text="Submit" marginTop="5" />
+        </form>
+        <LinkModule text="sign up" marginTop="20" linkTo={SIGNUP} />
+      </SectionContainer>
+    </>
   );
 };
 

@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { colour, font } from '../../styles/StyleConstants.js';
 
+export const RowContainer = styled.div`
+  width: ${props => props.width}vw;
+  margin: auto;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-direction: column;
-  ${'' /* align-items: end; */}
-  ${'' /* width: 90%; */}
   margin: 0 auto 3%;
-  ${'' /* text-align: end; */}
 `;
 ///check here above!
 

@@ -1,8 +1,11 @@
+import { LogoContainer, LogoSpan } from './Styles';
+
 const Logo = () => {
   return (
-    <div>
-      <h2>Logo</h2>
-    </div>
+    <LogoContainer>
+      <h4>introv</h4>
+      <LogoSpan>Ærts</LogoSpan>
+    </LogoContainer>
   );
 };
 
