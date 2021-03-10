@@ -1,30 +1,19 @@
 import axios from 'axios';
 import { storeToken, getToken } from './helpers';
 import {
-  loginEndpoint,
-  getUsersAccountEndpoint,
   createUserEndpoint,
+  loginEndpoint,
+  usersInfoEndpoint,
   createSubdomainEndpoint,
-  getSubdomainEndpoint,
+  subdomainEndpoint,
+  subdomainAvailableEndpoint,
   createGalleryEndpoint,
+  galleryEndpoint,
   uploadImageEndpoint,
+  imageEndpoint,
 } from './endpoints';
 
 const Api = {
-  login: async userPayload => {
-    try {
-      const response = await axios.post(`${loginEndpoint}`, userPayload);
-      if (response.data.code === 200) {
-        storeToken(response.data.data.token);
-        return response.data;
-      } else {
-        console.log('no login', response.data);
-      }
-    } catch (error) {
-      console.error('login: ', error);
-    }
-  },
-
   createUser: async (email, password) => {
     try {
       const response = await axios.post(`${createUserEndpoint}`, {
@@ -39,6 +28,35 @@ const Api = {
     } catch (error) {
       console.error('createUser: ', error);
     }
+  },
+  login: async userPayload => {
+    try {
+      const response = await axios.post(`${loginEndpoint}`, userPayload);
+      if (response.data.code === 200) {
+        storeToken(response.data.data.token);
+        return response.data;
+      } else {
+        console.log('no login', response.data);
+      }
+    } catch (error) {
+      console.error('login: ', error);
+    }
+  },
+  getUsersAccount: async () => {
+    try {
+      const response = await axios.get(`${usersInfoEndpoint}`, {
+        headers: {
+          Authorization: getToken(),
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error('getUsersAccount: ', error);
+    }
+  },
+  editUsersAccount: async () => {
+    /* usersInfoEndpoint */
   },
   createSubdomain: async input => {
     const {
@@ -74,18 +92,14 @@ const Api = {
       console.error('createSubdomain: ', error);
     }
   },
-  getUsersAccount: async () => {
-    try {
-      const response = await axios.get(`${getUsersAccountEndpoint}`, {
-        headers: {
-          Authorization: getToken(),
-        },
-      });
-      console.log(response);
-      return response.data;
-    } catch (error) {
-      console.error('getUsersAccount: ', error);
-    }
+  getSubdomain: async () => {
+    /* subdomainEndpoint */
+  },
+  editSubdomain: async () => {
+    /* subdomainEndpoint */
+  },
+  subdomainAvailable: async () => {
+    /* subdomainAvailableEndpoint */
   },
   createGallery: async name => {
     try {
@@ -104,12 +118,24 @@ const Api = {
       console.error('createGallery: ', error);
     }
   },
+  getGallery: async () => {
+    /* galleryEndpoint */
+  },
+  editGallery: async () => {
+    /* galleryEndpoint */
+  },
+  deleteGallery: async () => {
+    /* galleryEndpoint */
+  },
   uploadImage: async () => {
     try {
       console.log('image upload');
     } catch (error) {
       console.error('uploadImage: ', error);
     }
+  },
+  deleteImage: async () => {
+    /* imageEndpoint */
   },
 };
 
