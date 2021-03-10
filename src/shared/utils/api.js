@@ -34,27 +34,46 @@ const Api = {
       if (response.data.code === 201) {
         storeToken(response.data.data.token);
       }
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error('createUser: ', error);
     }
   },
-  /*   createSubdomain: async (token, data) => {
-    {} = data;
+  createSubdomain: async input => {
+    const {
+      subdomain_name,
+      page_title,
+      tagline,
+      description,
+      contact_tagline,
+      first_name,
+      last_name,
+      email,
+      telephone,
+      street_and_number,
+      postalcode,
+      city,
+      country,
+    } = input;
     try {
-      const response = await axios.post(`${createSubdomainEndpoint}`, {
-        //put in data
-      }, {
-        headers: {
-          Authorization: getToken(),
+      const response = await axios.post(
+        `${createSubdomainEndpoint}`,
+        {
+          //put in data
         },
-      });
+        {
+          headers: {
+            Authorization: getToken(),
+          },
+        }
+      );
       console.log('createSubdomain', response);
       return response.data;
     } catch (error) {
       console.error('createSubdomain: ', error);
     }
-  }, */
+  },
   getUsersAccount: async () => {
     try {
       const response = await axios.get(`${getUsersAccountEndpoint}`, {

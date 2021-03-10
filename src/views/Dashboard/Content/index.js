@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// api
+import Api from '../../../shared/utils/api';
 // shared components
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
@@ -8,8 +10,8 @@ import Button from '../../../shared/components/Button';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
 const Content = () => {
+  //TODO: initialize with data from database
   const [userInput, setUserInput] = useState({
-    subdomain_name: '',
     page_title: '',
     tagline: '',
     description: '',
@@ -25,31 +27,12 @@ const Content = () => {
     city: '',
     country: '',
   });
-  // array holding all galleries that are supposed to be created
-  /* let galleries = []; */
 
   const handleSubmit = e => {
     e.preventDefault();
     addGallery();
-    createSubdomain();
+    editSubdomain();
     createGalleries();
-    // CLARIFY: clear fields after submit or leave it?
-    /*     setUserInput({
-      subdomain_name: '',
-      page_title: '',
-      tagline: '',
-      description: '',
-      galleryName: '',
-      contact_tagline: '',
-      first_name: '',
-      last_name: '',
-      email: '',
-      telephone: '',
-      street_and_number: '',
-      postalcode: '',
-      city: '',
-      country: '',
-    }); */
   };
 
   const handleUserInput = e => {
@@ -85,9 +68,12 @@ const Content = () => {
     }));
   };
 
-  const createSubdomain = () => {
+  const editSubdomain = async () => {
     console.log('Subdomain created');
     console.log(userInput);
+    const response = await Api.editSubdomain(userInput);
+    console.log('editSubdomain response');
+    console.log(response);
   };
 
   const createGalleries = () => {
@@ -100,16 +86,6 @@ const Content = () => {
       <form method="POST" onSubmit={handleSubmit}>
         {/* HEADER */}
         <SectionContainer>
-          <FormRow
-            htmlFor="subdomain_name"
-            label="name your page"
-            type="text"
-            id="subdomain"
-            name="subdomain_name"
-            value={userInput.subdomain_name}
-            required={true}
-            handleChange={handleUserInput}
-          />
           <FormRow
             htmlFor="page_title"
             label="page title"
