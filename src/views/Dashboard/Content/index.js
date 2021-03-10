@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // shared components
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
@@ -25,7 +25,9 @@ const Content = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    /* saveSubdomain(); */
+    addGallery();
+    createSubdomain();
+    createGalleries();
   };
 
   const handleUserInput = e => {
@@ -34,19 +36,29 @@ const Content = () => {
       ...userInput,
       [name]: value,
     }));
-    console.log(userInput.galleryName);
+    console.log(userInput);
+    // TODO: check if subdomain is available b/c it is unique
   };
+
+  useEffect(() => {}, []);
 
   const addGallery = () => {
-    console.log('before adding:', galleries);
     const { galleryName } = userInput;
-
-    /* galleries.push(galleryName); */
-
+    console.log('addGallery: ', galleryName);
     setGalleries([...galleries, galleryName]);
+    // TODO: render galleries with GalleryRow
+    // TODO: clear galleryName in userInput
   };
 
-  console.log('after adding:', galleries);
+  const createSubdomain = () => {
+    console.log('Subdomain created');
+    console.log(userInput);
+  };
+
+  const createGalleries = () => {
+    console.log('Galleries created');
+    console.log(galleries);
+  };
 
   return (
     <>
@@ -61,7 +73,7 @@ const Content = () => {
             id="subdomain"
             name="subdomain_name"
             value={userInput.subdomain_name}
-            required
+            required={true}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -71,7 +83,7 @@ const Content = () => {
             id="page_title"
             name="page_title"
             value={userInput.page_title}
-            required
+            required={true}
             handleChange={handleUserInput}
           />
         </SectionContainer>
@@ -84,7 +96,7 @@ const Content = () => {
             id="tagline"
             name="tagline"
             value={userInput.tagline}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -94,7 +106,7 @@ const Content = () => {
             id="description"
             name="description"
             value={userInput.description}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
         </SectionContainer>
@@ -107,7 +119,7 @@ const Content = () => {
             id="galleryName"
             name="galleryName"
             value={userInput.galleryName}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <Button type="button" text="add gallery" handleClick={addGallery} />
@@ -121,7 +133,7 @@ const Content = () => {
             id="contact_tagline"
             name="contact_tagline"
             value={userInput.contact_tagline}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -131,7 +143,7 @@ const Content = () => {
             id="first_name"
             name="first_name"
             value={userInput.first_name}
-            required
+            required={true}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -141,7 +153,7 @@ const Content = () => {
             id="last_name"
             name="last_name"
             value={userInput.last_name}
-            required
+            required={true}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -153,7 +165,7 @@ const Content = () => {
             value={userInput.email}
             pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
             title="Please put in a valid email address: accountname@domainname.domain"
-            required
+            required={true}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -163,7 +175,7 @@ const Content = () => {
             id="telephone"
             name="telephone"
             value={userInput.telephone}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -173,7 +185,7 @@ const Content = () => {
             id="street_and_number"
             name="street_and_number"
             value={userInput.street_and_number}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -183,7 +195,7 @@ const Content = () => {
             id="postalcode"
             name="postalcode"
             value={userInput.postalcode}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -193,7 +205,7 @@ const Content = () => {
             id="city"
             name="city"
             value={userInput.city}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
           <FormRow
@@ -203,7 +215,7 @@ const Content = () => {
             id="country"
             name="country"
             value={userInput.country}
-            required
+            required={false}
             handleChange={handleUserInput}
           />
         </SectionContainer>

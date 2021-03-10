@@ -11,6 +11,7 @@ const FormRow = ({
   pattern,
   title,
   handleChange,
+  required,
 }) => {
   return (
     <Row>
@@ -25,7 +26,7 @@ const FormRow = ({
           pattern={pattern}
           title={title}
           onChange={handleChange}
-          required
+          required={required}
         ></StyledInput>
       </StyledLabel>
     </Row>
