@@ -21,7 +21,8 @@ const Content = () => {
     city: '',
     country: '',
   });
-  const [galleries, setGalleries] = useState([]);
+  // array holding all galleries that are supposed to be created
+  let galleries = [];
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -30,6 +31,23 @@ const Content = () => {
     createGalleries();
     console.log('show galleries state after handleSubmit');
     console.log(galleries);
+    // TODO: clear fields
+    /*     setUserInput({
+      subdomain_name: '',
+      page_title: '',
+      tagline: '',
+      description: '',
+      galleryName: '',
+      contact_tagline: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      telephone: '',
+      street_and_number: '',
+      postalcode: '',
+      city: '',
+      country: '',
+    }); */
   };
 
   const handleUserInput = e => {
@@ -46,9 +64,13 @@ const Content = () => {
   const addGallery = () => {
     const { galleryName } = userInput;
     console.log('addGallery: ', galleryName);
-    setGalleries([...galleries, galleryName]);
+    galleries = [...galleries, galleryName];
     // TODO: render galleries with GalleryRow
     // TODO: clear galleryName in userInput
+    setUserInput(userInput => ({
+      ...userInput,
+      galleryName: '',
+    }));
   };
 
   const createSubdomain = () => {
