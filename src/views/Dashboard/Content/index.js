@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // shared components
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
+import GalleryRow from '../../../shared/components/GalleryRow';
 import Button from '../../../shared/components/Button';
+// settings
+import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
 const Content = () => {
   const [userInput, setUserInput] = useState({
@@ -11,6 +14,7 @@ const Content = () => {
     tagline: '',
     description: '',
     galleryName: '',
+    galleries: [],
     contact_tagline: '',
     first_name: '',
     last_name: '',
@@ -22,16 +26,14 @@ const Content = () => {
     country: '',
   });
   // array holding all galleries that are supposed to be created
-  let galleries = [];
+  /* let galleries = []; */
 
   const handleSubmit = e => {
     e.preventDefault();
     addGallery();
     createSubdomain();
     createGalleries();
-    console.log('show galleries state after handleSubmit');
-    console.log(galleries);
-    // TODO: clear fields
+    // CLARIFY: clear fields after submit or leave it?
     /*     setUserInput({
       subdomain_name: '',
       page_title: '',
@@ -56,17 +58,27 @@ const Content = () => {
       ...userInput,
       [name]: value,
     }));
+
     // TODO: check if subdomain is available b/c it is unique
   };
 
-  useEffect(() => {}, []);
-
+  // adds a gallery to the userInput key galleries and clears the field
   const addGallery = () => {
     const { galleryName } = userInput;
-    console.log('addGallery: ', galleryName);
-    galleries = [...galleries, galleryName];
-    // TODO: render galleries with GalleryRow
-    // TODO: clear galleryName in userInput
+    // put galleryName into the array holding all galleries
+    if (
+      galleryName.trim() &&
+      userInput.galleries.length < allowedNumberOfGalleries
+    ) {
+      userInput.galleries = [...userInput.galleries, galleryName];
+    } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
+      // TODO: Error message if user enters more than the allowed number of galleries
+      console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
+    } else {
+      // TODO: Error message if user tries to add empty gallery
+      console.log('put in a gallery name');
+    }
+    //clear galleryName in userInput
     setUserInput(userInput => ({
       ...userInput,
       galleryName: '',
@@ -80,12 +92,11 @@ const Content = () => {
 
   const createGalleries = () => {
     console.log('Galleries created');
-    console.log(galleries);
+    console.log(userInput.galleries);
   };
 
   return (
     <>
-      <h2>Content</h2>
       <form method="POST" onSubmit={handleSubmit}>
         {/* HEADER */}
         <SectionContainer>
@@ -146,6 +157,12 @@ const Content = () => {
             handleChange={handleUserInput}
           />
           <Button type="button" text="add gallery" handleClick={addGallery} />
+          {/* CLARIFY: How to delete a gallery out of this list? */}
+          {userInput.galleries
+            ? userInput.galleries.map((gallery, i) => (
+                <GalleryRow key={i} galleryName={gallery} />
+              ))
+            : null}
         </SectionContainer>
         {/* CONTACT */}
         <SectionContainer>
