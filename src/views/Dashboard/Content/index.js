@@ -8,6 +8,7 @@ import GalleryRow from '../../../shared/components/GalleryRow';
 import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
+import { createGalleryEndpoint } from '../../../shared/utils/endpoints';
 
 const Content = () => {
   const [userInfo, setUserInfo] = useState();
@@ -99,9 +100,8 @@ const Content = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addGallery();
+    if (userInput.galleryName) createGallery();
     editSubdomain();
-    createGalleries();
   };
 
   const handleUserInput = e => {
@@ -112,15 +112,28 @@ const Content = () => {
     }));
   };
 
-  // adds a gallery to the userInput key galleries and clears the field
-  const addGallery = () => {
+  const editSubdomain = async () => {
+    await Api.editSubdomain(
+      userInfo.subdomains[0]._id,
+      userInfo.subdomains[0].name,
+      userInput
+    );
+  };
+
+  const createGallery = async () => {
     const { galleryName } = userInput;
-    // put galleryName into the array holding all galleries
     if (
       galleryName.trim() &&
       userInput.galleries.length < allowedNumberOfGalleries
     ) {
-      userInput.galleries = [...userInput.galleries, galleryName];
+      const response = await Api.createGallery(
+        userInput.galleryName,
+        userInfo.subdomains[0]._id
+      );
+      userInput.galleries = [
+        ...userInput.galleries,
+        { name: response.data.name, id: response.data._id },
+      ];
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
       // TODO: Error message if user enters more than the allowed number of galleries
       console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
@@ -133,23 +146,6 @@ const Content = () => {
       ...userInput,
       galleryName: '',
     }));
-  };
-
-  const editSubdomain = async () => {
-    const subdomainId = userInfo.subdomains[0]._id;
-    const subdomainName = userInfo.subdomains[0].name;
-    const response = await Api.editSubdomain(
-      subdomainId,
-      subdomainName,
-      userInput
-    );
-    console.log('editSubdomain response');
-    console.log(response);
-  };
-
-  const createGalleries = () => {
-    console.log('Galleries created');
-    console.log(userInput.galleries);
   };
 
   return (
@@ -203,7 +199,11 @@ const Content = () => {
             required={false}
             handleChange={handleUserInput}
           />
-          <Button type="button" text="add gallery" handleClick={addGallery} />
+          <Button
+            type="button"
+            text="add gallery"
+            handleClick={createGallery}
+          />
           {/* CLARIFY: How to delete a gallery out of this list? */}
           {userInput.galleries
             ? userInput.galleries.map((gallery, i) => (

@@ -176,18 +176,19 @@ const Api = {
   //subdomainAvailable: async () => {
   //  /* subdomainAvailableEndpoint */
   //},
-  createGallery: async name => {
+  createGallery: async (name, subdomainId) => {
     try {
       // TODO: check how many galleries do already exist, max 3 galleries allowed for now
       const response = await axios.post(
         `${createGalleryEndpoint}`,
-        { name },
+        { name, subdomainId },
         {
           headers: {
             Authorization: getToken(),
           },
         }
       );
+      console.log('gallery successful created', response.data);
       return response.data;
     } catch (error) {
       console.error('createGallery: ', error);
