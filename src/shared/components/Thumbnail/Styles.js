@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const ImageContainer = styled.div`
-  width: 20vw;
-  height: 20vw;
+  width: 30vw;
+  height: 30vw;
 `;
 
 export const Image = styled.img`

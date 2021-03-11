@@ -4,12 +4,16 @@ import { colour, font } from '../../styles/StyleConstants.js';
 export const RowContainer = styled.div`
   width: ${props => props.width}vw;
   margin: auto;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto 3%;
+  text-align: left;
+`;
+
+export const LabelContainer = styled.div`
+  text-align: right;
 `;
 ///check here above!
 
@@ -23,8 +27,7 @@ export const StyledLabel = styled.label`
   ${font.label};
   text-transform: uppercase;
   font-size: 0.7rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin: 0 1rem 0 0;
 `;
 
 export const StyledInput = styled.input`

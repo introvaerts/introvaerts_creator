@@ -7,6 +7,7 @@ const Content = () => {
     <>
       <form>
         <SectionContainer border="yes" padding="2">
+          <h2>Header</h2>
           <FormRow
             htmlFor="email"
             label="email"
@@ -25,7 +26,7 @@ const Content = () => {
             width="25"
           />
         </SectionContainer>
-        <SectionContainer border="yes" padding="2">
+        <SectionContainer border="yes" padding="2" sectionTitle="Contact">
           <FormRow
             htmlFor="email"
             label="email"
@@ -35,7 +36,7 @@ const Content = () => {
             width="25"
           />
         </SectionContainer>
-        <SectionContainer border="yes" padding="2">
+        <SectionContainer borderBottom="yes" padding="2" align="center">
           <Button type="submit" text="Submit" />
         </SectionContainer>
       </form>
