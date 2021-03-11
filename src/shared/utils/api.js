@@ -5,12 +5,12 @@ import {
   loginEndpoint,
   usersInfoEndpoint,
   createSubdomainEndpoint,
-  subdomainEndpoint,
-  subdomainAvailableEndpoint,
+  // subdomainByIdEndpoint,
+  // subdomainAvailableEndpoint,
   createGalleryEndpoint,
-  galleryEndpoint,
-  uploadImageEndpoint,
-  imageEndpoint,
+  // galleryByIdEndpoint,
+  // uploadImageEndpoint,
+  // imageByIdEndpoint,
 } from './endpoints';
 
 const Api = {
@@ -49,15 +49,14 @@ const Api = {
           Authorization: getToken(),
         },
       });
-      console.log(response);
       return response.data;
     } catch (error) {
       console.error('getUsersAccount: ', error);
     }
   },
-  editUsersAccount: async () => {
-    /* usersInfoEndpoint */
-  },
+  //editUsersAccount: async () => {
+  //  /* usersInfoEndpoint */
+  //},
   createSubdomain: async input => {
     const {
       subdomain_name,
@@ -92,15 +91,20 @@ const Api = {
       console.error('createSubdomain: ', error);
     }
   },
-  getSubdomain: async () => {
-    /* subdomainEndpoint */
+  getSubdomain: async subdomainId => {
+    try {
+      const response = await axios.get(`${createUserEndpoint}subdomainId`);
+      console.log('getSubdomain', response);
+    } catch (error) {
+      console.error('getSubdomain: ', error);
+    }
   },
-  editSubdomain: async () => {
-    /* subdomainEndpoint */
-  },
-  subdomainAvailable: async () => {
-    /* subdomainAvailableEndpoint */
-  },
+  //editSubdomain: async () => {
+  //  /* subdomainByIdEndpoint */
+  //},
+  //subdomainAvailable: async () => {
+  //  /* subdomainAvailableEndpoint */
+  //},
   createGallery: async name => {
     try {
       // TODO: check how many galleries do already exist, max 3 galleries allowed for now
@@ -118,15 +122,15 @@ const Api = {
       console.error('createGallery: ', error);
     }
   },
-  getGallery: async () => {
-    /* galleryEndpoint */
-  },
-  editGallery: async () => {
-    /* galleryEndpoint */
-  },
-  deleteGallery: async () => {
-    /* galleryEndpoint */
-  },
+  //getGallery: async () => {
+  //  /* galleryByIdEndpoint */
+  //},
+  //editGallery: async () => {
+  //  /* galleryByIdEndpoint */
+  //},
+  //deleteGallery: async () => {
+  //  /* galleryByIdEndpoint */
+  //},
   uploadImage: async () => {
     try {
       console.log('image upload');
@@ -134,9 +138,9 @@ const Api = {
       console.error('uploadImage: ', error);
     }
   },
-  deleteImage: async () => {
-    /* imageEndpoint */
-  },
+  //deleteImage: async () => {
+  //  /* imageByIdEndpoint */
+  //},
 };
 
 export default Api;
