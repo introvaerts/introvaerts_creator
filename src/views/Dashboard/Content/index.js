@@ -10,6 +10,7 @@ import Button from '../../../shared/components/Button';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
 const Content = () => {
+  const [userInfo, setUserInfo] = useState();
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -27,8 +28,6 @@ const Content = () => {
     country: '',
   });
 
-  const [userInfo, setUserInfo] = useState();
-
   // fetch user data (email, subdomains with all infos)
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +37,7 @@ const Content = () => {
     fetchData();
   }, []);
 
-  // apply
+  // initialize userInput with data from database
   useEffect(() => {
     if (userInfo) {
       // is there a subdomain in the array of subdomains?
@@ -79,7 +78,6 @@ const Content = () => {
           });
           // is there an address object inside contact?
           if (subdomain.contact.address) {
-            console.log(subdomain.contact.address);
             const {
               street_and_number,
               postalcode,
@@ -112,8 +110,6 @@ const Content = () => {
       ...userInput,
       [name]: value,
     }));
-
-    // TODO: check if subdomain is available b/c it is unique
   };
 
   // adds a gallery to the userInput key galleries and clears the field
@@ -140,9 +136,13 @@ const Content = () => {
   };
 
   const editSubdomain = async () => {
-    console.log('Subdomain created');
-    console.log(userInput);
-    const response = await Api.editSubdomain(userInput);
+    const subdomainId = userInfo.subdomains[0]._id;
+    const subdomainName = userInfo.subdomains[0].name;
+    const response = await Api.editSubdomain(
+      subdomainId,
+      subdomainName,
+      userInput
+    );
     console.log('editSubdomain response');
     console.log(response);
   };

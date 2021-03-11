@@ -5,7 +5,7 @@ import {
   loginEndpoint,
   usersInfoEndpoint,
   createSubdomainEndpoint,
-  // subdomainByIdEndpoint,
+  subdomainByIdEndpoint,
   // subdomainAvailableEndpoint,
   createGalleryEndpoint,
   // galleryByIdEndpoint,
@@ -117,9 +117,62 @@ const Api = {
       console.error('getSubdomain: ', error);
     }
   },
-  //editSubdomain: async () => {
-  //  /* subdomainByIdEndpoint */
-  //},
+  editSubdomain: async (
+    subdomain_id,
+    subdomain_name,
+    content,
+    theme = 'default'
+  ) => {
+    const {
+      page_title,
+      tagline,
+      description,
+      contact_tagline,
+      first_name,
+      last_name,
+      business_email,
+      phone_number,
+      street_and_number,
+      postalcode,
+      city,
+      country,
+    } = content;
+    try {
+      const response = await axios.patch(
+        `${subdomainByIdEndpoint}${subdomain_id}`,
+        {
+          about: {
+            tagline: tagline,
+            description: description,
+          },
+          contact: {
+            address: {
+              street_and_number: street_and_number,
+              postalcode: postalcode,
+              city: city,
+              country: country,
+            },
+            first_name: first_name,
+            last_name: last_name,
+            contact_tagline: contact_tagline,
+            business_email: business_email,
+            phone_number: phone_number,
+          },
+          name: subdomain_name,
+          theme: theme,
+          page_title: page_title,
+        },
+        {
+          headers: {
+            Authorization: getToken(),
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('createSubdomain: ', error);
+    }
+  },
   //subdomainAvailable: async () => {
   //  /* subdomainAvailableEndpoint */
   //},
