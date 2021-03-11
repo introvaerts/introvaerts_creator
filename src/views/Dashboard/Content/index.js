@@ -8,7 +8,6 @@ import GalleryRow from '../../../shared/components/GalleryRow';
 import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
-import { createGalleryEndpoint } from '../../../shared/utils/endpoints';
 
 const Content = () => {
   const [userInfo, setUserInfo] = useState();
@@ -28,6 +27,8 @@ const Content = () => {
     city: '',
     country: '',
   });
+  //fetch gallery names and put into state to show in form
+  const [galleryNames, setGalleryNames] = useState([]);
 
   // fetch user data (email, subdomains with all infos)
   useEffect(() => {
@@ -41,6 +42,7 @@ const Content = () => {
   // initialize userInput with data from database
   useEffect(() => {
     if (userInfo) {
+      console.log(userInfo.subdomains[0]);
       // is there a subdomain in the array of subdomains?
       if (userInfo.subdomains) {
         const subdomain = userInfo.subdomains[0];
@@ -130,10 +132,7 @@ const Content = () => {
         userInput.galleryName,
         userInfo.subdomains[0]._id
       );
-      userInput.galleries = [
-        ...userInput.galleries,
-        { name: response.data.name, id: response.data._id },
-      ];
+      userInput.galleries = [...userInput.galleries, response.data._id];
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
       // TODO: Error message if user enters more than the allowed number of galleries
       console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
