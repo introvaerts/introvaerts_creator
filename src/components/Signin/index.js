@@ -8,7 +8,7 @@ import { SIGNUP } from '../../navigation/CONSTANTS';
 // import { SignInContainer } from './Styles';
 import Header from '../Header';
 import Button from '../../shared/components/Button';
-import FormRow from '../../shared/components/FormRow';
+import SignForm from '../../shared/components/SignForm';
 import LinkModule from '../../shared/components/LinkModule';
 import SectionContainer from '../../shared/components/SectionContainer';
 
@@ -61,7 +61,7 @@ const Signin = props => {
       <SectionContainer width="20" margin="15% auto">
         <h1>Sign In</h1>
         <form method="POST" onSubmit={handleLogIn}>
-          <FormRow
+          <SignForm
             htmlFor="email"
             label="email"
             type="email"
@@ -71,7 +71,7 @@ const Signin = props => {
             handleChange={handleChange}
             required={true}
           />
-          <FormRow
+          <SignForm
             htmlFor="password"
             label="password"
             type="password"

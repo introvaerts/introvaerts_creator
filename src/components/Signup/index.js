@@ -10,9 +10,8 @@ import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 import Header from '../Header';
 import SectionContainer from '../../shared/components/SectionContainer';
 import Button from '../../shared/components/Button';
-import FormRow from '../../shared/components/FormRow';
+import SignForm from '../../shared/components/SignForm';
 import LinkModule from '../../shared/components/LinkModule';
-import { MenuItem } from './Styles';
 
 const Singup = props => {
   const [userInput, setUserInput] = useState({
@@ -64,7 +63,7 @@ const Singup = props => {
         <h1>Sign Up</h1>
 
         <form method="POST" onSubmit={handleSubmit}>
-          <FormRow
+          <SignForm
             type="email"
             name="email"
             label="email"
@@ -75,7 +74,7 @@ const Singup = props => {
             required
             handleChange={handleUserInput}
           />
-          <FormRow
+          <SignForm
             type="password"
             name="password"
             label="password"
@@ -86,7 +85,7 @@ const Singup = props => {
             required
             handleChange={handleUserInput}
           />
-          <FormRow
+          <SignForm
             type="password"
             name="confirmPassword"
             label="confirm password"

@@ -15,7 +15,6 @@ const Content = () => {
             id="email"
             name="email"
             width="25"
-            sectionTitle="Header"
           />
           <FormRow
             htmlFor="password"
