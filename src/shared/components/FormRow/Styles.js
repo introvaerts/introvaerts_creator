@@ -13,13 +13,18 @@ export const Row = styled.div`
 `;
 ///check here above!
 
+export const StyledTitle = styled.div`
+  margin: 0 auto 2rem;
+`;
+
 export const StyledLabel = styled.label`
   color: ${colour.secondary};
   background: none;
   ${font.label};
   text-transform: uppercase;
   font-size: 0.7rem;
-  margin-top: 1%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const StyledInput = styled.input`
@@ -29,5 +34,4 @@ export const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
   border-bottom: solid 1px ${colour.background2};
-  ${'' /* margin-left: 5%; */}
 `;

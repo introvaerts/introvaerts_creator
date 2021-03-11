@@ -5,15 +5,16 @@ import Button from '../../../shared/components/Button';
 const Content = () => {
   return (
     <>
-      <h2>Content</h2>
       <form>
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
           <FormRow
             htmlFor="email"
             label="email"
             type="email"
             id="email"
             name="email"
+            width="25"
+            sectionTitle="Header"
           />
           <FormRow
             htmlFor="password"
@@ -21,18 +22,20 @@ const Content = () => {
             type="password"
             id="password"
             name="password"
+            width="25"
           />
         </SectionContainer>
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
           <FormRow
             htmlFor="email"
             label="email"
             type="email"
             id="email"
             name="email"
+            width="25"
           />
         </SectionContainer>
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
           <Button type="submit" text="Submit" />
         </SectionContainer>
       </form>

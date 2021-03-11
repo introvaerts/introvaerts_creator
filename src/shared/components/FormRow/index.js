@@ -1,4 +1,10 @@
-import { RowContainer, Row, StyledLabel, StyledInput } from './Styles';
+import {
+  RowContainer,
+  Row,
+  StyledLabel,
+  StyledInput,
+  StyledTitle,
+} from './Styles';
 
 const FormRow = ({
   htmlFor,
@@ -12,10 +18,14 @@ const FormRow = ({
   title,
   handleChange,
   required,
+  width,
+  sectionTitle,
 }) => {
   return (
-    <RowContainer width="25">
+    <RowContainer width={width}>
       <Row>
+        {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
+        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
         <StyledInput
           type={type}
           id={id}
@@ -27,7 +37,6 @@ const FormRow = ({
           onChange={handleChange}
           required={required}
         ></StyledInput>
-        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
       </Row>
     </RowContainer>
   );
