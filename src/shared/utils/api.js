@@ -23,7 +23,6 @@ const Api = {
       if (response.data.code === 201) {
         storeToken(response.data.data.token);
       }
-      console.log(response);
       return response.data;
     } catch (error) {
       console.error('createUser: ', error);
@@ -61,13 +60,14 @@ const Api = {
     const {
       subdomain_name,
       page_title,
+      theme,
       tagline,
       description,
       contact_tagline,
       first_name,
       last_name,
-      email,
-      telephone,
+      business_email,
+      phone_number,
       street_and_number,
       postalcode,
       city,
@@ -77,7 +77,26 @@ const Api = {
       const response = await axios.post(
         `${createSubdomainEndpoint}`,
         {
-          //put in data
+          about: {
+            tagline: tagline,
+            description: description,
+          },
+          contact: {
+            address: {
+              street_and_number: street_and_number,
+              postalcode: postalcode,
+              city: city,
+              country: country,
+            },
+            first_name: first_name,
+            last_name: last_name,
+            contact_tagline: contact_tagline,
+            business_email: business_email,
+            phone_number: phone_number,
+          },
+          name: subdomain_name,
+          theme: theme,
+          page_title: page_title,
         },
         {
           headers: {
@@ -85,7 +104,6 @@ const Api = {
           },
         }
       );
-      console.log('createSubdomain', response);
       return response.data;
     } catch (error) {
       console.error('createSubdomain: ', error);

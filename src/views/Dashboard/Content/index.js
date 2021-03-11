@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // api
 import Api from '../../../shared/utils/api';
 // shared components
@@ -10,7 +10,6 @@ import Button from '../../../shared/components/Button';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
 const Content = () => {
-  //TODO: initialize with data from database
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -20,13 +19,85 @@ const Content = () => {
     contact_tagline: '',
     first_name: '',
     last_name: '',
-    email: '',
-    telephone: '',
+    business_email: '',
+    phone_number: '',
     street_and_number: '',
     postalcode: '',
     city: '',
     country: '',
   });
+
+  const [userInfo, setUserInfo] = useState();
+
+  // fetch user data (email, subdomains with all infos)
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await Api.getUsersAccount();
+      setUserInfo(result.data);
+    };
+    fetchData();
+  }, []);
+
+  // apply
+  useEffect(() => {
+    if (userInfo) {
+      // is there a subdomain in the array of subdomains?
+      if (userInfo.subdomains) {
+        const subdomain = userInfo.subdomains[0];
+        const { galleries, name, page_title } = userInfo.subdomains[0];
+        setUserInput({
+          ...userInput,
+          page_title: page_title ? page_title : '',
+          //NOTE:get names from ids
+          galleries: galleries ? galleries : [],
+        });
+        // is there a about object inside subdomain?
+        if (subdomain.about) {
+          const { tagline, description } = subdomain.about;
+          setUserInput({
+            ...userInput,
+            tagline: tagline ? tagline : '',
+            description: description ? description : '',
+          });
+        }
+        // is there a contact object inside subdomain?
+        if (subdomain.contact) {
+          const {
+            first_name,
+            last_name,
+            contact_tagline,
+            business_email,
+            phone_number,
+          } = subdomain.contact;
+          setUserInput({
+            ...userInput,
+            first_name: first_name ? first_name : '',
+            last_name: last_name ? last_name : '',
+            contact_tagline: contact_tagline ? contact_tagline : '',
+            business_email: business_email ? business_email : '',
+            phone_number: phone_number ? phone_number : '',
+          });
+          // is there an address object inside contact?
+          if (subdomain.contact.address) {
+            console.log(subdomain.contact.address);
+            const {
+              street_and_number,
+              postalcode,
+              city,
+              country,
+            } = subdomain.contact.address;
+            setUserInput({
+              ...userInput,
+              street_and_number: street_and_number ? street_and_number : '',
+              postalcode: postalcode ? postalcode : '',
+              city: city ? city : '',
+              country: country ? country : '',
+            });
+          }
+        }
+      }
+    }
+  }, [userInfo]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -173,24 +244,24 @@ const Content = () => {
             handleChange={handleUserInput}
           />
           <FormRow
-            htmlFor="email"
-            label="email"
+            htmlFor="business_email"
+            label="business_email"
             type="email"
-            id="email"
-            name="email"
-            value={userInput.email}
+            id="business_email"
+            name="business_email"
+            value={userInput.business_email}
             pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
             title="Please put in a valid email address: accountname@domainname.domain"
             required={true}
             handleChange={handleUserInput}
           />
           <FormRow
-            htmlFor="telephone"
-            label="telephone"
+            htmlFor="phone_number"
+            label="phone_number"
             type="tel"
-            id="telephone"
-            name="telephone"
-            value={userInput.telephone}
+            id="phone_number"
+            name="phone_number"
+            value={userInput.phone_number}
             required={false}
             handleChange={handleUserInput}
           />
