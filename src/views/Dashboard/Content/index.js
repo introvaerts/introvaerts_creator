@@ -9,7 +9,7 @@ import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
-const Content = subdomain => {
+const Content = data => {
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -29,59 +29,66 @@ const Content = subdomain => {
 
   // FIXME: initialize userInput with data from database
   useEffect(() => {
-    if (subdomain) {
-      const { galleries, name, page_title } = subdomain;
-      setUserInput({
-        ...userInput,
+    let newUserInput = { galleryName: '' };
+
+    if (data.subdomain) {
+      const { galleries, page_title } = data.subdomain;
+      newUserInput = {
+        ...newUserInput,
         page_title: page_title ? page_title : '',
         //NOTE:get names from ids
         galleries: galleries ? galleries : [],
-      });
+      };
+
       // is there a about object inside subdomain?
-      if (subdomain.about) {
-        const { tagline, description } = subdomain.about;
-        setUserInput({
-          ...userInput,
+      if (data.subdomain.about) {
+        const { tagline, description } = data.subdomain.about;
+
+        newUserInput = {
+          ...newUserInput,
           tagline: tagline ? tagline : '',
           description: description ? description : '',
-        });
+        };
       }
       // is there a contact object inside subdomain?
-      if (subdomain.contact) {
+      if (data.subdomain.contact) {
         const {
           first_name,
           last_name,
           contact_tagline,
           business_email,
           phone_number,
-        } = subdomain.contact;
-        setUserInput({
-          ...userInput,
+        } = data.subdomain.contact;
+
+        newUserInput = {
+          ...newUserInput,
           first_name: first_name ? first_name : '',
           last_name: last_name ? last_name : '',
           contact_tagline: contact_tagline ? contact_tagline : '',
           business_email: business_email ? business_email : '',
           phone_number: phone_number ? phone_number : '',
-        });
+        };
         // is there an address object inside contact?
-        if (subdomain.contact.address) {
+        if (data.subdomain.contact.address) {
           const {
             street_and_number,
             postalcode,
             city,
             country,
-          } = subdomain.contact.address;
-          setUserInput({
-            ...userInput,
+          } = data.subdomain.contact.address;
+
+          newUserInput = {
+            ...newUserInput,
             street_and_number: street_and_number ? street_and_number : '',
             postalcode: postalcode ? postalcode : '',
             city: city ? city : '',
             country: country ? country : '',
-          });
+          };
         }
       }
+      setUserInput(newUserInput);
     }
-  }, [subdomain]);
+  }, [data]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -98,7 +105,7 @@ const Content = subdomain => {
   };
 
   const editSubdomain = async () => {
-    await Api.editSubdomain(subdomain._id, subdomain.name, userInput);
+    await Api.editSubdomain(data.subdomain._id, data.subdomain.name, userInput);
   };
 
   const createGallery = async () => {
@@ -109,7 +116,7 @@ const Content = subdomain => {
     ) {
       const response = await Api.createGallery(
         userInput.galleryName,
-        subdomain._id
+        data.subdomain._id
       );
       userInput.galleries = [...userInput.galleries, response.data._id];
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
