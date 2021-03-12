@@ -46,6 +46,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (userInfo) {
+      const fetchData = async () => {
+        const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
+        console.log(result);
+      };
+      fetchData();
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (userInfo) {
       const galleryIds = userInfo.subdomains[0].galleries;
       // TODO: reduce instead of var and loop
       let promisContainer = [];
