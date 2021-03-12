@@ -5,11 +5,12 @@ import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
 
 import { SIGNUP } from '../../navigation/CONSTANTS';
 
-import { SignInContainer } from './Styles';
-// import SectionContainer from '../../shared/components/SectionContainer';
+// import { SignInContainer } from './Styles';
+import Header from '../Header';
 import Button from '../../shared/components/Button';
-import FormRow from '../../shared/components/FormRow';
+import SignForm from '../../shared/components/SignForm';
 import LinkModule from '../../shared/components/LinkModule';
+import SectionContainer from '../../shared/components/SectionContainer';
 
 const Signin = props => {
   //getting token from context
@@ -45,46 +46,46 @@ const Signin = props => {
 
     const response = await Api.login(userPayload);
 
-    setToken(response.data.token ? true : false);
+    if (response) {
+      setToken(response.data.token ? true : false);
 
-    if (response.data.token) {
-      redirectAfterAuth(response.data.token, 'dashboard', props);
+      if (response.data.token) {
+        redirectAfterAuth(response.data.token, 'dashboard', props);
+      }
     }
   };
 
-  /*   const redirectAfterAuth = token => {
-    if (token) {
-      console.log('redirect to dashboard');
-      props.history.push('/dashboard');
-    } else console.log('redirection forbidden, no token available');
-  }; */
-
   return (
-    <SignInContainer>
-      <h1>Sign In</h1>
-      <form method="POST" onSubmit={handleLogIn}>
-        <FormRow
-          htmlFor="email"
-          label="email"
-          type="email"
-          id="email"
-          name="email"
-          value={userLogIn.email}
-          handleChange={handleChange}
-        />
-        <FormRow
-          htmlFor="password"
-          label="password"
-          type="password"
-          id="password"
-          name="password"
-          value={userLogIn.password}
-          handleChange={handleChange}
-        />
-        <Button type="submit" text="Submit" />
-      </form>
-      <LinkModule text="sign up" linkTo={SIGNUP} />
-    </SignInContainer>
+    <>
+      <Header />
+      <SectionContainer width="20" margin="15% auto">
+        <h1>Sign In</h1>
+        <form method="POST" onSubmit={handleLogIn}>
+          <SignForm
+            htmlFor="email"
+            label="email"
+            type="email"
+            id="email"
+            name="email"
+            value={userLogIn.email}
+            handleChange={handleChange}
+            required={true}
+          />
+          <SignForm
+            htmlFor="password"
+            label="password"
+            type="password"
+            id="password"
+            name="password"
+            value={userLogIn.password}
+            handleChange={handleChange}
+            required={false}
+          />
+          <Button type="submit" text="Submit" marginTop="5" />
+        </form>
+        <LinkModule text="sign up" marginTop="20" linkTo={SIGNUP} />
+      </SectionContainer>
+    </>
   );
 };
 

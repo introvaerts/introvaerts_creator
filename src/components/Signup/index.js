@@ -6,9 +6,11 @@ import { SIGNIN } from '../../navigation/CONSTANTS';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
 import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
-import { SignUpContainer } from './Styles';
+//components
+import Header from '../Header';
+import SectionContainer from '../../shared/components/SectionContainer';
 import Button from '../../shared/components/Button';
-import FormRow from '../../shared/components/FormRow';
+import SignForm from '../../shared/components/SignForm';
 import LinkModule from '../../shared/components/LinkModule';
 
 const Singup = props => {
@@ -55,47 +57,50 @@ const Singup = props => {
   };
 
   return (
-    <SignUpContainer>
-      <h1>Sign Up</h1>
+    <>
+      <Header />
+      <SectionContainer width="20" margin="15% auto">
+        <h1>Sign Up</h1>
 
-      <form method="POST" onSubmit={handleSubmit}>
-        <FormRow
-          type="email"
-          name="email"
-          label="email"
-          id="email"
-          value={userInput.email}
-          pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-          title="Please put in a valid email address: accountname@domainname.domain"
-          required
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          type="password"
-          name="password"
-          label="password"
-          id="password"
-          value={userInput.password}
-          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
-          required
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          type="password"
-          name="confirmPassword"
-          label="confirm password"
-          id="confirmPassword"
-          value={userInput.confirmPassword}
-          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-          title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
-          required
-          handleChange={handleUserInput}
-        />
-        <Button type="submit" id="submit" text="Submit" />
-      </form>
-      <LinkModule text="sign in" linkTo={SIGNIN} />
-    </SignUpContainer>
+        <form method="POST" onSubmit={handleSubmit}>
+          <SignForm
+            type="email"
+            name="email"
+            label="email"
+            id="email"
+            value={userInput.email}
+            pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+            title="Please put in a valid email address: accountname@domainname.domain"
+            required
+            handleChange={handleUserInput}
+          />
+          <SignForm
+            type="password"
+            name="password"
+            label="password"
+            id="password"
+            value={userInput.password}
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+            title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
+            required
+            handleChange={handleUserInput}
+          />
+          <SignForm
+            type="password"
+            name="confirmPassword"
+            label="confirm password"
+            id="confirmPassword"
+            value={userInput.confirmPassword}
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+            title="Please put in a password with minimum eight characters, at least one upper case letter, one lower case letter, one number and one of these special characters (! @ # $ % & * ?)"
+            required
+            handleChange={handleUserInput}
+          />
+          <Button type="submit" id="submit" text="Submit" marginTop="5" />
+        </form>
+        <LinkModule text="sign in" marginTop="20" linkTo={SIGNIN} />
+      </SectionContainer>
+    </>
   );
 };
 

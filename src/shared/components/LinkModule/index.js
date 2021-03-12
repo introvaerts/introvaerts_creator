@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { SmallWrapper, SmallLink } from './Styles';
 
-const LinkModule = ({ text, linkTo }) => {
+const LinkModule = ({ text, linkTo, marginTop, marginLeft }) => {
   return (
-    <SmallWrapper>
+    <SmallWrapper marginTop={marginTop} marginLeft={marginLeft}>
       <h3>
         or click
         <Link to={linkTo}>

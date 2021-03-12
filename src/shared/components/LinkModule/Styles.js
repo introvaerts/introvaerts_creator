@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { font, colour } from '../../styles/StyleConstants';
 
 export const SmallWrapper = styled.div`
-  margin-top: 2rem;
-  margin-left: 6rem;
+  margin-top: ${props => props.marginTop}%;
+  margin-left: ${props => props.marginLeft}%;
 `;
 
 export const SmallLink = styled.span`

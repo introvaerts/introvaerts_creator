@@ -1,7 +1,6 @@
 import {
   RowContainer,
   Row,
-  LabelContainer,
   StyledLabel,
   StyledInput,
   StyledTitle,
@@ -27,7 +26,6 @@ const FormRow = ({
       <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
       <Row>
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
-
         <StyledInput
           type={type}
           id={id}
