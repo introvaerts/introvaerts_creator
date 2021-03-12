@@ -28,24 +28,27 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
-  //FIXME: fetch gallery names and put into state to show in form
+
   useEffect(() => {
     if (userInfo) {
-      const fetchData = async () => {
-        const galleryIds = userInfo.subdomains[0].galleries;
-        console.log(galleryIds);
-        for (let index = 0; index < galleryIds.length; index++) {
-          const galleryId = galleryIds[index];
-          console.log(index);
-          const result = await Api.getGalleryById(galleryId);
-          setGalleries([...galleries, result.data.gallery.name]);
-        }
-      };
-      fetchData();
+      const galleryIds = userInfo.subdomains[0].galleries;
+      // TODO: reduce instead of var and loop
+      let promisContainer = [];
+      galleryIds.forEach(galleryId => {
+        promisContainer.push(Api.getGalleryById(galleryId));
+      });
+      Promise.all(promisContainer)
+        .then(resolvedPromises => {
+          setGalleries(
+            resolvedPromises.reduce(
+              (accum, val) => (accum.push(val.data.gallery.name), accum),
+              []
+            )
+          );
+        })
+        .catch(error => console.error(error));
     }
   }, [userInfo]);
-
-  console.log('galleries: ', galleries);
 
   return (
     <div>
@@ -62,7 +65,7 @@ const Dashboard = () => {
           <Route path={`${path}/design`} component={Design} />
           <Route path={`${path}/content`}>
             {/* uses the only on subdomain of the user */}
-            <Content subdomain={userInfo ? userInfo.subdomains[0] : []} />
+            <Content subdomain={userInfo ? userInfo.subdomains[0] : null} />
           </Route>
           <Route path={`${path}/settings`} component={Settings} />
         </Switch>
