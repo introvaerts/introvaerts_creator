@@ -9,8 +9,7 @@ import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
-const Content = () => {
-  const [userInfo, setUserInfo] = useState();
+const Content = subdomain => {
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -27,78 +26,62 @@ const Content = () => {
     city: '',
     country: '',
   });
-  //fetch gallery names and put into state to show in form
-  const [galleryNames, setGalleryNames] = useState([]);
 
-  // fetch user data (email, subdomains with all infos)
+  // FIXME: initialize userInput with data from database
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await Api.getUsersAccount();
-      setUserInfo(result.data);
-    };
-    fetchData();
-  }, []);
-
-  // initialize userInput with data from database
-  useEffect(() => {
-    if (userInfo) {
-      console.log(userInfo.subdomains[0]);
-      // is there a subdomain in the array of subdomains?
-      if (userInfo.subdomains) {
-        const subdomain = userInfo.subdomains[0];
-        const { galleries, name, page_title } = userInfo.subdomains[0];
+    if (subdomain) {
+      const { galleries, name, page_title } = subdomain;
+      setUserInput({
+        ...userInput,
+        page_title: page_title ? page_title : '',
+        //NOTE:get names from ids
+        galleries: galleries ? galleries : [],
+      });
+      // is there a about object inside subdomain?
+      if (subdomain.about) {
+        const { tagline, description } = subdomain.about;
         setUserInput({
           ...userInput,
-          page_title: page_title ? page_title : '',
-          //NOTE:get names from ids
-          galleries: galleries ? galleries : [],
+          tagline: tagline ? tagline : '',
+          description: description ? description : '',
         });
-        // is there a about object inside subdomain?
-        if (subdomain.about) {
-          const { tagline, description } = subdomain.about;
-          setUserInput({
-            ...userInput,
-            tagline: tagline ? tagline : '',
-            description: description ? description : '',
-          });
-        }
-        // is there a contact object inside subdomain?
-        if (subdomain.contact) {
+      }
+      // is there a contact object inside subdomain?
+      if (subdomain.contact) {
+        const {
+          first_name,
+          last_name,
+          contact_tagline,
+          business_email,
+          phone_number,
+        } = subdomain.contact;
+        setUserInput({
+          ...userInput,
+          first_name: first_name ? first_name : '',
+          last_name: last_name ? last_name : '',
+          contact_tagline: contact_tagline ? contact_tagline : '',
+          business_email: business_email ? business_email : '',
+          phone_number: phone_number ? phone_number : '',
+        });
+        // is there an address object inside contact?
+        if (subdomain.contact.address) {
           const {
-            first_name,
-            last_name,
-            contact_tagline,
-            business_email,
-            phone_number,
-          } = subdomain.contact;
+            street_and_number,
+            postalcode,
+            city,
+            country,
+          } = subdomain.contact.address;
           setUserInput({
             ...userInput,
-            first_name: first_name ? first_name : '',
-            last_name: last_name ? last_name : '',
-            contact_tagline: contact_tagline ? contact_tagline : '',
-            business_email: business_email ? business_email : '',
-            phone_number: phone_number ? phone_number : '',
+            street_and_number: street_and_number ? street_and_number : '',
+            postalcode: postalcode ? postalcode : '',
+            city: city ? city : '',
+            country: country ? country : '',
           });
-          // is there an address object inside contact?
-          if (subdomain.contact.address) {
-            const {
-              street_and_number,
-              postalcode,
-              city,
-              country,
-            } = subdomain.contact.address;
-            setUserInput({
-              ...userInput,
-              street_and_number: street_and_number ? street_and_number : '',
-              postalcode: postalcode ? postalcode : '',
-              city: city ? city : '',
-              country: country ? country : '',
-            });
-          }
         }
       }
     }
-  }, [userInfo]);
+  }, [subdomain]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -115,11 +98,7 @@ const Content = () => {
   };
 
   const editSubdomain = async () => {
-    await Api.editSubdomain(
-      userInfo.subdomains[0]._id,
-      userInfo.subdomains[0].name,
-      userInput
-    );
+    await Api.editSubdomain(subdomain._id, subdomain.name, userInput);
   };
 
   const createGallery = async () => {
@@ -130,7 +109,7 @@ const Content = () => {
     ) {
       const response = await Api.createGallery(
         userInput.galleryName,
-        userInfo.subdomains[0]._id
+        subdomain._id
       );
       userInput.galleries = [...userInput.galleries, response.data._id];
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {

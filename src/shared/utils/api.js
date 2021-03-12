@@ -8,7 +8,7 @@ import {
   subdomainByIdEndpoint,
   // subdomainAvailableEndpoint,
   createGalleryEndpoint,
-  // galleryByIdEndpoint,
+  galleryByIdEndpoint,
   // uploadImageEndpoint,
   // imageByIdEndpoint,
 } from './endpoints';
@@ -20,7 +20,7 @@ const Api = {
         email,
         password,
       });
-      if (response.data.code === 201) {
+      if (parseInt(response.data.code) === 201) {
         storeToken(response.data.data.token);
       }
       return response.data;
@@ -194,13 +194,23 @@ const Api = {
       console.error('createGallery: ', error);
     }
   },
-  //getGallery: async () => {
+  getGalleryById: async galleryId => {
+    try {
+      const response = await axios.get(`${galleryByIdEndpoint}${galleryId}`);
+      if (parseInt(response.data.code) === 200) {
+        return response.data;
+      } else {
+        console.log('no gallery for this Id');
+        return [];
+      }
+    } catch (error) {
+      console.error('getGalleryById: ', error);
+    }
+  },
+  //editGalleryById: async () => {
   //  /* galleryByIdEndpoint */
   //},
-  //editGallery: async () => {
-  //  /* galleryByIdEndpoint */
-  //},
-  //deleteGallery: async () => {
+  //deleteGalleryById: async () => {
   //  /* galleryByIdEndpoint */
   //},
   uploadImage: async () => {
