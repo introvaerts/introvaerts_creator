@@ -1,7 +1,6 @@
 import {
   RowContainer,
   Row,
-  LabelContainer,
   StyledLabel,
   StyledInput,
   StyledTitle,
@@ -24,7 +23,6 @@ const FormRow = ({
 }) => {
   return (
     <RowContainer width={width}>
-      <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
       <Row>
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
 
@@ -39,6 +37,8 @@ const FormRow = ({
           onChange={handleChange}
           required={required}
         ></StyledInput>
+
+        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
       </Row>
     </RowContainer>
   );

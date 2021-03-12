@@ -5,6 +5,7 @@ import Api from '../../../shared/utils/api';
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
 import GalleryRow from '../../../shared/components/GalleryRow';
+import FormRowArea from '../../../shared/components/FormRowArea';
 import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
