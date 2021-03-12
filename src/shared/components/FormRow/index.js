@@ -8,6 +8,7 @@ import {
 } from './Styles';
 
 const FormRow = ({
+  accept,
   htmlFor,
   label,
   type,
@@ -29,6 +30,7 @@ const FormRow = ({
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
 
         <StyledInput
+          accept={accept}
           type={type}
           id={id}
           name={name}

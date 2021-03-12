@@ -18,6 +18,7 @@ import Content from './Content';
 import Settings from './Settings';
 import Signout from '../../components/Signout';
 import Logo from '../../components/Logo';
+import Gallery from './Gallery';
 // import Menu from '../../components/Menu';
 
 import {
@@ -48,7 +49,6 @@ const Dashboard = () => {
     if (userInfo) {
       const fetchData = async () => {
         const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
-        console.log(result);
       };
       fetchData();
     }
@@ -127,6 +127,9 @@ const Dashboard = () => {
           <Route path={`${path}/content`}>
             {/* uses the only on subdomain of the user */}
             <Content subdomain={userInfo ? userInfo.subdomains[0] : null} />
+          </Route>
+          <Route path={`${path}/galleries/:name`}>
+            <Gallery />
           </Route>
           <Route path={`${path}/settings`} component={Settings} />
         </Switch>
