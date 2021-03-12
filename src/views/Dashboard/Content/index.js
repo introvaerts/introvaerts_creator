@@ -138,8 +138,10 @@ const Content = data => {
     <>
       <form method="POST" onSubmit={handleSubmit}>
         {/* HEADER */}
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
+          <h2>Header</h2>
           <FormRow
+            width="25"
             htmlFor="page_title"
             label="page title"
             type="text"
@@ -151,8 +153,10 @@ const Content = data => {
           />
         </SectionContainer>
         {/* ABOUT */}
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
+          <h2>About</h2>
           <FormRow
+            width="25"
             htmlFor="tagline"
             label="tagline"
             type="text"
@@ -162,7 +166,8 @@ const Content = data => {
             required={false}
             handleChange={handleUserInput}
           />
-          <FormRow
+          <FormRowArea
+            width="25"
             htmlFor="description"
             label="description"
             type="text"
@@ -174,8 +179,10 @@ const Content = data => {
           />
         </SectionContainer>
         {/* GALLERY */}
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
+          <h2>Galleries</h2>
           <FormRow
+            width="25"
             htmlFor="galleryName"
             label="gallery name"
             type="text"
@@ -198,8 +205,10 @@ const Content = data => {
             : null}
         </SectionContainer>
         {/* CONTACT */}
-        <SectionContainer>
+        <SectionContainer border="yes" padding="2">
+          <h2>Contact</h2>
           <FormRow
+            width="25"
             htmlFor="contact_tagline"
             label="motivate your fellows to contact you"
             type="text"
@@ -210,6 +219,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="first_name"
             label="first name"
             type="text"
@@ -220,6 +230,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="last_name"
             label="last name"
             type="text"
@@ -230,6 +241,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="business_email"
             label="business_email"
             type="email"
@@ -242,6 +254,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="phone_number"
             label="phone_number"
             type="tel"
@@ -252,6 +265,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="street_and_number"
             label="street and number"
             type="text"
@@ -262,6 +276,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="postalcode"
             label="postalcode"
             type="text"
@@ -272,6 +287,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="city"
             label="city"
             type="text"
@@ -282,6 +298,7 @@ const Content = data => {
             handleChange={handleUserInput}
           />
           <FormRow
+            width="25"
             htmlFor="country"
             label="country"
             type="text"
@@ -293,7 +310,7 @@ const Content = data => {
           />
         </SectionContainer>
         {/* SUBMIT */}
-        <SectionContainer>
+        <SectionContainer borderBottom="yes" padding="2" align="center">
           <Button type="submit" text="Submit" />
         </SectionContainer>
       </form>
