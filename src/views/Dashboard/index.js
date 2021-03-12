@@ -1,4 +1,5 @@
 /* import DashboardRouter from "../../navigation/DashboardRouter"; */
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Link,
@@ -6,6 +7,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+// api
+import Api from '../../shared/utils/api';
 //global token
 import { useTokenContext } from '../../shared/utils/context';
 
@@ -29,6 +32,38 @@ import {
 const Dashboard = () => {
   let { path, url } = useRouteMatch();
 
+  const [userInfo, setUserInfo] = useState();
+  const [galleries, setGalleries] = useState([]);
+
+  // fetch user data (email, subdomains with all infos)
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await Api.getUsersAccount();
+      setUserInfo(result.data);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (userInfo) {
+      const galleryIds = userInfo.subdomains[0].galleries;
+      // TODO: reduce instead of var and loop
+      let promisContainer = [];
+      galleryIds.forEach(galleryId => {
+        promisContainer.push(Api.getGalleryById(galleryId));
+      });
+      Promise.all(promisContainer)
+        .then(resolvedPromises => {
+          setGalleries(
+            resolvedPromises.reduce(
+              (accum, val) => (accum.push(val.data.gallery.name), accum),
+              []
+            )
+          );
+        })
+        .catch(error => console.error(error));
+    }
+  }, [userInfo]);
   //global logout
   const { token } = useTokenContext();
   const logOutButton = () => {
@@ -79,7 +114,10 @@ const Dashboard = () => {
         <Switch>
           <Route exact path={path} />
           <Route path={`${path}/design`} component={Design} />
-          <Route path={`${path}/content`} component={Content} />
+          <Route path={`${path}/content`}>
+            {/* uses the only on subdomain of the user */}
+            <Content subdomain={userInfo ? userInfo.subdomains[0] : null} />
+          </Route>
           <Route path={`${path}/settings`} component={Settings} />
         </Switch>
       </Router>
