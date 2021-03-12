@@ -109,10 +109,14 @@ const Api = {
       console.error('createSubdomain: ', error);
     }
   },
-  getSubdomain: async subdomainId => {
+  getSubdomainById: async subdomainId => {
+    console.log(subdomainId);
     try {
-      const response = await axios.get(`${createUserEndpoint}subdomainId`);
+      const response = await axios.get(
+        `${subdomainByIdEndpoint}${subdomainId}`
+      );
       console.log('getSubdomain', response);
+      return response.data;
     } catch (error) {
       console.error('getSubdomain: ', error);
     }
@@ -201,7 +205,7 @@ const Api = {
         return response.data;
       } else {
         console.log('no gallery for this Id');
-        return [];
+        return {};
       }
     } catch (error) {
       console.error('getGalleryById: ', error);
