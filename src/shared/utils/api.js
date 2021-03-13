@@ -110,15 +110,13 @@ const Api = {
     }
   },
   getSubdomainById: async subdomainId => {
-    console.log(subdomainId);
     try {
       const response = await axios.get(
         `${subdomainByIdEndpoint}${subdomainId}`
       );
-      console.log('getSubdomain', response);
       return response.data;
     } catch (error) {
-      console.error('getSubdomain: ', error);
+      console.error('getSubdomainByID: ', error);
     }
   },
   editSubdomain: async (
