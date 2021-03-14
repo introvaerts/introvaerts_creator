@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Api from '../../shared/utils/api.js';
 import { useTokenContext } from '../../shared/utils/context.js';
-import { getToken, redirectAfterAuth } from '../../shared/utils/helpers';
+import { redirectAfterAuth } from '../../shared/utils/helpers';
 
 import { SIGNUP } from '../../navigation/CONSTANTS';
 
