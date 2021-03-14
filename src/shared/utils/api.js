@@ -6,7 +6,7 @@ import {
   usersInfoEndpoint,
   createSubdomainEndpoint,
   subdomainByIdEndpoint,
-  // subdomainAvailableEndpoint,
+  subdomainAvailableEndpoint,
   createGalleryEndpoint,
   galleryByIdEndpoint,
   // uploadImageEndpoint,
@@ -175,9 +175,16 @@ const Api = {
       console.error('createSubdomain: ', error);
     }
   },
-  //subdomainAvailable: async () => {
-  //  /* subdomainAvailableEndpoint */
-  //},
+  subdomainAvailable: async subdomainName => {
+    /* subdomainAvailableEndpoint */
+    try {
+      const response = await axios.get(
+        `${subdomainAvailableEndpoint}${subdomainName}`
+      );
+    } catch (error) {
+      console.error('subdomainAvailable: ', error);
+    }
+  },
   createGallery: async (name, subdomainId) => {
     try {
       // TODO: check how many galleries do already exist, max 3 galleries allowed for now
