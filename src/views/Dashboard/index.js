@@ -36,6 +36,7 @@ const Dashboard = () => {
     userEmail: '',
     subdomains: [{ name: '', _id: '', theme: '' }],
   });
+  const [subdomainInfo, setSubdomainInfo] = useState();
 
   // fetch user data (email, subdomains with all infos)
   useEffect(() => {
@@ -58,18 +59,13 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  if (userInfo) {
-    userInfo.subdomains.forEach((subdomain, i) => {
-      console.log('subdomain ' + i + ': ', subdomain._id);
-    });
-  }
-
   // fetch subdomain by its Id
   useEffect(() => {
     if (userInfo) {
       const fetchData = async () => {
+        // NOTE: uses first subdomain of the Array
         const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
-        console.log('SubdomainById: ', result.data);
+        setSubdomainInfo(result.data);
       };
       fetchData();
     }
@@ -127,7 +123,11 @@ const Dashboard = () => {
           <Route path={`${path}/design`} component={Design} />
           <Route path={`${path}/content`}>
             {/* uses the only on subdomain of the user */}
-            <Content subdomain={userInfo ? userInfo.subdomains[0] : null} />
+            <Content subdomain={subdomainInfo ? subdomainInfo : {}} />
+          </Route>
+          <Route path={`${path}/content`}>
+            {/* uses the only on subdomain of the user */}
+            <test subdomain={subdomainInfo ? subdomainInfo : null} />
           </Route>
           <Route path={`${path}/settings`} component={Settings} />
         </Switch>

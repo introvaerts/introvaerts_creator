@@ -10,7 +10,9 @@ import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 
-const Content = data => {
+const Content = ({ subdomain }) => {
+  // change name of subdomain to data for better code reading
+  const data = subdomain;
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -28,12 +30,15 @@ const Content = data => {
     country: '',
   });
 
-  // FIXME: initialize userInput with data from database
   useEffect(() => {
     let newUserInput = { galleryName: '' };
-
     if (data.subdomain) {
-      const { galleries, page_title } = data.subdomain;
+      const { page_title } = data.subdomain;
+      let galleries = [];
+      data.galleries.forEach(gallery => {
+        galleries.push(gallery.name);
+      });
+
       newUserInput = {
         ...newUserInput,
         page_title: page_title ? page_title : '',
