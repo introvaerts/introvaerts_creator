@@ -31,5 +31,5 @@ export const StyledInput = styled.textarea`
   ${font.regular};
   font-size: 1rem;
   border: none;
-  border-bottom: solid 1px ${colour.background2};
+  border-bottom: solid 1px ${colour.primary};
 `;

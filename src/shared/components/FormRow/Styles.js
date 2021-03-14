@@ -36,6 +36,6 @@ export const StyledInput = styled.input`
   ${font.regular};
   font-size: 1rem;
   border: none;
-  border-bottom: solid 1px ${colour.background2};
+  border-bottom: solid 1px ${colour.primary};
   margin-bottom: 1rem;
 `;
