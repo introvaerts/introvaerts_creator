@@ -14,6 +14,7 @@ const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
   const [userInput, setUserInput] = useState({
+    subdomain_name: '',
     page_title: '',
     tagline: '',
     description: '',
@@ -33,7 +34,7 @@ const Content = ({ subdomain }) => {
   useEffect(() => {
     let newUserInput = { galleryName: '' };
     if (data.subdomain) {
-      const { page_title } = data.subdomain;
+      const { name, page_title } = data.subdomain;
       let galleries = [];
       data.galleries.forEach(gallery => {
         galleries.push(gallery.name);
@@ -41,6 +42,7 @@ const Content = ({ subdomain }) => {
 
       newUserInput = {
         ...newUserInput,
+        subdomain_name: name ? name : '',
         page_title: page_title ? page_title : '',
         //NOTE:get names from ids
         galleries: galleries ? galleries : [],
@@ -104,6 +106,7 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
+    if (name === 'subdomain_name') console.log('>>>');
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
@@ -139,9 +142,26 @@ const Content = ({ subdomain }) => {
     }));
   };
 
+  console.log(data);
+
   return (
     <>
       <form method="POST" onSubmit={handleSubmit}>
+        {/* Subdomain */}
+        <SectionContainer border="yes" padding="2">
+          <h2>Subdomain</h2>
+          <FormRow
+            width="25"
+            htmlFor="subdomain_name"
+            label="subdomain name"
+            type="text"
+            id="subdomain_name"
+            name="subdomain_name"
+            value={userInput.subdomain_name}
+            required={true}
+            handleChange={handleUserInput}
+          />
+        </SectionContainer>
         {/* HEADER */}
         <SectionContainer border="yes" padding="2">
           <h2>Header</h2>
