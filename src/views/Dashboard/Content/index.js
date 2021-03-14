@@ -9,6 +9,8 @@ import FormRowArea from '../../../shared/components/FormRowArea';
 import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
+// time delay for firing API call
+import useDebounce from './use-debounce';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
@@ -30,6 +32,8 @@ const Content = ({ subdomain }) => {
     city: '',
     country: '',
   });
+  const [isAvailable, setIsAvailable] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     let newUserInput = { galleryName: '' };
@@ -117,6 +121,21 @@ const Content = ({ subdomain }) => {
     }));
   };
 
+  // costum hook return latest value (after 500ms) or previous value of subdomain_name (only have the API call fire when user stops typing)
+  const debouncedSubdomainName = useDebounce(userInput.subdomain_name, 500);
+
+  useEffect(() => {
+    if (debouncedSubdomainName) {
+      setIsSearching(true);
+      Api.subdomainAvailable(debouncedSubdomainName).then(res => {
+        setIsSearching(false);
+        setIsAvailable(res.isAvailable);
+      });
+    } else {
+      setIsAvailable(true);
+    }
+  }, [debouncedSubdomainName]);
+
   const subdomainNameAvailable = userInputSubdomainName => {
     console.log('check');
   };
@@ -169,6 +188,8 @@ const Content = ({ subdomain }) => {
             required={true}
             handleChange={handleUserInput}
           />
+          {isSearching && <div>Searching ...</div>}
+          {isAvailable && <div>YES</div>}
         </SectionContainer>
         {/* HEADER */}
         <SectionContainer border="yes" padding="2">
