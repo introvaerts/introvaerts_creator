@@ -106,11 +106,19 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
-    if (name === 'subdomain_name') console.log('>>>');
+    if (name === 'subdomain_name') {
+      // TODO: check after typing
+      // NOTE: use endpoint /subdomains/available/:name
+      subdomainNameAvailable(value);
+    }
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
     }));
+  };
+
+  const subdomainNameAvailable = userInputSubdomainName => {
+    console.log('check');
   };
 
   const editSubdomain = async () => {
