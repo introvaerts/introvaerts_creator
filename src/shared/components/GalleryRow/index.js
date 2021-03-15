@@ -61,7 +61,7 @@ const GalleryRow = ({
       {galleries
         ? galleries.map((gallery, i) => (
             <StyledTitle key={i}>
-              <Link>
+              <Link to={`galleries/${gallery}`}>
                 <h2>{gallery}</h2>
               </Link>
             </StyledTitle>
