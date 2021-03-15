@@ -19,4 +19,7 @@ export const StyledButton = styled.button`
   font-size: ${props => props.fontSize}rem;
 
   align-self: baseline;
+  margin-top: ${props => props.marginTop}rem;
+  margin-bottom: ${props => props.marginBottom}rem;
+  margin-left: ${props => props.marginLeft}rem; ;
 `;

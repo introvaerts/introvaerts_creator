@@ -4,8 +4,6 @@ import {
   RowContainer,
   Row,
   LongRow,
-  FlexContainer,
-  GalleryName,
   StyledLabel,
   StyledInput,
   StyledTitle,

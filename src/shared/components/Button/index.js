@@ -8,6 +8,7 @@ const Button = ({
   value,
   marginTop,
   marginLeft,
+  marginBottom,
   fontSize,
 }) => {
   return (
@@ -18,6 +19,7 @@ const Button = ({
       value={value}
       marginTop={marginTop}
       marginLeft={marginLeft}
+      marginBottom={marginBottom}
       fontSize={fontSize}
     >
       {text}
