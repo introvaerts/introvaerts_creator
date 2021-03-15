@@ -16,7 +16,7 @@ const Image = () => {
   const [imageFields, setImageFields] = useState({});
 
   useEffect(() => {
-    Api.getGalleryByName(id).then(response =>
+    Api.getGalleryById(id).then(response =>
       setImageFields({ gallery_id: response.data.gallery._id })
     );
   }, [id]);
@@ -52,7 +52,8 @@ const Image = () => {
 
   const uploadToS3 = async () => {
     const response = await Api.uploadImage(appendFormData());
-    console.log(response);
+    if (response.code === 201)
+      window.location.href = `/dashboard/galleries/${id}`;
   };
 
   return (
@@ -71,7 +72,7 @@ const Image = () => {
         width="25"
         htmlFor="year"
         label="Year"
-        type="text"
+        type="number"
         id="year"
         name="year"
         required={false}
@@ -94,6 +95,16 @@ const Image = () => {
         type="text"
         id="dimensions"
         name="dimensions"
+        required={false}
+        handleChange={handleUserInput}
+      />
+      <FormRow
+        width="25"
+        htmlFor="alt_text"
+        label="Alt Text"
+        type="text"
+        id="alt_text"
+        name="alt_text"
         required={false}
         handleChange={handleUserInput}
       />
