@@ -59,12 +59,12 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  // fetch subdomain by its Id
+  // fetch PREVIEW subdomain by its Id
   useEffect(() => {
-    if (userInfo && userInfo.subdomains[0]) {
+    if (userInfo && userInfo.subdomains[1]) {
       const fetchData = async () => {
         // NOTE: uses first subdomain of the Array
-        const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
+        const result = await Api.getSubdomainById(userInfo.subdomains[1]._id);
         setSubdomainInfo(result.data);
       };
       fetchData();
@@ -163,7 +163,12 @@ const Dashboard = () => {
       {/* <DashboardRouter /> */}
       <Switch>
         <Route exact path={path} />
-        <Route path={`${path}/preview`} component={Preview} />
+        <Route path={`${path}/preview`}>
+          <Preview
+            previewId={userInfo ? userInfo.subdomains[1]._id : null}
+            previewName={userInfo ? userInfo.subdomains[1].name : null}
+          />
+        </Route>
         <Route path={`${path}/design`} component={Design} />
         <Route path={`${path}/content`}>
           {/* uses the only on subdomain of the user */}
@@ -171,7 +176,6 @@ const Dashboard = () => {
         </Route>
         <Route path={`${path}/galleries/:id/image-upload`} component={Image} />
         <Route path={`${path}/galleries/:id`}>
-
           <Gallery />
         </Route>
         <Route path={`${path}/settings`} component={Settings} />
