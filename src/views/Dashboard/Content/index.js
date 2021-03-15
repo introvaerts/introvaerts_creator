@@ -40,16 +40,19 @@ const Content = ({ subdomain }) => {
     let newUserInput = { galleryName: '' };
     if (data.subdomain) {
       const { name, page_title } = data.subdomain;
+      // gather gallery name and id
       let galleries = [];
       data.galleries.forEach(gallery => {
         galleries.push({ name: gallery.name, id: gallery._id });
       });
-
+      // cut off -preview of preview subdomain name
+      let alteredPreviewSubdomainName = name.replace('-preview', '');
       newUserInput = {
         ...newUserInput,
-        subdomain_name: name ? name : '',
+        subdomain_name: alteredPreviewSubdomainName
+          ? alteredPreviewSubdomainName
+          : '',
         page_title: page_title ? page_title : '',
-        //NOTE:get names from ids
         galleries: galleries ? galleries : [],
       };
 
@@ -142,7 +145,11 @@ const Content = ({ subdomain }) => {
   };
 
   const editSubdomain = async () => {
-    await Api.editSubdomain(data.subdomain._id, data.subdomain.name, userInput);
+    await Api.editSubdomain(
+      data.subdomain._id,
+      `${userInput.subdomain_name}-preview`,
+      userInput
+    );
   };
 
   const createGallery = async () => {
@@ -173,8 +180,6 @@ const Content = ({ subdomain }) => {
       galleryName: '',
     }));
   };
-
-  console.log(userInput.galleries);
 
   return (
     <>
