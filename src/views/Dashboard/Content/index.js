@@ -37,7 +37,7 @@ const Content = ({ subdomain }) => {
       const { page_title } = data.subdomain;
       let galleries = [];
       data.galleries.forEach(gallery => {
-        galleries.push(gallery.name);
+        galleries.push({ name: gallery.name, id: gallery._id });
       });
 
       newUserInput = {
@@ -143,6 +143,8 @@ const Content = ({ subdomain }) => {
       galleryName: '',
     }));
   };
+
+  console.log(userInput.galleries);
 
   return (
     <>

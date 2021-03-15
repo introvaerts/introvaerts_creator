@@ -1,21 +1,25 @@
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageGrid from '../../../components/ImageGrid';
+import Api from '../../../shared/utils/api';
 
 // call API and get images of this galleryId and pass them to ImageGrid
-const images = [
-  'https://picsum.photos/300/200',
-  'https://picsum.photos/200/140',
-  'https://picsum.photos/100/30',
-  'https://picsum.photos/200/400',
-];
-
 const Gallery = () => {
   const { id } = useParams();
+  const [data, setData] = useState();
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await Api.getGalleryById(id);
+      setData(response.data);
+    };
+    fetchImages();
+  }, []);
+
   return (
     <div>
-      Gallery: {id}
+      Gallery: {data ? data.gallery.name : null}
       <Link to={`/dashboard/galleries/${id}/image-upload`}>Add image</Link>
-      <ImageGrid images={images} />
+      <ImageGrid images={data ? data.images : []} />
     </div>
   );
 };
