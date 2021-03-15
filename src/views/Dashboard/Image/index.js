@@ -1,6 +1,6 @@
 // Import react stuff
 import { useState, useEffect } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // Import Api
 import Api from '../../../shared/utils/api';
@@ -12,14 +12,14 @@ import FormRow from '../../../shared/components/FormRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
 
 const Image = () => {
-  const { name } = useParams();
+  const { id } = useParams();
   const [imageFields, setImageFields] = useState({});
 
   useEffect(() => {
-    Api.getGalleryByName(name).then(response =>
+    Api.getGalleryById(id).then(response =>
       setImageFields({ gallery_id: response.data.gallery._id })
     );
-  }, [name]);
+  }, [id]);
 
   const handleUserInput = e => {
     const { name, value } = e.target;
@@ -53,7 +53,7 @@ const Image = () => {
   const uploadToS3 = async () => {
     const response = await Api.uploadImage(appendFormData());
     if (response.code === 201)
-      window.location.href = `/dashboard/galleries/${name}`;
+      window.location.href = `/dashboard/galleries/${id}`;
   };
 
   return (

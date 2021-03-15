@@ -120,9 +120,7 @@ const Dashboard = () => {
           {/* uses the only on subdomain of the user */}
           <Content subdomain={subdomainInfo ? subdomainInfo : {}} />
         </Route>
-        <Route path={`${path}/galleries/:name/image-upload`}>
-          <Image />
-        </Route>
+        <Route path={`${path}/galleries/:id/image-upload`} component={Image} />
         <Route path={`${path}/galleries/:name`}>
           <Gallery />
         </Route>

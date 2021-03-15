@@ -14,4 +14,3 @@ export const galleryByIdEndpoint = `${apiBaseURL}/galleries/`; // :galleryId get
 //images
 export const uploadImageEndpoint = `${apiBaseURL}/images/upload`; // post
 // export const imageByIdEndpoint = `${apiBaseURL}/images/`; // :imageId delete
-export const galleryByNameEndpoint = `${apiBaseURL}/galleries/names/`;
