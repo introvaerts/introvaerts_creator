@@ -6,7 +6,7 @@ import Button from '../../../shared/components/Button';
 import { StylediFrame } from './Styles';
 
 const Preview = ({ previewId, previewName }) => {
-  console.log(previewId);
+
   const handlePublish = async () => {
     const publishPreview = await Api.publishPreview(previewId);
 

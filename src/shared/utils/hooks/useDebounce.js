@@ -14,5 +14,6 @@ const useDebounce = (value, delay) => {
     };
     // Only re-call effect if value changes
   }, [value]);
+  return debouncedValue;
 };
 export default useDebounce;
