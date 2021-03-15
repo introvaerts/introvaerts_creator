@@ -7,6 +7,7 @@ import Api from '../../shared/utils/api';
 import { useTokenContext } from '../../shared/utils/context';
 
 //components
+import Preview from './Preview';
 import Design from './Design';
 import Content from './Content';
 import Settings from './Settings';
@@ -25,6 +26,7 @@ import {
   MenuBox,
   Dropdown,
   StyledLink,
+  Offset,
 } from './Styles';
 
 const Dashboard = () => {
@@ -78,22 +80,36 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <Offset>
       {/* <Router> */}
       <MenuContainer>
         <MenuBox>
           <Logo />
           <MenuItem>
             <LinkBox>
+              <StyledLink to={`${url}/preview`}>
+                <h3>Preview</h3>
+              </StyledLink>
+            </LinkBox>
+          </MenuItem>
+          <MenuItem>
+            <LinkBox>
               <StyledLink to={`${url}/design`}>
                 <h3>Design</h3>
               </StyledLink>
             </LinkBox>
-            <Dropdown>
-              <h3></h3>
-              <h3>Colours</h3>
-              <h3>Typography</h3>
-            </Dropdown>
+            <Route path={`${url}/design`}>
+              <Dropdown>
+                <h3></h3>
+                <Link>
+                  {' '}
+                  <h3>Colours</h3>
+                </Link>
+                <Link>
+                  <h3>Typography</h3>
+                </Link>
+              </Dropdown>
+            </Route>
           </MenuItem>
           <MenuItem>
             <LinkBox>
@@ -101,12 +117,23 @@ const Dashboard = () => {
                 <h3>Content</h3>
               </StyledLink>
             </LinkBox>
-            {/* <Dropdown>
-                <h3>Header</h3>
-                <h3>About</h3>
-                <h3>Gallery</h3>
-                <h3>Contact</h3>
-              </Dropdown> */}
+            <Route path={`${url}/content`}>
+              <Dropdown>
+                <h3></h3>
+                <Link>
+                  <h3>Header</h3>
+                </Link>
+                <Link>
+                  <h3>About</h3>
+                </Link>
+                <Link>
+                  <h3>Gallery</h3>
+                </Link>
+                <Link>
+                  <h3>Contact</h3>
+                </Link>
+              </Dropdown>
+            </Route>
           </MenuItem>
           <MenuItem>
             <LinkBox>
@@ -114,6 +141,17 @@ const Dashboard = () => {
                 <h3>Settings</h3>
               </StyledLink>
             </LinkBox>
+            <Route path={`${url}/settings`}>
+              <Dropdown>
+                <h3></h3>
+                <Link>
+                  <h3>User Profile</h3>
+                </Link>
+                <Link>
+                  <h3>Security</h3>
+                </Link>
+              </Dropdown>
+            </Route>
           </MenuItem>
         </MenuBox>
         <SignOutBlock>
@@ -125,6 +163,7 @@ const Dashboard = () => {
       {/* <DashboardRouter /> */}
       <Switch>
         <Route exact path={path} />
+        <Route path={`${path}/preview`} component={Preview} />
         <Route path={`${path}/design`} component={Design} />
         <Route path={`${path}/content`}>
           {/* uses the only on subdomain of the user */}
@@ -139,7 +178,7 @@ const Dashboard = () => {
         <Route path={`${path}/settings`} component={Settings} />
       </Switch>
       {/* </Router> */}
-    </div>
+    </Offset>
   );
 };
 
