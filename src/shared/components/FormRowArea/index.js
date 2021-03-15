@@ -6,6 +6,8 @@ import {
   StyledTitle,
 } from './Styles';
 
+import ErrorDisplay from '../ErrorDisplay';
+
 const FormRow = ({
   htmlFor,
   label,
@@ -20,10 +22,10 @@ const FormRow = ({
   required,
   width,
   sectionTitle,
+  errorMessage,
 }) => {
   return (
     <RowContainer width={width}>
-      <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
       <Row>
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
         <StyledInput
@@ -36,7 +38,10 @@ const FormRow = ({
           title={title}
           onChange={handleChange}
           required={required}
+          rows="1"
         ></StyledInput>
+        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
+        {errorMessage ? <ErrorDisplay errorMessage={errorMessage} /> : null}
       </Row>
     </RowContainer>
   );

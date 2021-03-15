@@ -4,7 +4,7 @@ export const colour = {
   accent: '#11f48b', //brand's green
   reverse: '#ffffff', //white
   background1: '#ffffff', //white
-  background2: '#605d5d', // darker grey for lines, etc
+  background2: '#AFAFAF', // darker grey for lines, etc
 };
 
 export const font = {

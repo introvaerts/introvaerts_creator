@@ -56,7 +56,7 @@ const Dashboard = () => {
 
   // fetch subdomain by its Id
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.subdomains[0]) {
       const fetchData = async () => {
         // NOTE: uses first subdomain of the Array
         const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
@@ -121,7 +121,8 @@ const Dashboard = () => {
           <Content subdomain={subdomainInfo ? subdomainInfo : {}} />
         </Route>
         <Route path={`${path}/galleries/:id/image-upload`} component={Image} />
-        <Route path={`${path}/galleries/:name`}>
+        <Route path={`${path}/galleries/:id`}>
+
           <Gallery />
         </Route>
         <Route path={`${path}/settings`} component={Settings} />

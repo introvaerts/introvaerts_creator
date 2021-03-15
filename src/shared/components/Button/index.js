@@ -8,6 +8,7 @@ const Button = ({
   value,
   marginTop,
   marginLeft,
+  fontSize,
 }) => {
   return (
     <StyledButton
@@ -17,6 +18,7 @@ const Button = ({
       value={value}
       marginTop={marginTop}
       marginLeft={marginLeft}
+      fontSize={fontSize}
     >
       {text}
     </StyledButton>
