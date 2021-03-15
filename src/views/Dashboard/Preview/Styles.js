@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StylediFrame = styled.iframe`
-  width: 90vw;
+  width: 100%;
   margin: auto;
-  height: 64vh;
+  min-height: 64vh;
 `;

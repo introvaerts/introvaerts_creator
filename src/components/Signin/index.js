@@ -14,7 +14,7 @@ import SectionContainer from '../../shared/components/SectionContainer';
 
 const Signin = props => {
   //getting token from context
-  const { token, setToken } = useTokenContext();
+  const { setToken } = useTokenContext();
 
   console.log('props: ', props);
 
@@ -41,8 +41,6 @@ const Signin = props => {
       email: userLogIn.email,
       password: userLogIn.password,
     };
-
-    console.log('hola again');
 
     const response = await Api.login(userPayload);
 

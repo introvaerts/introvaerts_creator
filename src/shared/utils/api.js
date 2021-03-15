@@ -12,6 +12,7 @@ import {
   uploadImageEndpoint,
   galleryByNameEndpoint,
   // imageByIdEndpoint,
+  publishPreviewSubdomain,
 } from './endpoints';
 
 const Api = {
@@ -245,6 +246,27 @@ const Api = {
   //deleteImage: async () => {
   //  /* imageByIdEndpoint */
   //},
+
+  publishPreview: async previewId => {
+    try {
+      const response = await axios.get(
+        `${publishPreviewSubdomain}${previewId}`,
+        {
+          headers: {
+            Authorization: getToken(),
+          },
+        }
+      );
+      if (parseInt(response.data.code) === 200) {
+        return response.data;
+      } else {
+        console.log('not able to publish' + response.data.code);
+        return {};
+      }
+    } catch (error) {
+      console.error('publishPreview: ', error);
+    }
+  },
 };
 
 export default Api;
