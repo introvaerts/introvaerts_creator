@@ -117,7 +117,7 @@ const Api = {
       );
       return response.data;
     } catch (error) {
-      console.error('getSubdomain: ', error);
+      console.error('getSubdomainByID: ', error);
     }
   },
   editSubdomain: async (
