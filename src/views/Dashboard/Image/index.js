@@ -1,6 +1,6 @@
 // Import react stuff
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 // Import Api
 import Api from '../../../shared/utils/api';
@@ -52,7 +52,8 @@ const Image = () => {
 
   const uploadToS3 = async () => {
     const response = await Api.uploadImage(appendFormData());
-    console.log(response);
+    if (response.code === 201)
+      window.location.href = `/dashboard/galleries/${name}`;
   };
 
   return (
@@ -71,7 +72,7 @@ const Image = () => {
         width="25"
         htmlFor="year"
         label="Year"
-        type="text"
+        type="number"
         id="year"
         name="year"
         required={false}
