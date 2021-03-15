@@ -13,6 +13,7 @@ import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
+  const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     page_title: '',
     tagline: '',
@@ -128,6 +129,10 @@ const Content = ({ subdomain }) => {
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
       // TODO: Error message if user enters more than the allowed number of galleries
       console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
+      setErrorMessages({
+        ...errorMessages,
+        galleryName: `You can create ${allowedNumberOfGalleries} galleries only.`,
+      });
     } else {
       // TODO: Error message if user tries to add empty gallery
       console.log('put in a gallery name');
@@ -198,18 +203,8 @@ const Content = ({ subdomain }) => {
             handleChange={handleUserInput}
             handleClick={createGallery}
             galleries={userInput.galleries}
+            errorMessage={errorMessages.galleryName}
           />
-          {/* <Button
-            type="button"
-            text="add gallery"
-            handleClick={createGallery}
-          /> */}
-          {/* CLARIFY: How to delete a gallery out of this list? */}
-          {/* {userInput.galleries
-            ? userInput.galleries.map((gallery, i) => (
-                <GalleryRow key={i} galleryName={gallery} />
-              ))
-            : null} */}
         </SectionContainer>
         {/* CONTACT */}
         <SectionContainer border="yes" padding="2">
