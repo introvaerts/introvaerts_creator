@@ -169,8 +169,6 @@ const Content = ({ subdomain }) => {
     }));
   };
 
-  console.log(data);
-
   return (
     <>
       <form method="POST" onSubmit={handleSubmit}>
