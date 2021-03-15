@@ -15,6 +15,7 @@ import useDebounce from '../../../shared/utils/hooks/useDebounce';
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
+  const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     subdomain_name: '',
     page_title: '',
@@ -41,7 +42,7 @@ const Content = ({ subdomain }) => {
       const { name, page_title } = data.subdomain;
       let galleries = [];
       data.galleries.forEach(gallery => {
-        galleries.push(gallery.name);
+        galleries.push({ name: gallery.name, id: gallery._id });
       });
 
       newUserInput = {
@@ -158,6 +159,10 @@ const Content = ({ subdomain }) => {
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
       // TODO: Error message if user enters more than the allowed number of galleries
       console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
+      setErrorMessages({
+        ...errorMessages,
+        galleryName: `You can create ${allowedNumberOfGalleries} galleries only.`,
+      });
     } else {
       // TODO: Error message if user tries to add empty gallery
       console.log('put in a gallery name');
@@ -168,6 +173,8 @@ const Content = ({ subdomain }) => {
       galleryName: '',
     }));
   };
+
+  console.log(userInput.galleries);
 
   return (
     <>
@@ -233,8 +240,8 @@ const Content = ({ subdomain }) => {
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
           <h2>Galleries</h2>
-          <FormRow
-            width="25"
+          <GalleryRow
+            width="35"
             htmlFor="galleryName"
             label="gallery name"
             type="text"
@@ -243,18 +250,10 @@ const Content = ({ subdomain }) => {
             value={userInput.galleryName}
             required={false}
             handleChange={handleUserInput}
-          />
-          <Button
-            type="button"
-            text="add gallery"
             handleClick={createGallery}
+            galleries={userInput.galleries}
+            errorMessage={errorMessages.galleryName}
           />
-          {/* CLARIFY: How to delete a gallery out of this list? */}
-          {userInput.galleries
-            ? userInput.galleries.map((gallery, i) => (
-                <GalleryRow key={i} galleryName={gallery} />
-              ))
-            : null}
         </SectionContainer>
         {/* CONTACT */}
         <SectionContainer border="yes" padding="2">

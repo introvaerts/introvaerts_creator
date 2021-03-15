@@ -9,7 +9,8 @@ import {
   subdomainAvailableEndpoint,
   createGalleryEndpoint,
   galleryByIdEndpoint,
-  // uploadImageEndpoint,
+  uploadImageEndpoint,
+  galleryByNameEndpoint,
   // imageByIdEndpoint,
 } from './endpoints';
 
@@ -222,9 +223,15 @@ const Api = {
   //deleteGalleryById: async () => {
   //  /* galleryByIdEndpoint */
   //},
-  uploadImage: async () => {
+  uploadImage: async formData => {
     try {
-      console.log('image upload');
+      const response = await axios.post(`${uploadImageEndpoint}`, formData, {
+        headers: {
+          'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+          Authorization: getToken(),
+        },
+      });
+      return response.data;
     } catch (error) {
       console.error('uploadImage: ', error);
     }
