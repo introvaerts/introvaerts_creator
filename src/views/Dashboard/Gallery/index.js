@@ -10,11 +10,11 @@ const images = [
 ];
 
 const Gallery = () => {
-  const { name } = useParams();
+  const { id } = useParams();
   return (
     <div>
-      Gallery: {name}
-      <Link to={`/dashboard/galleries/${name}/image-upload`}>Add image</Link>
+      Gallery: {id}
+      <Link to={`/dashboard/galleries/${id}/image-upload`}>Add image</Link>
       <ImageGrid images={images} />
     </div>
   );
