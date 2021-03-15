@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 // api
 import Api from '../../../shared/utils/api';
 import SectionContainer from '../../../shared/components/SectionContainer';
