@@ -10,7 +10,7 @@ import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
-import useDebounce from './use-debounce';
+import useDebounce from '../../../shared/utils/hooks/useDebounce';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
