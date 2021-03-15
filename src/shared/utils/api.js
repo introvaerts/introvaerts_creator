@@ -180,8 +180,14 @@ const Api = {
     /* subdomainAvailableEndpoint */
     try {
       const response = await axios.get(
-        `${subdomainAvailableEndpoint}${subdomainName}`
+        `${subdomainAvailableEndpoint}${subdomainName}`,
+        {
+          headers: {
+            Authorization: getToken(),
+          },
+        }
       );
+      return response.data;
     } catch (error) {
       console.error('subdomainAvailable: ', error);
     }
