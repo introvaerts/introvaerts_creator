@@ -1,10 +1,8 @@
 // Router
 import { useState } from 'react';
 import { TokenContext } from './shared/utils/context.js';
-import { BrowserRouter, Link } from 'react-router-dom';
-
+import { BrowserRouter } from 'react-router-dom';
 import MainRouter from './navigation/MainRouter';
-import Signout from './components/Signout';
 import Wrapper from './shared/components/Wrapper';
 import { getToken } from './shared/utils/helpers';
 
@@ -17,7 +15,7 @@ function App() {
 
   return (
     <Wrapper>
-      {/* global styles */}
+      {/* styles */}
       <NormaliseStyles />
       <BaseStyles />
 

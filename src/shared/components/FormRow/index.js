@@ -1,7 +1,6 @@
 import {
   RowContainer,
   Row,
-  LabelContainer,
   StyledLabel,
   StyledInput,
   StyledTitle,
@@ -10,6 +9,7 @@ import {
 import ErrorDisplay from '../ErrorDisplay';
 
 const FormRow = ({
+  accept,
   htmlFor,
   label,
   type,
@@ -31,6 +31,7 @@ const FormRow = ({
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
 
         <StyledInput
+          accept={accept}
           type={type}
           id={id}
           name={name}
