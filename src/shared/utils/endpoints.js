@@ -8,6 +8,7 @@ export const usersInfoEndpoint = `${apiBaseURL}/users/account`; // get & patch
 export const createSubdomainEndpoint = `${apiBaseURL}/subdomains/create`; // post
 export const subdomainByIdEndpoint = `${apiBaseURL}/subdomains/`; // :subdomainId get & patch
 export const subdomainAvailableEndpoint = `${apiBaseURL}/subdomains/available/`; // get
+export const publishPreviewSubdomain = `${apiBaseURL}/subdomains/publish/`; // :previewSubdomainId get
 //gallery
 export const createGalleryEndpoint = `${apiBaseURL}/galleries/create`; // post
 export const galleryByIdEndpoint = `${apiBaseURL}/galleries/`; // :galleryId get & patch & delete

@@ -6,7 +6,7 @@ export const MenuContainer = styled.div`
   width: 97.5%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12vh;
+  ${'' /* margin-bottom: 12vh; */}
   background: ${colour.background1};
   position: fixed;
   padding-top: 1rem;
@@ -56,5 +56,5 @@ export const LoggedInUser = styled.p`
 `;
 
 export const Offset = styled.div`
-  padding-top: 30vh;
+  padding-top: 25vh;
 `;
