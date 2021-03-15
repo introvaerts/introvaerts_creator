@@ -98,6 +98,16 @@ const Image = () => {
         required={false}
         handleChange={handleUserInput}
       />
+      <FormRow
+        width="25"
+        htmlFor="alt_text"
+        label="Alt Text"
+        type="text"
+        id="alt_text"
+        name="alt_text"
+        required={false}
+        handleChange={handleUserInput}
+      />
       <FormRowArea
         width="25"
         htmlFor="description"
