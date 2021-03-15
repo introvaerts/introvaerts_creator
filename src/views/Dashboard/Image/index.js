@@ -13,7 +13,6 @@ import FormRowArea from '../../../shared/components/FormRowArea';
 
 const Image = () => {
   const { name } = useParams();
-  const [image, setImage] = useState('');
   const [imageFields, setImageFields] = useState({});
 
   useEffect(() => {
@@ -39,13 +38,12 @@ const Image = () => {
         }
       });
       reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0]);
+      setImageFields({ ...imageFields, image: e.target.files[0] });
     }
   };
 
   const appendFormData = () => {
-    let formData = new FormData();
-    formData.append('image', image);
+    const formData = new FormData();
     Object.entries(imageFields).forEach(field => {
       formData.append(field[0], field[1]);
     });
