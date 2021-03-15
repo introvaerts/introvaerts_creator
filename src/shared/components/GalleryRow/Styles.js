@@ -12,8 +12,20 @@ export const Row = styled.div`
   ${'' /* margin: 0 auto 3%; */}
 `;
 
+export const LongRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  ${'' /* margin: 0 auto 3%; */}
+`;
+
+export const GalleryName = styled.div`
+  margin-bottom: 1rem;
+`;
+///check here above!
+
 export const StyledTitle = styled.div`
-  margin: 0 auto 2rem;
+  ${'' /* margin: 0 auto 2rem; */}
+  margin-bottom: 1rem;
 `;
 
 export const StyledLabel = styled.label`
@@ -26,7 +38,7 @@ export const StyledLabel = styled.label`
   margin-bottom: 2rem;
 `;
 
-export const StyledInput = styled.textarea`
+export const StyledInput = styled.input`
   color: ${colour.primary};
   background: none;
   ${font.regular};

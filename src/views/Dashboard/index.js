@@ -56,7 +56,7 @@ const Dashboard = () => {
 
   // fetch subdomain by its Id
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.subdomains[0]) {
       const fetchData = async () => {
         // NOTE: uses first subdomain of the Array
         const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);

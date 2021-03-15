@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   ${font.label};
   text-transform: uppercase;
   font-size: 1rem;
+  font-size: ${props => props.fontSize}rem;
 
-  margin-top: ${props => props.marginTop}%;
-  margin-left: ${props => props.marginLeft}%;
+  align-self: baseline;
 `;

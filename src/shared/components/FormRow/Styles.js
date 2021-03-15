@@ -3,13 +3,19 @@ import { colour, font } from '../../styles/StyleConstants.js';
 
 export const RowContainer = styled.div`
   width: ${props => props.width}vw;
-  margin: auto;
+  margin-left: 33vw;
+  ${
+    '' /* margin: auto;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  margin: 0 auto 3%; */
+  }
 `;
 
 export const Row = styled.div`
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  ${'' /* margin: 0 auto 3%; */}
 `;
 
 export const LabelContainer = styled.div`
@@ -27,7 +33,8 @@ export const StyledLabel = styled.label`
   ${font.label};
   text-transform: uppercase;
   font-size: 0.7rem;
-  margin: 0.7rem 1.3rem 0 0;
+  margin-top: 0.7rem;
+  margin-bottom: 2rem;
 `;
 
 export const StyledInput = styled.input`
@@ -36,6 +43,5 @@ export const StyledInput = styled.input`
   ${font.regular};
   font-size: 1rem;
   border: none;
-  border-bottom: solid 1px ${colour.background2};
-  margin-bottom: 1rem;
+  border-bottom: solid 1px ${colour.primary};
 `;
