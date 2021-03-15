@@ -12,5 +12,6 @@ export const subdomainByIdEndpoint = `${apiBaseURL}/subdomains/`; // :subdomainI
 export const createGalleryEndpoint = `${apiBaseURL}/galleries/create`; // post
 export const galleryByIdEndpoint = `${apiBaseURL}/galleries/`; // :galleryId get & patch & delete
 //images
-// export const uploadImageEndpoint = `${apiBaseURL}/images/upload`; // post
+export const uploadImageEndpoint = `${apiBaseURL}/images/upload`; // post
 // export const imageByIdEndpoint = `${apiBaseURL}/images/`; // :imageId delete
+export const galleryByNameEndpoint = `${apiBaseURL}/galleries/names/`;

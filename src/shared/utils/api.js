@@ -9,7 +9,8 @@ import {
   // subdomainAvailableEndpoint,
   createGalleryEndpoint,
   galleryByIdEndpoint,
-  // uploadImageEndpoint,
+  uploadImageEndpoint,
+  galleryByNameEndpoint,
   // imageByIdEndpoint,
 } from './endpoints';
 
@@ -209,15 +210,36 @@ const Api = {
       console.error('getGalleryById: ', error);
     }
   },
+  getGalleryByName: async galleryName => {
+    try {
+      const response = await axios.get(
+        `${galleryByNameEndpoint}${galleryName}`
+      );
+      if (parseInt(response.data.code) === 200) {
+        return response.data;
+      } else {
+        console.log('no gallery for this name');
+        return {};
+      }
+    } catch (error) {
+      console.error('getGalleryByName: ', error);
+    }
+  },
   //editGalleryById: async () => {
   //  /* galleryByIdEndpoint */
   //},
   //deleteGalleryById: async () => {
   //  /* galleryByIdEndpoint */
   //},
-  uploadImage: async () => {
+  uploadImage: async formData => {
     try {
-      console.log('image upload');
+      const response = await axios.post(`${uploadImageEndpoint}`, formData, {
+        headers: {
+          'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+          Authorization: getToken(),
+        },
+      });
+      return response.data;
     } catch (error) {
       console.error('uploadImage: ', error);
     }
