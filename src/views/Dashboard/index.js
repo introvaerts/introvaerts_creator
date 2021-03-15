@@ -21,7 +21,10 @@ import {
   MenuItem,
   SignOutBlock,
   LoggedInUser,
+  LinkBox,
   MenuBox,
+  Dropdown,
+  StyledLink,
 } from './Styles';
 
 const Dashboard = () => {
@@ -81,18 +84,23 @@ const Dashboard = () => {
         <MenuBox>
           <Logo />
           <MenuItem>
-            <Link to={`${url}/design`}>
-              <h3>Design</h3>
-            </Link>
-            {/* <Dropdown>
-                <h3>Colours</h3>
-                <h3>Typography</h3>
-              </Dropdown> */}
+            <LinkBox>
+              <StyledLink to={`${url}/design`}>
+                <h3>Design</h3>
+              </StyledLink>
+            </LinkBox>
+            <Dropdown>
+              <h3></h3>
+              <h3>Colours</h3>
+              <h3>Typography</h3>
+            </Dropdown>
           </MenuItem>
           <MenuItem>
-            <Link to={`${url}/content`}>
-              <h3>Content</h3>
-            </Link>
+            <LinkBox>
+              <StyledLink to={`${url}/content`}>
+                <h3>Content</h3>
+              </StyledLink>
+            </LinkBox>
             {/* <Dropdown>
                 <h3>Header</h3>
                 <h3>About</h3>
@@ -101,9 +109,11 @@ const Dashboard = () => {
               </Dropdown> */}
           </MenuItem>
           <MenuItem>
-            <Link to={`${url}/settings`}>
-              <h3>Settings</h3>
-            </Link>
+            <LinkBox>
+              <StyledLink to={`${url}/settings`}>
+                <h3>Settings</h3>
+              </StyledLink>
+            </LinkBox>
           </MenuItem>
         </MenuBox>
         <SignOutBlock>
