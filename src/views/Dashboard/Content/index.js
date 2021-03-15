@@ -11,6 +11,7 @@ import Button from '../../../shared/components/Button';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
+import { ThemeConsumer } from 'styled-components';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
@@ -35,6 +36,9 @@ const Content = ({ subdomain }) => {
   });
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
+
+  // costum hook return latest value (after 500ms) or previous value of subdomain_name (only have the API call fire when user stops typing)
+  const debouncedSubdomainName = useDebounce(userInput.subdomain_name, 500);
 
   useEffect(() => {
     let newUserInput = { galleryName: '' };
@@ -114,35 +118,25 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
-    if (name === 'subdomain_name') {
-      // TODO: check after typing
-      // NOTE: use endpoint /subdomains/available/:name
-      subdomainNameAvailable(value);
-    }
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
     }));
   };
 
-  // costum hook return latest value (after 500ms) or previous value of subdomain_name (only have the API call fire when user stops typing)
-  const debouncedSubdomainName = useDebounce(userInput.subdomain_name, 500);
-
   useEffect(() => {
     if (debouncedSubdomainName) {
       setIsSearching(true);
-      Api.subdomainAvailable(debouncedSubdomainName).then(res => {
+      const is = async () => {
+        const response = await Api.subdomainAvailable(debouncedSubdomainName);
         setIsSearching(false);
-        setIsAvailable(res.isAvailable);
-      });
+        setIsAvailable(response.isAvailable);
+      };
+      is();
     } else {
       setIsAvailable(true);
     }
   }, [debouncedSubdomainName]);
-
-  const subdomainNameAvailable = userInputSubdomainName => {
-    console.log('check');
-  };
 
   const editSubdomain = async () => {
     await Api.editSubdomain(
@@ -151,6 +145,36 @@ const Content = ({ subdomain }) => {
       userInput
     );
   };
+
+  // when isAvailable changes setErrorMessage
+  useEffect(() => {
+    if (!isAvailable) {
+      setErrorMessages({
+        ...errorMessages,
+        subdomainNameAvailable: `This subdomain name is not available.`,
+      });
+    } else {
+      setErrorMessages({
+        ...errorMessages,
+        subdomainNameAvailable: '',
+      });
+    }
+  }, [isAvailable]);
+
+  // when isSearching changes setErrorMessage
+  useEffect(() => {
+    if (!isSearching) {
+      setErrorMessages({
+        ...errorMessages,
+        subdomainNameAvailable: '',
+      });
+    } else {
+      setErrorMessages({
+        ...errorMessages,
+        subdomainNameAvailable: 'seaching ...',
+      });
+    }
+  }, [isSearching]);
 
   const createGallery = async () => {
     const { galleryName } = userInput;
@@ -197,9 +221,8 @@ const Content = ({ subdomain }) => {
             value={userInput.subdomain_name}
             required={true}
             handleChange={handleUserInput}
+            errorMessage={errorMessages.subdomainNameAvailable}
           />
-          {isSearching && <div>Searching ...</div>}
-          {isAvailable && <div>YES</div>}
         </SectionContainer>
         {/* HEADER */}
         <SectionContainer border="yes" padding="2">
