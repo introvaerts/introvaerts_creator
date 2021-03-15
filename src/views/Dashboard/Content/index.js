@@ -9,12 +9,15 @@ import FormRowArea from '../../../shared/components/FormRowArea';
 import Button from '../../../shared/components/Button';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
+// time delay for firing API call
+import useDebounce from '../../../shared/utils/hooks/useDebounce';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
+    subdomain_name: '',
     page_title: '',
     tagline: '',
     description: '',
@@ -30,11 +33,13 @@ const Content = ({ subdomain }) => {
     city: '',
     country: '',
   });
+  const [isAvailable, setIsAvailable] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     let newUserInput = { galleryName: '' };
     if (data.subdomain) {
-      const { page_title } = data.subdomain;
+      const { name, page_title } = data.subdomain;
       let galleries = [];
       data.galleries.forEach(gallery => {
         galleries.push({ name: gallery.name, id: gallery._id });
@@ -42,6 +47,7 @@ const Content = ({ subdomain }) => {
 
       newUserInput = {
         ...newUserInput,
+        subdomain_name: name ? name : '',
         page_title: page_title ? page_title : '',
         //NOTE:get names from ids
         galleries: galleries ? galleries : [],
@@ -105,10 +111,34 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
+    if (name === 'subdomain_name') {
+      // TODO: check after typing
+      // NOTE: use endpoint /subdomains/available/:name
+      subdomainNameAvailable(value);
+    }
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
     }));
+  };
+
+  // costum hook return latest value (after 500ms) or previous value of subdomain_name (only have the API call fire when user stops typing)
+  const debouncedSubdomainName = useDebounce(userInput.subdomain_name, 500);
+
+  useEffect(() => {
+    if (debouncedSubdomainName) {
+      setIsSearching(true);
+      Api.subdomainAvailable(debouncedSubdomainName).then(res => {
+        setIsSearching(false);
+        setIsAvailable(res.isAvailable);
+      });
+    } else {
+      setIsAvailable(true);
+    }
+  }, [debouncedSubdomainName]);
+
+  const subdomainNameAvailable = userInputSubdomainName => {
+    console.log('check');
   };
 
   const editSubdomain = async () => {
@@ -149,6 +179,23 @@ const Content = ({ subdomain }) => {
   return (
     <>
       <form method="POST" onSubmit={handleSubmit}>
+        {/* Subdomain */}
+        <SectionContainer border="yes" padding="2">
+          <h2>Subdomain</h2>
+          <FormRow
+            width="25"
+            htmlFor="subdomain_name"
+            label="subdomain name"
+            type="text"
+            id="subdomain_name"
+            name="subdomain_name"
+            value={userInput.subdomain_name}
+            required={true}
+            handleChange={handleUserInput}
+          />
+          {isSearching && <div>Searching ...</div>}
+          {isAvailable && <div>YES</div>}
+        </SectionContainer>
         {/* HEADER */}
         <SectionContainer border="yes" padding="2">
           <h2>Header</h2>
