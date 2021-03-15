@@ -181,8 +181,8 @@ const Content = data => {
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
           <h2>Galleries</h2>
-          <FormRow
-            width="25"
+          <GalleryRow
+            width="35"
             htmlFor="galleryName"
             label="gallery name"
             type="text"
@@ -191,18 +191,20 @@ const Content = data => {
             value={userInput.galleryName}
             required={false}
             handleChange={handleUserInput}
+            handleClick={createGallery}
+            galleries={userInput.galleries}
           />
-          <Button
+          {/* <Button
             type="button"
             text="add gallery"
             handleClick={createGallery}
-          />
+          /> */}
           {/* CLARIFY: How to delete a gallery out of this list? */}
-          {userInput.galleries
+          {/* {userInput.galleries
             ? userInput.galleries.map((gallery, i) => (
                 <GalleryRow key={i} galleryName={gallery} />
               ))
-            : null}
+            : null} */}
         </SectionContainer>
         {/* CONTACT */}
         <SectionContainer border="yes" padding="2">

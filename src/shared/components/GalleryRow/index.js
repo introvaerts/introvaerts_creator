@@ -1,13 +1,17 @@
+import { Link } from 'react-router-dom';
 import Button from '../Button';
 import {
   RowContainer,
   Row,
+  LongRow,
   FlexContainer,
-  LabelContainer,
+  GalleryName,
   StyledLabel,
   StyledInput,
   StyledTitle,
 } from './Styles';
+
+import ErrorDisplay from '../ErrorDisplay';
 
 const GalleryRow = ({
   htmlFor,
@@ -22,16 +26,16 @@ const GalleryRow = ({
   handleChange,
   required,
   width,
+  handleClick,
   sectionTitle,
   galleries,
+  galleryName,
+  errorMessage,
 }) => {
   return (
     <RowContainer width={width}>
-      <LabelContainer>
-        <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
-      </LabelContainer>
-      <Row>
-        <FlexContainer>
+      <LongRow>
+        <Row>
           <StyledInput
             type={type}
             id={id}
@@ -43,15 +47,26 @@ const GalleryRow = ({
             onChange={handleChange}
             required={required}
           ></StyledInput>
-          <Button text="+ Gallery" marginLeft="3" />
-        </FlexContainer>
-      </Row>
-      <LabelContainer>offset</LabelContainer>
-      <Row>
-        <StyledTitle>
-          <h2>Paintings</h2>
-        </StyledTitle>
-      </Row>
+          <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
+        </Row>
+        <Button
+          text="+ Gallery"
+          marginLeft="3"
+          handleClick={handleClick}
+          fontSize="0.8"
+        />
+      </LongRow>
+      {errorMessage ? <ErrorDisplay errorMessage={errorMessage} /> : null}
+
+      {galleries
+        ? galleries.map((gallery, i) => (
+            <StyledTitle key={i}>
+              <Link>
+                <h2>{gallery}</h2>
+              </Link>
+            </StyledTitle>
+          ))
+        : null}
     </RowContainer>
   );
 };

@@ -31,6 +31,7 @@ const Settings = () => {
             type="text"
             id="tagline"
             name="tagline"
+            errorMessage="this is an error message"
           />
           <FormRowArea
             width="25"
@@ -43,7 +44,7 @@ const Settings = () => {
         </SectionContainer>
         <SectionContainer border="yes" padding="2">
           <GalleryRow
-            width="25"
+            width="35"
             htmlFor="description"
             label="description"
             type="text"
