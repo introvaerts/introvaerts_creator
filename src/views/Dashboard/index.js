@@ -32,48 +32,45 @@ import {
 const Dashboard = () => {
   let { path, url } = useRouteMatch();
 
-  const [userInfo, setUserInfo] = useState();
-  const [galleries, setGalleries] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    userEmail: '',
+    subdomains: [{ name: '', _id: '', theme: '' }],
+  });
+  const [subdomainInfo, setSubdomainInfo] = useState();
 
   // fetch user data (email, subdomains with all infos)
   useEffect(() => {
     const fetchData = async () => {
+      let subdomains = [];
       const result = await Api.getUsersAccount();
-      setUserInfo(result.data);
+      result.data.subdomains.forEach(subdomain => {
+        subdomains.push({
+          name: subdomain.name,
+          _id: subdomain._id,
+          theme: subdomain.theme,
+        });
+      });
+      setUserInfo({
+        ...userInfo,
+        userEmail: result.data.userEmail,
+        subdomains: subdomains,
+      });
     };
     fetchData();
   }, []);
 
+  // fetch subdomain by its Id
   useEffect(() => {
     if (userInfo) {
       const fetchData = async () => {
+        // NOTE: uses first subdomain of the Array
         const result = await Api.getSubdomainById(userInfo.subdomains[0]._id);
-        console.log(result);
+        setSubdomainInfo(result.data);
       };
       fetchData();
     }
   }, [userInfo]);
 
-  useEffect(() => {
-    if (userInfo) {
-      const galleryIds = userInfo.subdomains[0].galleries;
-      // TODO: reduce instead of var and loop
-      let promisContainer = [];
-      galleryIds.forEach(galleryId => {
-        promisContainer.push(Api.getGalleryById(galleryId));
-      });
-      Promise.all(promisContainer)
-        .then(resolvedPromises => {
-          setGalleries(
-            resolvedPromises.reduce(
-              (accum, val) => (accum.push(val.data.gallery.name), accum),
-              []
-            )
-          );
-        })
-        .catch(error => console.error(error));
-    }
-  }, [userInfo]);
   //global logout
   const { token } = useTokenContext();
   const logOutButton = () => {
@@ -126,7 +123,11 @@ const Dashboard = () => {
           <Route path={`${path}/design`} component={Design} />
           <Route path={`${path}/content`}>
             {/* uses the only on subdomain of the user */}
-            <Content subdomain={userInfo ? userInfo.subdomains[0] : null} />
+            <Content subdomain={subdomainInfo ? subdomainInfo : {}} />
+          </Route>
+          <Route path={`${path}/content`}>
+            {/* uses the only on subdomain of the user */}
+            <test subdomain={subdomainInfo ? subdomainInfo : null} />
           </Route>
           <Route path={`${path}/settings`} component={Settings} />
         </Switch>
