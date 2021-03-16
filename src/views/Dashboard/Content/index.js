@@ -12,13 +12,10 @@ import SingleImage from '../../../shared/components/Single Image';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
-import { ThemeConsumer } from 'styled-components';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
-  // this state checks if Form is submitted and is used on useEffect that initializes imput values with data from the database
-  const [isFormSubmitted, setIsFromSubmitted] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     subdomain_name: '',
@@ -113,13 +110,12 @@ const Content = ({ subdomain }) => {
       }
       setUserInput(newUserInput);
     }
-  }, [data, isFormSubmitted]);
+  }, [data]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (userInput.galleryName.length) createGallery();
     editSubdomain();
-    console.log(userInput);
   };
 
   const handleUserInput = e => {
@@ -168,12 +164,7 @@ const Content = ({ subdomain }) => {
       userInput
     );
     if (res.code === 204) {
-      // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
-      setUserInput({
-        ...userInput,
-        subdomain_name: res.data.name.replace('-preview', ''),
-      });
-      setIsFromSubmitted(true);
+      window.location.href = `/dashboard/preview`;
     }
   };
 
