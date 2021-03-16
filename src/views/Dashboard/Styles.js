@@ -12,6 +12,7 @@ export const MenuContainer = styled.div`
   padding-top: 1rem;
   top: 0rem;
   left: 1rem;
+  z-index: 10;
 `;
 
 export const MenuBox = styled.div`
@@ -63,4 +64,4 @@ export const Offset = styled.div`
 export const Visit = styled.a`
   font-size: 0.8rem;
   border-bottom: solid 1px ${colour.accent};
-`
+`;

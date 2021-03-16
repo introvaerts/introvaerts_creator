@@ -14,4 +14,6 @@ export const StyledSectionContainer = styled.div`
   margin: ${props => props.margin};
   padding: ${props => props.padding}rem;
   text-align: ${props => props.align};
+  position: relative;
+  z-index: 0;
 `;

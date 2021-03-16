@@ -3,7 +3,7 @@ import { colour, font } from '../../styles/StyleConstants.js';
 
 export const RowContainer = styled.div`
   width: ${props => props.width}vw;
-  margin-left: 33vw;
+  margin-left: ${props => props.marginLeft}vw;
 `;
 
 export const Row = styled.div`

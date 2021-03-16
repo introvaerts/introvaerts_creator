@@ -21,11 +21,12 @@ const FormRow = ({
   handleChange,
   required,
   width,
+  marginLeft,
   sectionTitle,
   errorMessage,
 }) => {
   return (
-    <RowContainer width={width}>
+    <RowContainer width={width} marginLeft={marginLeft}>
       <Row>
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
         <StyledInput

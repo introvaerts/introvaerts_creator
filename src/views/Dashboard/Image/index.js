@@ -9,7 +9,10 @@ import Api from '../../../shared/utils/api';
 import Button from '../../../shared/components/Button';
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
+import ImageRow from '../../../shared/components/ImageRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
+
+import { ImagePreview, StyledImage } from './Styles';
 
 const Image = () => {
   const { id } = useParams();
@@ -59,8 +62,10 @@ const Image = () => {
   return (
     <>
       <SectionContainer border="yes" padding="2">
+        <h2>Caption</h2>
         <FormRow
           width="25"
+          marginLeft="55"
           htmlFor="title"
           label="Title"
           type="text"
@@ -71,6 +76,7 @@ const Image = () => {
         />
         <FormRow
           width="25"
+          marginLeft="55"
           htmlFor="year"
           label="Year"
           type="text"
@@ -81,6 +87,7 @@ const Image = () => {
         />
         <FormRow
           width="25"
+          marginLeft="55"
           htmlFor="media"
           label="Media"
           type="text"
@@ -91,6 +98,7 @@ const Image = () => {
         />
         <FormRow
           width="25"
+          marginLeft="55"
           htmlFor="dimensions"
           label="Dimensions"
           type="text"
@@ -101,6 +109,7 @@ const Image = () => {
         />
         <FormRow
           width="25"
+          marginLeft="55"
           htmlFor="alt_text"
           label="Alt Text"
           type="text"
@@ -111,6 +120,7 @@ const Image = () => {
         />
         <FormRowArea
           width="25"
+          marginLeft="55"
           htmlFor="description"
           label="Description"
           type="text"
@@ -119,18 +129,19 @@ const Image = () => {
           required={false}
           handleChange={handleUserInput}
         />
-        <FormRow
-          label="Upload Image"
+        <ImageRow
           width="25"
+          marginLeft="55"
+          align="center"
+          label="Upload Image"
           accept="image/*"
           name="image"
           type="file"
           handleChange={e => onSelectFile('image', e)}
         />
-        <div style={{ overflow: 'hidden' }}>
-          {' '}
-          <img id="image" src="" />{' '}
-        </div>
+        <ImagePreview>
+          <StyledImage id="image" src="" />
+        </ImagePreview>
       </SectionContainer>
       <SectionContainer borderBottom="yes" padding="2" align="center">
         <Button

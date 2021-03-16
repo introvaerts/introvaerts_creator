@@ -276,6 +276,7 @@ const Content = ({ subdomain }) => {
           <h2>Subdomain</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="subdomain_name"
             label="subdomain name"
             type="text"
@@ -296,6 +297,7 @@ const Content = ({ subdomain }) => {
           <h2>Header</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="page_title"
             label="page title"
             type="text"
@@ -311,6 +313,7 @@ const Content = ({ subdomain }) => {
           <h2>About</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="tagline"
             label="tagline"
             type="text"
@@ -322,6 +325,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRowArea
             width="25"
+            marginLeft="33"
             htmlFor="description"
             label="description"
             type="text"
@@ -334,6 +338,7 @@ const Content = ({ subdomain }) => {
           <FormRow
             label="Upload Your Image"
             width="25"
+            marginLeft="33"
             accept="image/*"
             name="aboutImage"
             type="file"
@@ -366,6 +371,7 @@ const Content = ({ subdomain }) => {
           <h2>Contact</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="contact_tagline"
             label="motivate your fellows to contact you"
             type="text"
@@ -377,6 +383,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="first_name"
             label="first name"
             type="text"
@@ -388,6 +395,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="last_name"
             label="last name"
             type="text"
@@ -399,6 +407,8 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
+            marginLeft="33"
             htmlFor="business_email"
             label="business_email"
             type="email"
@@ -412,6 +422,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="phone_number"
             label="phone_number"
             type="tel"
@@ -423,6 +434,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="street_and_number"
             label="street and number"
             type="text"
@@ -434,6 +446,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="postalcode"
             label="postalcode"
             type="text"
@@ -445,6 +458,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="city"
             label="city"
             type="text"
@@ -456,6 +470,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="country"
             label="country"
             type="text"
