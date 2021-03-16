@@ -118,6 +118,22 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
+    // error handling
+    if (name === 'subdomain_name') {
+      const regex = /(^[a-z0-9-]+$)/;
+      // if regex does not match write error message
+      if (!regex.test(value)) {
+        setErrorMessages({
+          ...errorMessages,
+          subdomainNameMatchRegex: `The subdomain name must consist of lowercase letters and numbers and may conatain a dash (-).`,
+        });
+      } else {
+        setErrorMessages({
+          ...errorMessages,
+          subdomainNameMatchRegex: '',
+        });
+      }
+    }
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
@@ -166,12 +182,12 @@ const Content = ({ subdomain }) => {
     if (!isSearching) {
       setErrorMessages({
         ...errorMessages,
-        subdomainNameAvailable: '',
+        searching: '',
       });
     } else {
       setErrorMessages({
         ...errorMessages,
-        subdomainNameAvailable: 'seaching ...',
+        searching: 'seaching ...',
       });
     }
   }, [isSearching]);
@@ -221,7 +237,11 @@ const Content = ({ subdomain }) => {
             value={userInput.subdomain_name}
             required={true}
             handleChange={handleUserInput}
-            errorMessage={errorMessages.subdomainNameAvailable}
+            errorMessage={
+              errorMessages.searching ||
+              errorMessages.subdomainNameMatchRegex ||
+              errorMessages.subdomainNameAvailable
+            }
           />
         </SectionContainer>
         {/* HEADER */}
