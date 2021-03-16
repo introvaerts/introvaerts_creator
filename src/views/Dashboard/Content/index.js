@@ -176,6 +176,9 @@ const Content = ({ subdomain }) => {
     }
   }, [isSearching]);
 
+  // upload about image
+  const onSelectFile = (key, e) => {};
+
   const createGallery = async () => {
     const { galleryName } = userInput;
     if (
@@ -264,6 +267,18 @@ const Content = ({ subdomain }) => {
             required={false}
             handleChange={handleUserInput}
           />
+          <FormRow
+            label="Upload Your Image"
+            width="25"
+            accept="image/*"
+            name="aboutImage"
+            type="file"
+            handleChange={e => onSelectFile('aboutImage', e)}
+          />
+          <div style={{ overflow: 'hidden' }}>
+            {' '}
+            <img id="aboutImage" src="" />{' '}
+          </div>
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
