@@ -57,86 +57,90 @@ const Image = () => {
   };
 
   return (
-    <SectionContainer borderBottom="yes" padding="2" align="center">
-      <FormRow
-        width="25"
-        htmlFor="title"
-        label="Title"
-        type="text"
-        id="title"
-        name="title"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="year"
-        label="Year"
-        type="number"
-        id="year"
-        name="year"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="media"
-        label="Media"
-        type="text"
-        id="media"
-        name="media"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="dimensions"
-        label="Dimensions"
-        type="text"
-        id="dimensions"
-        name="dimensions"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="alt_text"
-        label="Alt Text"
-        type="text"
-        id="alt_text"
-        name="alt_text"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRowArea
-        width="25"
-        htmlFor="description"
-        label="Description"
-        type="text"
-        id="description"
-        name="description"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        label="Upload Image"
-        width="25"
-        accept="image/*"
-        name="image"
-        type="file"
-        handleChange={e => onSelectFile('image', e)}
-      />
-      <div style={{ overflow: 'hidden' }}>
-        {' '}
-        <img id="image" src="" />{' '}
-      </div>
-      <Button
-        type="submit"
-        text="Upload"
-        placeholder="upload"
-        handleClick={uploadToS3}
-      />
-    </SectionContainer>
+    <>
+      <SectionContainer border="yes" padding="2">
+        <FormRow
+          width="25"
+          htmlFor="title"
+          label="Title"
+          type="text"
+          id="title"
+          name="title"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          htmlFor="year"
+          label="Year"
+          type="text"
+          id="year"
+          name="year"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          htmlFor="media"
+          label="Media"
+          type="text"
+          id="media"
+          name="media"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          htmlFor="dimensions"
+          label="Dimensions"
+          type="text"
+          id="dimensions"
+          name="dimensions"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          htmlFor="alt_text"
+          label="Alt Text"
+          type="text"
+          id="alt_text"
+          name="alt_text"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRowArea
+          width="25"
+          htmlFor="description"
+          label="Description"
+          type="text"
+          id="description"
+          name="description"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          label="Upload Image"
+          width="25"
+          accept="image/*"
+          name="image"
+          type="file"
+          handleChange={e => onSelectFile('image', e)}
+        />
+        <div style={{ overflow: 'hidden' }}>
+          {' '}
+          <img id="image" src="" />{' '}
+        </div>
+      </SectionContainer>
+      <SectionContainer borderBottom="yes" padding="2" align="center">
+        <Button
+          type="submit"
+          text="Upload"
+          placeholder="upload"
+          handleClick={uploadToS3}
+        />
+      </SectionContainer>
+    </>
   );
 };
 
