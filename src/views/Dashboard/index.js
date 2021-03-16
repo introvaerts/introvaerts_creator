@@ -156,7 +156,13 @@ const Dashboard = () => {
         </MenuBox>
         <SignOutBlock>
           {logOutButton()}
-          <LoggedInUser>Welcome [username] !</LoggedInUser>
+          <LoggedInUser>
+            Welcome{' '}
+            {subdomainInfo
+              ? subdomainInfo.subdomain.contact.first_name.toUpperCase()
+              : userInfo.userEmail.replace(/@(.*)/, '').toUpperCase}
+            !
+          </LoggedInUser>
         </SignOutBlock>
       </MenuContainer>
 
