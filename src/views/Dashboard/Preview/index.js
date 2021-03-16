@@ -39,13 +39,6 @@ const Preview = ({ previewId, publishedId, refreshApp }) => {
   return (
     <>
       <Button text="Publish" marginBottom="1" handleClick={handlePublish} />{' '}
-      <StyledExternalLink
-        href={`https://${publishedName}.introvaerts.com/`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {`www.${publishedName}.introvaerts.com`}
-      </StyledExternalLink>
       <SectionContainer borderBottom="yes">
         <StylediFrame
           src={`https://${previewName}.introvaerts.com/`}

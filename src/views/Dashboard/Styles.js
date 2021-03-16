@@ -52,7 +52,8 @@ export const SignOutBlock = styled.div`
 `;
 
 export const LoggedInUser = styled.p`
-  margin-top: 15%;
+  margin-top: 10%;
+  text-align: right;
 `;
 
 export const Offset = styled.div`
@@ -60,10 +61,6 @@ export const Offset = styled.div`
 `;
 
 export const Visit = styled.a`
-  color: ${colour.accent};
-  font-size: 1rem;
-  font-weight: bold;
-  &:hover {
-    color: ${colour.primary}
-  }
+  font-size: 0.8rem;
+  border-bottom: solid 1px ${colour.accent};
 `
