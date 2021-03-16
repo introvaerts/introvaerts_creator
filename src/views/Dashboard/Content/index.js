@@ -119,6 +119,7 @@ const Content = ({ subdomain }) => {
     e.preventDefault();
     if (userInput.galleryName) createGallery();
     editSubdomain();
+    console.log(userInput);
   };
 
   const handleUserInput = e => {

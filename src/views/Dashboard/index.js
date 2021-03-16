@@ -166,7 +166,9 @@ const Dashboard = () => {
         <Route path={`${path}/preview`}>
           <Preview
             previewId={subdomainInfo ? subdomainInfo.subdomain._id : null}
-            previewName={subdomainInfo ? subdomainInfo.subdomain.name : null}
+            publishedId={
+              userInfo.subdomains ? userInfo.subdomains[0]._id : null
+            }
           />
         </Route>
         <Route path={`${path}/design`} component={Design} />
