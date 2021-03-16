@@ -6,6 +6,7 @@ import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
 import GalleryRow from '../../../shared/components/GalleryRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
+import ImageRow from '../../../shared/components/ImageRow';
 import Button from '../../../shared/components/Button';
 import SingleImage from '../../../shared/components/Single Image';
 // settings
@@ -335,10 +336,11 @@ const Content = ({ subdomain }) => {
             required={false}
             handleChange={handleUserInput}
           />
-          <FormRow
-            label="Upload Your Image"
+          <ImageRow
             width="25"
             marginLeft="33"
+            align="center"
+            label="Upload Your Image"
             accept="image/*"
             name="aboutImage"
             type="file"
