@@ -52,9 +52,15 @@ export const SignOutBlock = styled.div`
 `;
 
 export const LoggedInUser = styled.p`
-  margin-top: 15%;
+  margin-top: 10%;
+  text-align: right;
 `;
 
 export const Offset = styled.div`
   padding-top: 25vh;
 `;
+
+export const Visit = styled.a`
+  font-size: 0.8rem;
+  border-bottom: solid 1px ${colour.accent};
+`

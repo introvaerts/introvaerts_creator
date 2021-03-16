@@ -1,9 +1,11 @@
+import Icon from '../Icon';
 import { ImageContainer, Image } from './Styles';
 
-const Thumbnail = ({ src, handleClick, altText }) => {
+const Thumbnail = ({ src, handleClick, altText, handleDelete, id }) => {
   return (
     <ImageContainer>
       <Image src={src} onClick={handleClick} altText={altText} />
+      <Icon handleClick={handleDelete} id={id} />
     </ImageContainer>
   );
 };

@@ -12,7 +12,7 @@ import {
   uploadImageEndpoint,
   galleryByNameEndpoint,
   uploadAboutImageEndpoint,
-  // imageByIdEndpoint,
+  imageByIdEndpoint,
   publishPreviewSubdomain,
 } from './endpoints';
 
@@ -244,9 +244,23 @@ const Api = {
       console.error('uploadImage: ', error);
     }
   },
-  //deleteImage: async () => {
-  //  /* imageByIdEndpoint */
-  //},
+  deleteImageById: async imageId => {
+    try {
+      const response = await axios.delete(`${imageByIdEndpoint}${imageId}`, {
+        headers: {
+          Authorization: getToken(),
+        },
+      });
+      if (parseInt(response.data.code) === 204) {
+        return response.data;
+      } else {
+        console.log('we could not delete the image');
+        return response.data;
+      }
+    } catch (error) {
+      console.error('deleteImageyById: ', error);
+    }
+  },
 
   publishPreview: async previewId => {
     try {
