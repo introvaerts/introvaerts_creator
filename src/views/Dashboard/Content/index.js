@@ -17,6 +17,8 @@ import { ThemeConsumer } from 'styled-components';
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
+  // this state checks if Form is submitted and is used on useEffect that initializes imput values with data from the database
+  const [isFormSubmitted, setIsFromSubmitted] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     subdomain_name: '',
@@ -35,6 +37,8 @@ const Content = ({ subdomain }) => {
     city: '',
     country: '',
   });
+
+  // states for checking if subdomain name is availabe when stop typing
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -109,7 +113,7 @@ const Content = ({ subdomain }) => {
       }
       setUserInput(newUserInput);
     }
-  }, [data]);
+  }, [data, isFormSubmitted]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -119,6 +123,22 @@ const Content = ({ subdomain }) => {
 
   const handleUserInput = e => {
     const { name, value } = e.target;
+    // error handling
+    if (name === 'subdomain_name') {
+      const regex = /(^[a-z0-9-]+$)/;
+      // if regex does not match write error message
+      if (!regex.test(value)) {
+        setErrorMessages({
+          ...errorMessages,
+          subdomainNameMatchRegex: `The subdomain name must consist of lowercase letters and numbers and may conatain a dash (-).`,
+        });
+      } else {
+        setErrorMessages({
+          ...errorMessages,
+          subdomainNameMatchRegex: '',
+        });
+      }
+    }
     setUserInput(userInput => ({
       ...userInput,
       [name]: value,
@@ -145,7 +165,15 @@ const Content = ({ subdomain }) => {
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
       userInput
-    );
+    )
+      .then(res => {
+        if (res.code204) {
+          // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
+          setUserInput({ ...userInput, subdomain_name: res.data.name });
+          setIsFromSubmitted(true);
+        }
+      })
+      .catch(error => console.error(error));
   };
 
   // when isAvailable changes setErrorMessage
@@ -168,12 +196,12 @@ const Content = ({ subdomain }) => {
     if (!isSearching) {
       setErrorMessages({
         ...errorMessages,
-        subdomainNameAvailable: '',
+        searching: '',
       });
     } else {
       setErrorMessages({
         ...errorMessages,
-        subdomainNameAvailable: 'seaching ...',
+        searching: 'seaching ...',
       });
     }
   }, [isSearching]);
@@ -214,16 +242,23 @@ const Content = ({ subdomain }) => {
         data.subdomain._id
       );
       userInput.galleries = [...userInput.galleries, response.data._id];
+      setErrorMessages({
+        ...errorMessages,
+        galleryName: '',
+      });
+    } else if (galleryName.trim().length === 0) {
+      // Error message if user tries to add empty gallery
+      setErrorMessages({
+        ...errorMessages,
+        galleryName: `Only white space is not allowed as a gallery name.`,
+      });
     } else if (userInput.galleries.length >= allowedNumberOfGalleries) {
-      // TODO: Error message if user enters more than the allowed number of galleries
-      console.log(`You can create ${allowedNumberOfGalleries} galleries only.`);
+      // Error message if user enters more than the allowed number of galleries
       setErrorMessages({
         ...errorMessages,
         galleryName: `You can create ${allowedNumberOfGalleries} galleries only.`,
       });
     } else {
-      // TODO: Error message if user tries to add empty gallery
-      console.log('put in a gallery name');
     }
     //clear galleryName in userInput
     setUserInput(userInput => ({
@@ -248,7 +283,11 @@ const Content = ({ subdomain }) => {
             value={userInput.subdomain_name}
             required={true}
             handleChange={handleUserInput}
-            errorMessage={errorMessages.subdomainNameAvailable}
+            errorMessage={
+              errorMessages.searching ||
+              errorMessages.subdomainNameMatchRegex ||
+              errorMessages.subdomainNameAvailable
+            }
           />
         </SectionContainer>
         {/* HEADER */}
