@@ -10,6 +10,7 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 - [Project Requirements](#Project-Requirements)
 - [Tools](#tools)
 - [Wireframe](#wireframe)
+- [Get started](#Get-started)
 - [Resources](#Resources)
 
 #### Description
@@ -42,6 +43,11 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 - Frontend: HTML, CSS, JS, JSX, REACT,
 - Backend: [MongoDB](https://www.mongodb.com/3), [AWS](https://aws.amazon.com/),[Postman](https://www.postman.com/)
 
+### Wireframe
+
+[Wireframe Creator](https://xd.adobe.com/view/fde89eb7-a8e9-46a1-bb94-fdf81b75b2b7-a8bb/screen/aee137c8-232c-4309-b8e4-855f7f521d2c/?fullscreen)
+
+
 ## Get started with introvÆrts:
 
   ### Admin:
@@ -60,8 +66,7 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 ### Design & Usage
 
 - [FORMAT]()
-- [Jira Clone](https://github.com/oldboyxx
-  jira_clone)
+- [Jira Clone](https://github.com/oldboyxxjira_clone)
 
 ## Technical
 
