@@ -58,3 +58,12 @@ export const LoggedInUser = styled.p`
 export const Offset = styled.div`
   padding-top: 25vh;
 `;
+
+export const Visit = styled.a`
+  color: ${colour.accent};
+  font-size: 1rem;
+  font-weight: bold;
+  &:hover {
+    color: ${colour.primary}
+  }
+`

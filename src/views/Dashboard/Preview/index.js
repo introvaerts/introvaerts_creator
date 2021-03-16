@@ -6,7 +6,7 @@ import Button from '../../../shared/components/Button';
 import { StylediFrame, StyledExternalLink } from './Styles';
 import { useEffect, useState } from 'react';
 
-const Preview = ({ previewId, publishedId }) => {
+const Preview = ({ previewId, publishedId, refreshApp }) => {
   const [previewName, setPreviewName] = useState('');
   const [publishedName, setPublishedName] = useState('');
 
@@ -32,7 +32,7 @@ const Preview = ({ previewId, publishedId }) => {
 
   const handlePublish = async () => {
     const publishPreview = await Api.publishPreview(previewId);
-
+    refreshApp(Date.now());
     setPublishedName('');
   };
 
