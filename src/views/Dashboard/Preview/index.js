@@ -18,7 +18,7 @@ const Preview = ({ previewId, publishedId, refreshApp }) => {
       };
       fetchData();
     }
-  }, []);
+  }, [previewId]);
 
   useEffect(() => {
     if (publishedId) {
