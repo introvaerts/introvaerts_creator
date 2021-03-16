@@ -161,20 +161,20 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    const response = await Api.postAboutImage(appendFormData());
-    await Api.editSubdomain(
+    const response = Api.postAboutImage(appendFormData());
+    const res = await Api.editSubdomain(
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
       userInput
-    )
-      .then(res => {
-        if (res.code204) {
-          // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
-          setUserInput({ ...userInput, subdomain_name: res.data.name });
-          setIsFromSubmitted(true);
-        }
-      })
-      .catch(error => console.error(error));
+    );
+    if (res.code === 204) {
+      // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
+      setUserInput({
+        ...userInput,
+        subdomain_name: res.data.name.replace('-preview', ''),
+      });
+      setIsFromSubmitted(true);
+    }
   };
 
   // when isAvailable changes setErrorMessage
