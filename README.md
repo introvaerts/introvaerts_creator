@@ -1,4 +1,4 @@
-![IntrovAErstlogo](https://user-images.githubusercontent.com/74352389/110111032-f6e6c600-7daf-11eb-9f65-b3b548a1e203.png)
+![Screenshot 2021-03-16 at 12 47 15](https://user-images.githubusercontent.com/74352389/111304219-c4fa1d00-8655-11eb-8894-4eef4c794558.png)
 
 Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.com/memocan40), [Montaser](https://github.com/monoamro) and [Avril](https://github.com/AvrilAvril)
 
