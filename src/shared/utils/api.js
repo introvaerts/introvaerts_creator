@@ -11,6 +11,7 @@ import {
   galleryByIdEndpoint,
   uploadImageEndpoint,
   galleryByNameEndpoint,
+  uploadAboutImageEndpoint,
   // imageByIdEndpoint,
   publishPreviewSubdomain,
 } from './endpoints';
@@ -265,6 +266,23 @@ const Api = {
       }
     } catch (error) {
       console.error('publishPreview: ', error);
+    }
+  },
+  postAboutImage: async formData => {
+    try {
+      const response = await axios.patch(
+        `${uploadAboutImageEndpoint}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+            Authorization: getToken(),
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('uploadImage: ', error);
     }
   },
 };

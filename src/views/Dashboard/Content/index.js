@@ -7,6 +7,7 @@ import FormRow from '../../../shared/components/FormRow';
 import GalleryRow from '../../../shared/components/GalleryRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
 import Button from '../../../shared/components/Button';
+import SingleImage from '../../../shared/components/Single Image';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
@@ -139,6 +140,7 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
+    const response = await Api.postAboutImage(appendFormData());
     await Api.editSubdomain(
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
@@ -175,6 +177,31 @@ const Content = ({ subdomain }) => {
       });
     }
   }, [isSearching]);
+
+  // upload about image
+  const onSelectFile = (key, e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        if (key === 'image') {
+          document.getElementById('image').src = reader.result;
+        }
+      });
+      reader.readAsDataURL(e.target.files[0]);
+      setUserInput({ ...userInput, image: e.target.files[0] });
+    }
+  };
+
+  const appendFormData = () => {
+    const formData = new FormData();
+    formData.append('subdomain_id', data.subdomain._id);
+    Object.entries(userInput).forEach(field => {
+      if (['tagline', 'description', 'image'].includes(field[0])) {
+        formData.append(field[0], field[1]);
+      }
+    });
+    return formData;
+  };
 
   const createGallery = async () => {
     const { galleryName } = userInput;
@@ -264,6 +291,17 @@ const Content = ({ subdomain }) => {
             required={false}
             handleChange={handleUserInput}
           />
+          <FormRow
+            label="Upload Your Image"
+            width="25"
+            accept="image/*"
+            name="aboutImage"
+            type="file"
+            handleChange={e => onSelectFile('aboutImage', e)}
+          />
+          <div style={{ maxWidth: '300px' }}>
+            <SingleImage src={data?.subdomain?.about?.about_image_url} />
+          </div>
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
