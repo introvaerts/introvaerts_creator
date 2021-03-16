@@ -10,13 +10,22 @@ import { StyledButton, GalleryBox } from './Styles';
 const Gallery = () => {
   const { id } = useParams();
   const [data, setData] = useState();
+  const [imageDelete, setImageDelete] = useState('');
+
   useEffect(() => {
     const fetchImages = async () => {
       const response = await Api.getGalleryById(id);
       setData(response.data);
     };
     fetchImages();
-  }, []);
+  }, [imageDelete]);
+
+  const deleteImage = async imageId => {
+    console.log(imageId);
+    const response = await Api.deleteImageById(imageId);
+    console.log(response);
+    setImageDelete(Date.now());
+  };
 
   return (
     <>
@@ -27,7 +36,7 @@ const Gallery = () => {
           Add image
         </StyledButton>
       </GalleryBox>
-      <ImageGrid images={data ? data.images : []} />
+      <ImageGrid images={data ? data.images : []} handleDelete={deleteImage} />
     </>
   );
 };
