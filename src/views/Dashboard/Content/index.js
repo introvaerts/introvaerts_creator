@@ -117,7 +117,7 @@ const Content = ({ subdomain }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (userInput.galleryName) createGallery();
+    if (userInput.galleryName.length) createGallery();
     editSubdomain();
     console.log(userInput);
   };
@@ -161,7 +161,7 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    const response = await Api.postAboutImage(appendFormData());
+    const response = Api.postAboutImage(appendFormData());
     await Api.editSubdomain(
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
