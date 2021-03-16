@@ -117,7 +117,7 @@ const Content = ({ subdomain }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (userInput.galleryName) createGallery();
+    if (userInput.galleryName.length) createGallery();
     editSubdomain();
     console.log(userInput);
   };
@@ -161,15 +161,18 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    const response = await Api.postAboutImage(appendFormData());
-    const responseSub = await Api.editSubdomain(
+    const response = Api.postAboutImage(appendFormData());
+    const res = await Api.editSubdomain(
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
       userInput
     );
-    if (responseSub.code === 204) {
+    if (res.code === 204) {
       // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
-      setUserInput({ ...userInput, subdomain_name: responseSub.data.name });
+      setUserInput({
+        ...userInput,
+        subdomain_name: res.data.name.replace('-preview', ''),
+      });
       setIsFromSubmitted(true);
     }
   };

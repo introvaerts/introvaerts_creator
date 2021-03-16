@@ -27,6 +27,7 @@ import {
   Dropdown,
   StyledLink,
   Offset,
+  Visit
 } from './Styles';
 
 const Dashboard = () => {
@@ -37,6 +38,7 @@ const Dashboard = () => {
     subdomains: [{ name: '', _id: '', theme: '' }],
   });
   const [subdomainInfo, setSubdomainInfo] = useState();
+  const [appRefresh, setAppRefresh] = useState(Date.now());
 
   // fetch user data (email, subdomains with all infos)
   useEffect(() => {
@@ -57,7 +59,7 @@ const Dashboard = () => {
       });
     };
     fetchData();
-  }, []);
+  }, [appRefresh]);
 
   // fetch PREVIEW subdomain by its Id
   useEffect(() => {
@@ -78,6 +80,10 @@ const Dashboard = () => {
       return <Signout />;
     }
   };
+
+  const refreshApp = (time) => {
+    setAppRefresh(time);
+  }
 
   return (
     <Offset>
@@ -157,11 +163,7 @@ const Dashboard = () => {
         <SignOutBlock>
           {logOutButton()}
           <LoggedInUser>
-            Welcome{' '}
-            {subdomainInfo
-              ? subdomainInfo.subdomain.contact.first_name.toUpperCase()
-              : userInfo.userEmail.replace(/@(.*)/, '').toUpperCase}
-            !
+            <Visit href={`https://${userInfo.subdomains[0].name}.introvaerts.com`} target="_blank">Visit your site</Visit>
           </LoggedInUser>
         </SignOutBlock>
       </MenuContainer>
@@ -175,6 +177,7 @@ const Dashboard = () => {
             publishedId={
               userInfo.subdomains ? userInfo.subdomains[0]._id : null
             }
+            refreshApp={refreshApp}
           />
         </Route>
         <Route path={`${path}/design`} component={Design} />

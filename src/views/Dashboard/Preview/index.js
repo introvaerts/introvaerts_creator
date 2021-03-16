@@ -6,7 +6,7 @@ import Button from '../../../shared/components/Button';
 import { StylediFrame, StyledExternalLink } from './Styles';
 import { useEffect, useState } from 'react';
 
-const Preview = ({ previewId, publishedId }) => {
+const Preview = ({ previewId, publishedId, refreshApp }) => {
   const [previewName, setPreviewName] = useState('');
   const [publishedName, setPublishedName] = useState('');
 
@@ -32,20 +32,13 @@ const Preview = ({ previewId, publishedId }) => {
 
   const handlePublish = async () => {
     const publishPreview = await Api.publishPreview(previewId);
-
+    refreshApp(Date.now());
     setPublishedName('');
   };
 
   return (
     <>
       <Button text="Publish" marginBottom="1" handleClick={handlePublish} />{' '}
-      <StyledExternalLink
-        href={`https://${publishedName}.introvaerts.com/`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {`www.${publishedName}.introvaerts.com`}
-      </StyledExternalLink>
       <SectionContainer borderBottom="yes">
         <StylediFrame
           src={`https://${previewName}.introvaerts.com/`}
