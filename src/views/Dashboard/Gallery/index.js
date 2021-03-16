@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import ImageGrid from '../../../components/ImageGrid';
+import { useParams } from 'react-router-dom';
+
 import Api from '../../../shared/utils/api';
+
+import ImageGrid from '../../../components/ImageGrid';
+import { StyledButton, GalleryBox } from './Styles';
 
 // call API and get images of this galleryId and pass them to ImageGrid
 const Gallery = () => {
@@ -16,11 +19,16 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div>
-      Gallery: {data ? data.gallery.name : null}
-      <Link to={`/dashboard/galleries/${id}/image-upload`}>Add image</Link>
+    <>
+      <GalleryBox>
+        <h1>{data ? data.gallery.name : null}</h1>
+
+        <StyledButton to={`/dashboard/galleries/${id}/image-upload`}>
+          Add image
+        </StyledButton>
+      </GalleryBox>
       <ImageGrid images={data ? data.images : []} />
-    </div>
+    </>
   );
 };
 
