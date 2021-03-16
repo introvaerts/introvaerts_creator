@@ -156,7 +156,13 @@ const Dashboard = () => {
         </MenuBox>
         <SignOutBlock>
           {logOutButton()}
-          <LoggedInUser>Welcome [username] !</LoggedInUser>
+          <LoggedInUser>
+            Welcome{' '}
+            {subdomainInfo
+              ? subdomainInfo.subdomain.contact.first_name.toUpperCase()
+              : userInfo.userEmail.replace(/@(.*)/, '').toUpperCase}
+            !
+          </LoggedInUser>
         </SignOutBlock>
       </MenuContainer>
 
@@ -166,7 +172,9 @@ const Dashboard = () => {
         <Route path={`${path}/preview`}>
           <Preview
             previewId={subdomainInfo ? subdomainInfo.subdomain._id : null}
-            previewName={subdomainInfo ? subdomainInfo.subdomain.name : null}
+            publishedId={
+              userInfo.subdomains ? userInfo.subdomains[0]._id : null
+            }
           />
         </Route>
         <Route path={`${path}/design`} component={Design} />

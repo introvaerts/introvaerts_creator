@@ -5,3 +5,7 @@ export const StylediFrame = styled.iframe`
   margin: auto;
   min-height: 64vh;
 `;
+
+export const StyledExternalLink = styled.a`
+  margin-left: 3rem;
+`;
