@@ -44,11 +44,6 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 
 ## Get started with introvÆrts:
 
-### Portfolio:
-
-- Views & Components:
-  ![introvÆrts_wireframe_portfolio_web](https://user-images.githubusercontent.com/74352389/110110003-7d9aa380-7dae-11eb-996f-a546abcfab8c.png)
-
   ### Admin:
 
   ![introvÆrts_wireframe_admin web](https://user-images.githubusercontent.com/74352389/110110135-afac0580-7dae-11eb-97bb-e8a3c88dc149.png)
