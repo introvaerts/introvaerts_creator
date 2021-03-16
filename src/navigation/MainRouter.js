@@ -8,7 +8,7 @@ import Signup from "../components/Signup";
 import Dashboard from "../views/Dashboard";
 
 
-const MainRouter = () => (
+const MainRouter = ({refreshApp}) => (
     <Switch>
       <Redirect exact from={ROOT} to={SIGNIN} />
       <Route exact path={SIGNIN} component={Signin} />
