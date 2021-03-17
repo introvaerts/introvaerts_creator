@@ -344,10 +344,6 @@ const Content = ({ subdomain }) => {
             maxWidth="20"
             left="9"
           />
-
-          {/* <div style={{ maxWidth: '300px' }}>
-            <SingleImage src={data?.subdomain?.about?.about_image_url} />
-          </div> */}
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
