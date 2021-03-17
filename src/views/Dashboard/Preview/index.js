@@ -32,8 +32,10 @@ const Preview = ({ previewId, publishedId, refreshApp }) => {
 
   const handlePublish = async () => {
     const publishPreview = await Api.publishPreview(previewId);
-    refreshApp(Date.now());
-    setPublishedName('');
+    await refreshApp(Date.now());
+    const publishedNameNow = previewName.replace('-preview', '');
+    window.open(`https://${publishedNameNow}.introvaerts.com/`, "_blank")
+    await setPublishedName('');
   };
 
   return (
