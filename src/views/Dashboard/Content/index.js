@@ -160,14 +160,19 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    const response = Api.postAboutImage(appendFormData());
-    const res = await Api.editSubdomain(
-      data.subdomain._id,
-      `${userInput.subdomain_name}-preview`,
-      userInput
-    );
-    if (res.code === 204) {
-      window.location.href = `/dashboard/preview`;
+    
+    try {
+      await Api.postAboutImage(appendFormData());
+      const res = await Api.editSubdomain(
+        data.subdomain._id,
+        `${userInput.subdomain_name}-preview`,
+        userInput
+        );
+        if (res.code === 204) {
+          window.location.href = `/dashboard/preview`;
+        }
+    } catch (e) {
+      console.error(Error(e));
     }
   };
 
