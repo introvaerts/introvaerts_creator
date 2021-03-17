@@ -1,6 +1,6 @@
 ![Screenshot 2021-03-16 at 12 47 15](https://user-images.githubusercontent.com/74352389/111304219-c4fa1d00-8655-11eb-8894-4eef4c794558.png)
 
-Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.com/memocan40), [Montaser](https://github.com/monoamro) and [Avril](https://github.com/AvrilAvril)
+Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999), [Jasmin](https://github.com/jaazmyn), [Montaser](https://github.com/monoamro), [Avril](https://github.com/AvrilAvril)
 
 ### Table of Contents
 
@@ -10,7 +10,6 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 - [Project Requirements](#Project-Requirements)
 - [Tools](#tools)
 - [Wireframe](#wireframe)
-- [Get started](#Get-started)
 - [Resources](#Resources)
 
 #### Description
@@ -43,18 +42,13 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 - Frontend: HTML, CSS, JS, JSX, REACT,
 - Backend: [MongoDB](https://www.mongodb.com/3), [AWS](https://aws.amazon.com/),[Postman](https://www.postman.com/)
 
-### Wireframe
-
-[Wireframe Creator](https://xd.adobe.com/view/fde89eb7-a8e9-46a1-bb94-fdf81b75b2b7-a8bb/screen/aee137c8-232c-4309-b8e4-855f7f521d2c/?fullscreen)
-
-
 ## Get started with introvÆrts:
 
-  ### Admin:
+### Admin:
 
-  ![introvÆrts_wireframe_admin web](https://user-images.githubusercontent.com/74352389/110110135-afac0580-7dae-11eb-97bb-e8a3c88dc149.png)
+![inireframe_admin web](https://user-images.githubusercontent.com/74352389/110110135-afac0580-7dae-11eb-97bb-e8a3c88dc149.png)
 
-  ## Core functionalities:
+## Core functionalities:
 
 - Sign In
 - Sign Out
@@ -66,7 +60,8 @@ Team: [Janis](), [Diego](https://github.com/diegog999), [Jasmin](https://github.
 ### Design & Usage
 
 - [FORMAT]()
-- [Jira Clone](https://github.com/oldboyxxjira_clone)
+- [Jira Clone](https://github.com/oldboyxx
+  jira_clone)
 
 ## Technical
 
