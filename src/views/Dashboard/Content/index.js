@@ -193,11 +193,11 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
           data.subdomain._id,
           `${userInput.subdomain_name}-preview`,
           userInput
-          );
-          if (res.code === 204) {
-            window.location.href = `/dashboard/preview`;
-          }
+        );
+        if (res.code === 204) {
+          window.location.href = `/dashboard/preview`;
         }
+      }
     } catch (e) {
       console.error(Error(e));
     }
@@ -238,8 +238,8 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
-        if (key === 'image') {
-          document.getElementById('image').src = reader.result;
+        if (key === 'aboutImage') {
+          document.getElementById('imagePreview').src = reader.result;
         }
       });
       reader.readAsDataURL(e.target.files[0]);
@@ -372,10 +372,11 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             handleChange={e => onSelectFile('aboutImage', e)}
           />
           <ImagePreview
+            id="imagePreview"
             src={data?.subdomain?.about?.about_image_url}
             width="15"
             height="15"
-            left="12.5"
+            left="74"
           />
         </SectionContainer>
         {/* GALLERY */}

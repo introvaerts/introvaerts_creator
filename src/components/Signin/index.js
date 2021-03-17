@@ -16,8 +16,6 @@ const Signin = props => {
   //getting token from context
   const { setToken } = useTokenContext();
 
-  console.log('props: ', props);
-
   //for storing user credentials
   const [userLogIn, setUserLogIn] = useState({
     email: '',
