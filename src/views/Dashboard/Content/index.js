@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 // api
 import Api from '../../../shared/utils/api';
 // shared components
@@ -18,8 +19,6 @@ import ImagePreview from '../../../shared/components/ImagePreview';
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
-  // this state checks if Form is submitted and is used on useEffect that initializes imput values with data from the database
-  const [isFormSubmitted, setIsFromSubmitted] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     subdomain_name: '',
@@ -114,13 +113,12 @@ const Content = ({ subdomain }) => {
       }
       setUserInput(newUserInput);
     }
-  }, [data, isFormSubmitted]);
+  }, [data]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (userInput.galleryName.length) createGallery();
     editSubdomain();
-    console.log(userInput);
   };
 
   const handleUserInput = e => {
@@ -163,19 +161,14 @@ const Content = ({ subdomain }) => {
 
   const editSubdomain = async () => {
     const response = Api.postAboutImage(appendFormData());
-    await Api.editSubdomain(
+    const res = await Api.editSubdomain(
       data.subdomain._id,
       `${userInput.subdomain_name}-preview`,
       userInput
-    )
-      .then(res => {
-        if (res.code204) {
-          // puts the new subdomain name into the userInput state so the new name is shown as value of the inputfield subdomain name
-          setUserInput({ ...userInput, subdomain_name: res.data.name });
-          setIsFromSubmitted(true);
-        }
-      })
-      .catch(error => console.error(error));
+    );
+    if (res.code === 204) {
+      window.location.href = `/dashboard/preview`;
+    }
   };
 
   // when isAvailable changes setErrorMessage
