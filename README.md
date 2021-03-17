@@ -20,7 +20,7 @@ Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999)
 
 - With introvÆrts those people will be able to exhibit their work by creating a portfolio in a very easy-to-use tool that's as easy as filling a form.
 - Timeline: 1.March - 18.March.2021 (3 weeks-project)
-- [introvÆrts]()
+- [introvÆrts](https://introvaerts.com)
 
 #### Workflow
 
