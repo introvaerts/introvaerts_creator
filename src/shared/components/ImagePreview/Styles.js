@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const ImagePreview = styled.div`
+export const PreviewContainer = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 15%;
-  max-width: 25vw;
-  max-height: 90%;
+  left: ${props => props.left}%;
+  max-width: ${props => props.maxWidth}vw;
+  max-height: 80%;
 `;
 
 export const StyledImage = styled.img`

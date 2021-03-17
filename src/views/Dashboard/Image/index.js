@@ -11,8 +11,7 @@ import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
 import ImageRow from '../../../shared/components/ImageRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
-
-import { ImagePreview, StyledImage } from './Styles';
+import ImagePreview from '../../../shared/components/ImagePreview';
 
 const Image = () => {
   const { id } = useParams();
@@ -139,9 +138,7 @@ const Image = () => {
           type="file"
           handleChange={e => onSelectFile('image', e)}
         />
-        <ImagePreview>
-          <StyledImage id="image" src="" />
-        </ImagePreview>
+        <ImagePreview id="image" src="" maxWidth="25" left="15" />
       </SectionContainer>
       <SectionContainer borderBottom="yes" padding="2" align="center">
         <Button
