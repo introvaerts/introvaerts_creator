@@ -5,6 +5,7 @@ import {
   StyledInput,
   StyledTitle,
 } from './Styles';
+import ErrorDisplay from '../../components/ErrorDisplay';
 
 const FormRow = ({
   htmlFor,
@@ -20,6 +21,7 @@ const FormRow = ({
   required,
   width,
   sectionTitle,
+  errorMessage,
 }) => {
   return (
     <RowContainer width={width}>
@@ -39,6 +41,7 @@ const FormRow = ({
         ></StyledInput>
 
         <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
+        {errorMessage ? <ErrorDisplay errorMessage={errorMessage} /> : null}
       </Row>
     </RowContainer>
   );

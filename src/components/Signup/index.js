@@ -96,7 +96,7 @@ const Singup = props => {
           />
           <Button type="submit" id="submit" text="Submit" marginTop="5" />
         </form>
-        <LinkModule text="sign in" marginTop="20" linkTo={SIGNIN} />
+        <LinkModule text="log in" marginTop="20" linkTo={SIGNIN} />
       </SectionContainer>
     </>
   );
