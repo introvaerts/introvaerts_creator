@@ -154,17 +154,14 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
       setIsSearching(true);
       const is = async () => {
         // check if subdomain name is used as published subdomain name
-        console.log('debouncedSubdomainName ', debouncedSubdomainName);
         const response = await Api.subdomainAvailable(debouncedSubdomainName);
         setIsAvailable(response.isAvailable);
-        console.log('1 published', response.isAvailable);
         if (response.isAvailable) {
           // check if subdomain name is used as a preview subdomain name
           const responsePreview = await Api.subdomainAvailable(
             debouncedSubdomainName + '-preview'
           );
           setIsAvailable(responsePreview.isAvailable);
-          console.log('2 preview', responsePreview.isAvailable);
         }
         setIsSearching(false);
       };
