@@ -13,7 +13,7 @@ import SingleImage from '../../../shared/components/Single Image';
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
-import { ThemeConsumer } from 'styled-components';
+import ImagePreview from '../../../shared/components/ImagePreview';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
@@ -346,9 +346,15 @@ const Content = ({ subdomain }) => {
             type="file"
             handleChange={e => onSelectFile('aboutImage', e)}
           />
-          <div style={{ maxWidth: '300px' }}>
+          <ImagePreview
+            src={data?.subdomain?.about?.about_image_url}
+            maxWidth="20"
+            left="9"
+          />
+
+          {/* <div style={{ maxWidth: '300px' }}>
             <SingleImage src={data?.subdomain?.about?.about_image_url} />
-          </div>
+          </div> */}
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
