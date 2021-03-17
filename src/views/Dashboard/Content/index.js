@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // api
 import Api from '../../../shared/utils/api';
@@ -294,6 +294,10 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
     }));
   };
 
+  //ref for Menu linking
+  const targetRef = useRef();
+  console.log(targetRef);
+
   return (
     <>
       <form method="POST" onSubmit={handleSubmit}>
@@ -381,7 +385,9 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
-          <h2>Galleries</h2>
+          <h2 id="gallery" ref={targetRef}>
+            Gallery
+          </h2>
           <GalleryRow
             width="35"
             htmlFor="galleryName"
