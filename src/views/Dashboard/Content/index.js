@@ -14,7 +14,7 @@ import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
 
-const Content = ({ subdomain }) => {
+const Content = ({ subdomain, publishedSubdomainName }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
   const [errorMessages, setErrorMessages] = useState({});
@@ -144,12 +144,29 @@ const Content = ({ subdomain }) => {
   };
 
   useEffect(() => {
-    if (debouncedSubdomainName) {
+    if (
+      debouncedSubdomainName &&
+      // check if subdomain-preview is not the own one
+      `${debouncedSubdomainName}-preview` !== data.subdomain.name &&
+      // check if the subdomain is not the own one
+      debouncedSubdomainName !== publishedSubdomainName
+    ) {
       setIsSearching(true);
       const is = async () => {
+        // check if subdomain name is used as published subdomain name
+        console.log('debouncedSubdomainName ', debouncedSubdomainName);
         const response = await Api.subdomainAvailable(debouncedSubdomainName);
-        setIsSearching(false);
         setIsAvailable(response.isAvailable);
+        console.log('1 published', response.isAvailable);
+        if (response.isAvailable) {
+          // check if subdomain name is used as a preview subdomain name
+          const responsePreview = await Api.subdomainAvailable(
+            debouncedSubdomainName + '-preview'
+          );
+          setIsAvailable(responsePreview.isAvailable);
+          console.log('2 preview', responsePreview.isAvailable);
+        }
+        setIsSearching(false);
       };
       is();
     } else {
