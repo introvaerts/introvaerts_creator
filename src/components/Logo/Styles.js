@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colour } from '../../shared/styles/StyleConstants';
 
 export const LogoContainer = styled.div`
-  padding-top: 2.7%;
+  padding-top: 3.4rem;
   margin-right: 3%;
   cursor: pointer;
 `;

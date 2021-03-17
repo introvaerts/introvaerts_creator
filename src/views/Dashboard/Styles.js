@@ -18,14 +18,13 @@ export const MenuContainer = styled.div`
 
 export const MenuBox = styled.div`
   display: flex;
-  width: 60vw;
 `;
 
 export const LinkBox = styled.div`
   border-left: solid 1px ${colour.background2};
   padding-left: 1rem;
   padding-top: 3.7rem;
-  margin-left: 7rem;
+  margin-left: 7vw;
   min-height: 3rem;
   min-width: 6rem;
   background: ${colour.background1};
@@ -43,7 +42,7 @@ export const StyledLink = styled(NavLink)`
 export const Dropdown = styled.div`
   border-left: solid 1px ${colour.background2};
   padding-left: 1rem;
-  margin-left: 7rem;
+  margin-left: 7vw;
   position: absolute;
   top: 4.5rem;
   background: ${colour.background1};
@@ -52,7 +51,7 @@ export const Dropdown = styled.div`
 `;
 
 export const SignOutBlock = styled.div`
-      margin-left: 25%;
+      
 }
 `;
 
