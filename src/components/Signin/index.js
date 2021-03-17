@@ -65,7 +65,7 @@ const Signin = props => {
     <>
       <Header />
       <SectionContainer width="20" margin="15% auto">
-        <h1>Sign In</h1>
+        <h1>Log In</h1>
         <form method="POST" onSubmit={handleLogIn}>
           <SignForm
             htmlFor="email"

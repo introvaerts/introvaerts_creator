@@ -13,7 +13,7 @@ const Signout = () => {
 
   return (
     <>
-      <Button text="Sign Out" handleClick={handleSignOut} />
+      <Button text="Log Out" handleClick={handleSignOut} />
     </>
   );
 };
