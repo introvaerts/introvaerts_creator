@@ -23,6 +23,9 @@ const Signin = props => {
     message: null,
   });
 
+  //gather error messages from inputs
+  const [errorMessages, setErrorMessages] = useState({});
+
   //for reading input from login form
   const handleChange = e => {
     const { id, value } = e.target;
@@ -42,12 +45,19 @@ const Signin = props => {
 
     const response = await Api.login(userPayload);
 
-    if (response) {
+    if (parseInt(response.code) === 200) {
       setToken(response.data.token ? true : false);
+
+      setErrorMessages({});
 
       if (response.data.token) {
         redirectAfterAuth(response.data.token, 'dashboard/content', props);
       }
+    } else {
+      setErrorMessages({
+        ...errorMessages,
+        logIn: 'Incorrect email address or password.',
+      });
     }
   };
 
@@ -75,7 +85,8 @@ const Signin = props => {
             name="password"
             value={userLogIn.password}
             handleChange={handleChange}
-            required={false}
+            errorMessage={errorMessages.logIn}
+            required={true}
           />
           <Button type="submit" text="Submit" marginTop="5" />
         </form>
