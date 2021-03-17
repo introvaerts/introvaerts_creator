@@ -48,7 +48,7 @@ const Signin = props => {
       setToken(response.data.token ? true : false);
 
       if (response.data.token) {
-        redirectAfterAuth(response.data.token, 'dashboard', props);
+        redirectAfterAuth(response.data.token, 'dashboard/content', props);
       }
     }
   };

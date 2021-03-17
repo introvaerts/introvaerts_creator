@@ -26,7 +26,7 @@ const Singup = props => {
       switch (response.code) {
         case 201:
           setToken(getToken() ? true : false);
-          redirectAfterAuth(response.data.token, 'dashboard', props);
+          redirectAfterAuth(response.data.token, 'dashboard/content', props);
           break;
         case 11000:
           console.log('User does already exists!');
