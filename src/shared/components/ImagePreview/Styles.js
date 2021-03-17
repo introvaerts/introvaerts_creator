@@ -11,8 +11,6 @@ export const PreviewContainer = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  ${'' /* width: 100%;
-  height: auto; */}
   object-fit: cover;
   object-position: center;
   height: 100%;
