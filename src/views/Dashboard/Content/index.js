@@ -174,27 +174,32 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    // TODO: check for errors
-    const response = Api.postAboutImage(appendFormData());
-    // check if there are any error messages and allow editSubdomain only if error=false
-    let error = false;
-    for (const key in errorMessages) {
-      if (Object.hasOwnProperty.call(errorMessages, key)) {
-        if (errorMessages[key]) {
-          error = true;
-          console.log('error?: ', errorMessages[key]);
+    try {
+      if (userInput.image) {
+        await Api.postAboutImage(appendFormData());
+      }
+      // check if there are any error messages and allow editSubdomain only if error=false
+      let error = false;
+      for (const key in errorMessages) {
+        if (Object.hasOwnProperty.call(errorMessages, key)) {
+          if (errorMessages[key]) {
+            error = true;
+            console.log('error?: ', errorMessages[key]);
+          }
         }
       }
-    }
-    if (!error) {
-      const res = await Api.editSubdomain(
-        data.subdomain._id,
-        `${userInput.subdomain_name}-preview`,
-        userInput
-      );
-      if (res.code === 204) {
-        window.location.href = `/dashboard/preview`;
-      }
+      if (!error) {
+        const res = await Api.editSubdomain(
+          data.subdomain._id,
+          `${userInput.subdomain_name}-preview`,
+          userInput
+          );
+          if (res.code === 204) {
+            window.location.href = `/dashboard/preview`;
+          }
+        }
+    } catch (e) {
+      console.error(Error(e));
     }
   };
 
