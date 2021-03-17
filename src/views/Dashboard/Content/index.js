@@ -193,11 +193,11 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
           data.subdomain._id,
           `${userInput.subdomain_name}-preview`,
           userInput
-          );
-          if (res.code === 204) {
-            window.location.href = `/dashboard/preview`;
-          }
+        );
+        if (res.code === 204) {
+          window.location.href = `/dashboard/preview`;
         }
+      }
     } catch (e) {
       console.error(Error(e));
     }
@@ -375,7 +375,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             src={data?.subdomain?.about?.about_image_url}
             width="15"
             height="15"
-            left="12.5"
+            left="74"
           />
         </SectionContainer>
         {/* GALLERY */}
