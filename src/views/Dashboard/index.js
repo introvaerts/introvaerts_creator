@@ -27,7 +27,7 @@ import {
   Dropdown,
   StyledLink,
   Offset,
-  Visit
+  Visit,
 } from './Styles';
 
 const Dashboard = () => {
@@ -81,9 +81,9 @@ const Dashboard = () => {
     }
   };
 
-  const refreshApp = (time) => {
+  const refreshApp = time => {
     setAppRefresh(time);
-  }
+  };
 
   return (
     <Offset>
@@ -163,7 +163,12 @@ const Dashboard = () => {
         <SignOutBlock>
           {logOutButton()}
           <LoggedInUser>
-            <Visit href={`https://${userInfo.subdomains[0].name}.introvaerts.com`} target="_blank">Visit your site</Visit>
+            <Visit
+              href={`https://${userInfo.subdomains[0].name}.introvaerts.com`}
+              target="_blank"
+            >
+              Visit your site
+            </Visit>
           </LoggedInUser>
         </SignOutBlock>
       </MenuContainer>
@@ -183,7 +188,12 @@ const Dashboard = () => {
         <Route path={`${path}/design`} component={Design} />
         <Route path={`${path}/content`}>
           {/* uses the only on subdomain of the user */}
-          <Content subdomain={subdomainInfo ? subdomainInfo : {}} />
+          <Content
+            subdomain={subdomainInfo ? subdomainInfo : {}}
+            publishedSubdomainName={
+              userInfo.subdomains ? userInfo.subdomains[0].name : null
+            }
+          />
         </Route>
         <Route path={`${path}/galleries/:id/image-upload`} component={Image} />
         <Route path={`${path}/galleries/:id`}>
