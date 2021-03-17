@@ -12,6 +12,7 @@ export const MenuContainer = styled.div`
   padding-top: 1rem;
   top: 0rem;
   left: 1rem;
+  z-index: 20;
 `;
 
 export const MenuBox = styled.div`
@@ -31,6 +32,7 @@ export const LinkBox = styled.div`
 export const MenuItem = styled.div`
   position: relative;
 `;
+
 export const StyledLink = styled(NavLink)`
   &.active {
     color: ${colour.accent};
@@ -44,6 +46,8 @@ export const Dropdown = styled.div`
   position: absolute;
   top: 4.5rem;
   background: ${colour.background1};
+  z-index: 20;
+  width: 13rem;
 `;
 
 export const SignOutBlock = styled.div`

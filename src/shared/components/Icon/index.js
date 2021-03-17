@@ -2,7 +2,7 @@ import { IconContainer } from './Styles';
 
 const Icon = ({ handleClick, id }) => {
   return (
-    <IconContainer onClick={() => handleClick(id)}>
+    <IconContainer className="delete-image" onClick={() => handleClick(id)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="34"
