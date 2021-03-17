@@ -5,11 +5,14 @@ export const PreviewContainer = styled.div`
   top: 50%;
   transform: translateY(-50%);
   left: ${props => props.left}%;
+  width: ${props => props.width}vmax;
+  height: ${props => props.height}vmax;
   max-width: ${props => props.maxWidth}vw;
-  max-height: 80%;
 `;
 
 export const StyledImage = styled.img`
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
   width: 100%;
-  height: auto;
 `;

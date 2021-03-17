@@ -341,8 +341,9 @@ const Content = ({ subdomain }) => {
           />
           <ImagePreview
             src={data?.subdomain?.about?.about_image_url}
-            maxWidth="20"
-            left="9"
+            width="15"
+            height="15"
+            left="12.5"
           />
         </SectionContainer>
         {/* GALLERY */}
