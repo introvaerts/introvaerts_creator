@@ -5,10 +5,9 @@ export const PreviewContainer = styled.div`
   top: 50%;
   transform: translateY(-50%);
   left: ${props => props.left}%;
+  width: ${props => props.width}vmax;
+  height: ${props => props.height}vmax;
   max-width: ${props => props.maxWidth}vw;
-  max-height: 80%;
-  width: 15vw;
-  height: 15vw;
 `;
 
 export const StyledImage = styled.img`
