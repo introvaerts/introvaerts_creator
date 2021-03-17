@@ -4,11 +4,12 @@ import {
   StyledLabel,
   StyledInput,
   StyledTitle,
+  InputLabel,
 } from './Styles';
 
 import ErrorDisplay from '../ErrorDisplay';
 
-const FormRow = ({
+const ImageRow = ({
   accept,
   htmlFor,
   label,
@@ -30,19 +31,21 @@ const FormRow = ({
     <RowContainer width={width} marginLeft={marginLeft}>
       <Row>
         {sectionTitle ? <StyledTitle>{sectionTitle}</StyledTitle> : null}
-
-        <StyledInput
-          accept={accept}
-          type={type}
-          id={id}
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          pattern={pattern}
-          title={title}
-          onChange={handleChange}
-          required={required}
-        ></StyledInput>
+        <InputLabel>
+          Browse
+          <StyledInput
+            accept={accept}
+            type={type}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            value={value}
+            pattern={pattern}
+            title={title}
+            onChange={handleChange}
+            required={required}
+          ></StyledInput>
+        </InputLabel>
         <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
         {errorMessage ? <ErrorDisplay errorMessage={errorMessage} /> : null}
       </Row>
@@ -50,4 +53,4 @@ const FormRow = ({
   );
 };
 
-export default FormRow;
+export default ImageRow;

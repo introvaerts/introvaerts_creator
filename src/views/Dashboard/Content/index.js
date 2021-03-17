@@ -7,12 +7,14 @@ import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
 import GalleryRow from '../../../shared/components/GalleryRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
+import ImageRow from '../../../shared/components/ImageRow';
 import Button from '../../../shared/components/Button';
 import SingleImage from '../../../shared/components/Single Image';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
+import ImagePreview from '../../../shared/components/ImagePreview';
 
 const Content = ({ subdomain }) => {
   // change name of subdomain to data for better code reading
@@ -268,6 +270,7 @@ const Content = ({ subdomain }) => {
           <h2>Subdomain</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="subdomain_name"
             label="subdomain name"
             type="text"
@@ -288,6 +291,7 @@ const Content = ({ subdomain }) => {
           <h2>Header</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="page_title"
             label="page title"
             type="text"
@@ -303,6 +307,7 @@ const Content = ({ subdomain }) => {
           <h2>About</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="tagline"
             label="tagline"
             type="text"
@@ -314,6 +319,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRowArea
             width="25"
+            marginLeft="33"
             htmlFor="description"
             label="description"
             type="text"
@@ -323,17 +329,21 @@ const Content = ({ subdomain }) => {
             required={false}
             handleChange={handleUserInput}
           />
-          <FormRow
-            label="Upload Your Image"
+          <ImageRow
             width="25"
+            marginLeft="33"
+            align="center"
+            label="Upload Your Image"
             accept="image/*"
             name="aboutImage"
             type="file"
             handleChange={e => onSelectFile('aboutImage', e)}
           />
-          <div style={{ maxWidth: '300px' }}>
-            <SingleImage src={data?.subdomain?.about?.about_image_url} />
-          </div>
+          <ImagePreview
+            src={data?.subdomain?.about?.about_image_url}
+            maxWidth="20"
+            left="9"
+          />
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
@@ -358,6 +368,7 @@ const Content = ({ subdomain }) => {
           <h2>Contact</h2>
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="contact_tagline"
             label="motivate your fellows to contact you"
             type="text"
@@ -369,6 +380,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="first_name"
             label="first name"
             type="text"
@@ -380,6 +392,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="last_name"
             label="last name"
             type="text"
@@ -391,6 +404,8 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
+            marginLeft="33"
             htmlFor="business_email"
             label="business_email"
             type="email"
@@ -404,6 +419,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="phone_number"
             label="phone_number"
             type="tel"
@@ -415,6 +431,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="street_and_number"
             label="street and number"
             type="text"
@@ -426,6 +443,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="postalcode"
             label="postalcode"
             type="text"
@@ -437,6 +455,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="city"
             label="city"
             type="text"
@@ -448,6 +467,7 @@ const Content = ({ subdomain }) => {
           />
           <FormRow
             width="25"
+            marginLeft="33"
             htmlFor="country"
             label="country"
             type="text"

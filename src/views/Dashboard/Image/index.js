@@ -9,7 +9,9 @@ import Api from '../../../shared/utils/api';
 import Button from '../../../shared/components/Button';
 import SectionContainer from '../../../shared/components/SectionContainer';
 import FormRow from '../../../shared/components/FormRow';
+import ImageRow from '../../../shared/components/ImageRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
+import ImagePreview from '../../../shared/components/ImagePreview';
 
 const Image = () => {
   const { id } = useParams();
@@ -57,86 +59,96 @@ const Image = () => {
   };
 
   return (
-    <SectionContainer borderBottom="yes" padding="2" align="center">
-      <FormRow
-        width="25"
-        htmlFor="title"
-        label="Title"
-        type="text"
-        id="title"
-        name="title"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="year"
-        label="Year"
-        type="number"
-        id="year"
-        name="year"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="media"
-        label="Media"
-        type="text"
-        id="media"
-        name="media"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="dimensions"
-        label="Dimensions"
-        type="text"
-        id="dimensions"
-        name="dimensions"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        width="25"
-        htmlFor="alt_text"
-        label="Alt Text"
-        type="text"
-        id="alt_text"
-        name="alt_text"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRowArea
-        width="25"
-        htmlFor="description"
-        label="Description"
-        type="text"
-        id="description"
-        name="description"
-        required={false}
-        handleChange={handleUserInput}
-      />
-      <FormRow
-        label="Upload Image"
-        width="25"
-        accept="image/*"
-        name="image"
-        type="file"
-        handleChange={e => onSelectFile('image', e)}
-      />
-      <div style={{ overflow: 'hidden' }}>
-        {' '}
-        <img id="image" src="" />{' '}
-      </div>
-      <Button
-        type="submit"
-        text="Upload"
-        placeholder="upload"
-        handleClick={uploadToS3}
-      />
-    </SectionContainer>
+    <>
+      <SectionContainer border="yes" padding="2">
+        <h2>Caption</h2>
+        <FormRow
+          width="25"
+          marginLeft="55"
+          htmlFor="title"
+          label="Title"
+          type="text"
+          id="title"
+          name="title"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          marginLeft="55"
+          htmlFor="year"
+          label="Year"
+          type="text"
+          id="year"
+          name="year"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          marginLeft="55"
+          htmlFor="media"
+          label="Media"
+          type="text"
+          id="media"
+          name="media"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          marginLeft="55"
+          htmlFor="dimensions"
+          label="Dimensions"
+          type="text"
+          id="dimensions"
+          name="dimensions"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRow
+          width="25"
+          marginLeft="55"
+          htmlFor="alt_text"
+          label="Alt Text"
+          type="text"
+          id="alt_text"
+          name="alt_text"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <FormRowArea
+          width="25"
+          marginLeft="55"
+          htmlFor="description"
+          label="Description"
+          type="text"
+          id="description"
+          name="description"
+          required={false}
+          handleChange={handleUserInput}
+        />
+        <ImageRow
+          width="25"
+          marginLeft="55"
+          align="center"
+          label="Upload Image"
+          accept="image/*"
+          name="image"
+          type="file"
+          handleChange={e => onSelectFile('image', e)}
+        />
+        <ImagePreview id="image" src="" maxWidth="25" left="15" />
+      </SectionContainer>
+      <SectionContainer borderBottom="yes" padding="2" align="center">
+        <Button
+          type="submit"
+          text="Upload"
+          placeholder="upload"
+          handleClick={uploadToS3}
+        />
+      </SectionContainer>
+    </>
   );
 };
 

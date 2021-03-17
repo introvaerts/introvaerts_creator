@@ -67,4 +67,4 @@ export const Offset = styled.div`
 export const Visit = styled.a`
   font-size: 0.8rem;
   border-bottom: solid 1px ${colour.accent};
-`
+`;

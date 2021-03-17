@@ -2,7 +2,6 @@ import { StyledGrid } from './Styles';
 import Thumbnail from '../../shared/components/Thumbnail';
 
 export const ImageGrid = ({ images, handleDelete }) => {
-  console.log(images);
   return (
     <StyledGrid>
       {/* map the array of images from this gallery */}
