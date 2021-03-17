@@ -7,7 +7,7 @@ export const Menu = () => {
       <Logo />
       <MenuItem>
         <h2>
-          a tool for creative people to show work in a uncomplicated and
+          a tool for creative people to show their work in a simple and
           appealing way
         </h2>
       </MenuItem>
