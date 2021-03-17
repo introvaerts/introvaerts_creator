@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export const MenuContainer = styled.div`
   width: 97.5%;
+  height: 20vh;
   display: flex;
   justify-content: space-between;
   ${'' /* margin-bottom: 12vh; */}
@@ -56,8 +57,8 @@ export const SignOutBlock = styled.div`
 `;
 
 export const LoggedInUser = styled.p`
-  margin-top: 10%;
-  text-align: right;
+  margin-top: 30%;
+  text-align: center;
 `;
 
 export const Offset = styled.div`

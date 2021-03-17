@@ -1,6 +1,7 @@
 /* import DashboardRouter from "../../navigation/DashboardRouter"; */
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 // api
 import Api from '../../shared/utils/api';
 //global token
@@ -87,6 +88,7 @@ const Dashboard = () => {
 
   return (
     <Offset>
+      {/* <HashRouter basename={'/content'} /> */}
       {/* <Router> */}
       <MenuContainer>
         <MenuBox>
@@ -126,13 +128,13 @@ const Dashboard = () => {
             <Route path={`${url}/content`}>
               <Dropdown>
                 <h3></h3>
-                <Link>
+                <a href="#header">
                   <h3>Header</h3>
-                </Link>
+                </a>
                 <Link>
                   <h3>About</h3>
                 </Link>
-                <Link>
+                <Link to={{ hash: '#gallery' }}>
                   <h3>Gallery</h3>
                 </Link>
                 <Link>
