@@ -16,7 +16,7 @@ import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
 import ImagePreview from '../../../shared/components/ImagePreview';
 
-const Content = ({ subdomain }) => {
+const Content = ({ subdomain, publishedSubdomainName }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
   const [errorMessages, setErrorMessages] = useState({});
@@ -146,12 +146,26 @@ const Content = ({ subdomain }) => {
   };
 
   useEffect(() => {
-    if (debouncedSubdomainName) {
+    if (
+      debouncedSubdomainName &&
+      // check if subdomain-preview is not the own one
+      `${debouncedSubdomainName}-preview` !== data.subdomain.name &&
+      // check if the subdomain is not the own one
+      debouncedSubdomainName !== publishedSubdomainName
+    ) {
       setIsSearching(true);
       const is = async () => {
+        // check if subdomain name is used as published subdomain name
         const response = await Api.subdomainAvailable(debouncedSubdomainName);
-        setIsSearching(false);
         setIsAvailable(response.isAvailable);
+        if (response.isAvailable) {
+          // check if subdomain name is used as a preview subdomain name
+          const responsePreview = await Api.subdomainAvailable(
+            debouncedSubdomainName + '-preview'
+          );
+          setIsAvailable(responsePreview.isAvailable);
+        }
+        setIsSearching(false);
       };
       is();
     } else {
@@ -160,14 +174,32 @@ const Content = ({ subdomain }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    const response = Api.postAboutImage(appendFormData());
-    const res = await Api.editSubdomain(
-      data.subdomain._id,
-      `${userInput.subdomain_name}-preview`,
-      userInput
-    );
-    if (res.code === 204) {
-      window.location.href = `/dashboard/preview`;
+    try {
+      if (userInput.image) {
+        await Api.postAboutImage(appendFormData());
+      }
+      // check if there are any error messages and allow editSubdomain only if error=false
+      let error = false;
+      for (const key in errorMessages) {
+        if (Object.hasOwnProperty.call(errorMessages, key)) {
+          if (errorMessages[key]) {
+            error = true;
+            console.log('error?: ', errorMessages[key]);
+          }
+        }
+      }
+      if (!error) {
+        const res = await Api.editSubdomain(
+          data.subdomain._id,
+          `${userInput.subdomain_name}-preview`,
+          userInput
+          );
+          if (res.code === 204) {
+            window.location.href = `/dashboard/preview`;
+          }
+        }
+    } catch (e) {
+      console.error(Error(e));
     }
   };
 
