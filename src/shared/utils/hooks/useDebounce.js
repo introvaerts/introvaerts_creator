@@ -13,7 +13,7 @@ const useDebounce = (value, delay) => {
       clearTimeout(handler);
     };
     // Only re-call effect if value changes
-  }, [value]);
+  }, [value, delay]);
   return debouncedValue;
 };
 export default useDebounce;
