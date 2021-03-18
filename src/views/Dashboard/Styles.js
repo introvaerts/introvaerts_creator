@@ -47,7 +47,7 @@ export const Dropdown = styled.div`
   top: 4.5rem;
   background: ${colour.background1};
   z-index: 20;
-  width: 13rem;
+  width: 11.5rem;
 `;
 
 export const SignOutBlock = styled.div`
