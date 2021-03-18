@@ -306,7 +306,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
       {!loading ? (
         <form method="POST" onSubmit={handleSubmit}>
           {/* Subdomain */}
-          <SectionContainer border="yes" padding="2">
+          <SectionContainer border="yes" padding="2" id="subdomain">
             <h2>Subdomain</h2>
             <FormRow
               width="25"
@@ -327,7 +327,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             />
           </SectionContainer>
           {/* HEADER */}
-          <SectionContainer border="yes" padding="2">
+          <SectionContainer border="yes" padding="2" id="header">
             <h2>Header</h2>
             <FormRow
               width="25"
@@ -343,7 +343,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             />
           </SectionContainer>
           {/* ABOUT */}
-          <SectionContainer border="yes" padding="2">
+          <SectionContainer border="yes" padding="2" id="about">
             <h2>About</h2>
             <FormRow
               width="25"
@@ -394,10 +394,8 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             ) : null}
           </SectionContainer>
           {/* GALLERY */}
-          <SectionContainer border="yes" padding="2">
-            <h2 id="gallery" ref={targetRef}>
-              Gallery
-            </h2>
+          <SectionContainer border="yes" padding="2" id="gallery">
+            <h2>Gallery</h2>
             <GalleryRow
               width="35"
               htmlFor="galleryName"
@@ -414,7 +412,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             />
           </SectionContainer>
           {/* CONTACT */}
-          <SectionContainer border="yes" padding="2">
+          <SectionContainer border="yes" padding="2" id="contact">
             <h2>Contact</h2>
             <FormRow
               width="25"

@@ -88,7 +88,6 @@ const Dashboard = () => {
 
   return (
     <Offset>
-      {/* <HashRouter basename={'/content'} /> */}
       {/* <Router> */}
       <MenuContainer>
         <MenuBox>
@@ -128,18 +127,18 @@ const Dashboard = () => {
             <Route path={`${url}/content`}>
               <Dropdown>
                 <h3></h3>
-                <a href="#header">
+                <HashLink smooth to="/dashboard/content#header">
                   <h3>Header</h3>
-                </a>
-                <Link>
+                </HashLink>
+                <HashLink smooth to="/dashboard/content#about">
                   <h3>About</h3>
-                </Link>
-                <Link to={{ hash: '#gallery' }}>
+                </HashLink>
+                <HashLink smooth to="/dashboard/content#gallery">
                   <h3>Gallery</h3>
-                </Link>
-                <Link>
+                </HashLink>
+                <HashLink smooth to="/dashboard/content#gallery">
                   <h3>Contact</h3>
-                </Link>
+                </HashLink>
               </Dropdown>
             </Route>
           </MenuItem>
