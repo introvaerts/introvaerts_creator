@@ -9,7 +9,6 @@ import GalleryRow from '../../../shared/components/GalleryRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
 import ImageRow from '../../../shared/components/ImageRow';
 import Button from '../../../shared/components/Button';
-import SingleImage from '../../../shared/components/Single Image';
 // settings
 import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
@@ -444,7 +443,6 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
           />
           <FormRow
             width="25"
-            marginLeft="33"
             marginLeft="33"
             htmlFor="business_email"
             label="business_email"
