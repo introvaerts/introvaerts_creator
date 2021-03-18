@@ -176,9 +176,9 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    setLoading(true);
     try {
       if (userInput.image) {
+        setLoading(true);
         await Api.postAboutImage(appendFormData());
       }
       // check if there are any error messages and allow editSubdomain only if error=false
@@ -199,6 +199,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         );
         if (res.code === 204) {
           window.location.href = `/dashboard/preview`;
+          setLoading(false);
         }
       }
     } catch (e) {
@@ -299,7 +300,6 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
 
   //ref for Menu linking
   const targetRef = useRef();
-  console.log(targetRef);
 
   return (
     <>
