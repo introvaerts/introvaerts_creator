@@ -38,6 +38,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-weight: 300;
+	
 }
 ol, ul {
 	list-style: none;

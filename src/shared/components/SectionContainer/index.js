@@ -8,6 +8,7 @@ const SectionContainer = ({
   padding,
   align,
   borderBottom,
+  id,
 }) => {
   return (
     <StyledSectionContainer
@@ -18,6 +19,7 @@ const SectionContainer = ({
       padding={padding}
       align={align}
       borderBottom={borderBottom}
+      id={id}
     />
   );
 };

@@ -1,7 +1,7 @@
 // api
 import Api from '../../../shared/utils/api';
 import SectionContainer from '../../../shared/components/SectionContainer';
-import Button from '../../../shared/components/Button';
+import ReverseButton from '../../../shared/components/ReverseButton';
 
 import { StylediFrame } from './Styles';
 import { useEffect, useState } from 'react';
@@ -44,7 +44,11 @@ const Preview = ({ previewId, publishedId, refreshApp }) => {
     <>
       {!loading ? (
         <>
-          <Button text="Publish" marginBottom="1" handleClick={handlePublish} />{' '}
+          <ReverseButton
+            text="Publish"
+            marginBottom="1"
+            handleClick={handlePublish}
+          />{' '}
           <SectionContainer borderBottom="yes">
             <StylediFrame
               src={`https://${previewName}.introvaerts.com/`}
