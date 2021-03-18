@@ -29,6 +29,7 @@ const Settings = ({ userEmail }) => {
   };
 
   const handleSubmit = e => {
+    setErrorMessages({});
     e.preventDefault();
     if (userInput.password === userInput.confirmPassword)
       console.log('send Credentials to server');
