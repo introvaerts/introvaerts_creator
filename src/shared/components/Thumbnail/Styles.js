@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colour } from '../../styles/StyleConstants';
 
 export const ImageContainer = styled.div`
   position: relative;
@@ -12,6 +13,18 @@ export const ImageContainer = styled.div`
     display: block;
     grid-area: 1 / 1 / 2 / 2;
   }
+`;
+
+export const ConfirmationContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 50%;
+  padding: 1rem;
+  tranform: translateY(-50%);
+  background: ${colour.background1};
+  text-align: center;
+  display: ${props => props.display};
 `;
 
 export const Image = styled.img`
