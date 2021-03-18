@@ -110,13 +110,13 @@ const Dashboard = () => {
             <Route path={`${url}/design`}>
               <Dropdown>
                 <h3> </h3>
-                <Link>
+                <HashLink smooth to="/dashboard/design#colours">
                   {' '}
                   <h3>Colours</h3>
-                </Link>
-                <Link>
+                </HashLink>
+                <HashLink smooth to="/dashboard/design#typography">
                   <h3>Typography</h3>
-                </Link>
+                </HashLink>
               </Dropdown>
             </Route>
           </MenuItem>
@@ -153,12 +153,12 @@ const Dashboard = () => {
             <Route path={`${url}/settings`}>
               <Dropdown>
                 <h3> </h3>
-                <Link>
+                <HashLink smooth to="/dashboard/settings#userEmail">
                   <h3>User Profile</h3>
-                </Link>
-                <Link>
+                </HashLink>
+                <HashLink smooth to="/dashboard/settings#userPassword">
                   <h3>Security</h3>
-                </Link>
+                </HashLink>
               </Dropdown>
             </Route>
           </MenuItem>
