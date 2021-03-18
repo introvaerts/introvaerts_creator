@@ -20,7 +20,7 @@ const Gallery = () => {
       setData(response.data);
     };
     fetchImages();
-  }, [imageDelete]);
+  }, [imageDelete, id]);
 
   const confirmDeleteBox = async () => {
     setShowConfirm(showConfirm === "none" ? "block" : "none");

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // api
 import Api from '../../../shared/utils/api';
@@ -19,9 +19,6 @@ import Loading from '../../../shared/components/Loading';
 const Content = ({ subdomain, publishedSubdomainName }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
-
-  //ref for Menu linking
-  const targetRef = useRef();
 
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
@@ -179,7 +176,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
     } else {
       setIsAvailable(true);
     }
-  }, [debouncedSubdomainName]);
+  }, [debouncedSubdomainName, data?.subdomain?.name, publishedSubdomainName]);
 
   const editSubdomain = async () => {
     try {

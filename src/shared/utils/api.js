@@ -10,7 +10,6 @@ import {
   createGalleryEndpoint,
   galleryByIdEndpoint,
   uploadImageEndpoint,
-  galleryByNameEndpoint,
   uploadAboutImageEndpoint,
   imageByIdEndpoint,
   publishPreviewSubdomain,
