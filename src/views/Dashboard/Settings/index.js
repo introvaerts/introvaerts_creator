@@ -17,7 +17,7 @@ const Settings = ({ userEmail }) => {
 
   useEffect(() => {
     if (userEmail) setUserInput({ ...userInput, userEmail: userEmail });
-  }, []);
+  }, [userEmail]);
 
   const handleUserInput = e => {
     const { name, value } = e.target;
