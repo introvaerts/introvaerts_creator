@@ -60,7 +60,7 @@ const Dashboard = () => {
       });
     };
     fetchData();
-  }, [appRefresh]);
+  }, [appRefresh, userInfo]);
 
   // fetch PREVIEW subdomain by its Id
   useEffect(() => {
