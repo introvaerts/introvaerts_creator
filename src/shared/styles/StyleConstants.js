@@ -8,7 +8,7 @@ export const colour = {
 };
 
 export const font = {
-  regular: 'font-family: "IBM Plex Sans", sans-serif;',
+  regular: 'font-family: "IBM Plex Sans", sans-serif; font-weight: 300;',
   label: 'font-family: "IBM Plex Mono", monospace;',
   brand: 'font-family: "IBM Plex Serif", serif;',
   size: size => `font-size: ${size}rem;`,

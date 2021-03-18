@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import Headroom from 'react-headroom';
 // api
 import Api from '../../shared/utils/api';
 //global token
@@ -89,7 +90,9 @@ const Dashboard = () => {
   return (
     <Offset>
       {/* <Router> */}
+
       <MenuContainer>
+        {/* <Headroom> */}
         <MenuBox>
           <Logo />
           <MenuItem>
@@ -127,13 +130,13 @@ const Dashboard = () => {
             <Route path={`${url}/content`}>
               <Dropdown>
                 <h3></h3>
-                <HashLink smooth to="/dashboard/content#header">
+                {/* <HashLink smooth to="/dashboard/content#header">
                   <h3>Header</h3>
-                </HashLink>
-                <HashLink smooth to="/dashboard/content#about">
+                </HashLink> */}
+                <HashLink smooth to="/dashboard/content#header">
                   <h3>About</h3>
                 </HashLink>
-                <HashLink smooth to="/dashboard/content#gallery">
+                <HashLink smooth to="/dashboard/content#about">
                   <h3>Gallery</h3>
                 </HashLink>
                 <HashLink smooth to="/dashboard/content#gallery">
@@ -172,6 +175,7 @@ const Dashboard = () => {
             </Visit>
           </LoggedInUser>
         </SignOutBlock>
+        {/* </Headroom> */}
       </MenuContainer>
 
       {/* <DashboardRouter /> */}
