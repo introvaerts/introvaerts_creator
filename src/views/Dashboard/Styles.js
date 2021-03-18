@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export const MenuContainer = styled.div`
   width: 97.5%;
-  height: 20vh;
+  height: 18vh;
   display: flex;
   justify-content: space-between;
   ${'' /* margin-bottom: 12vh; */}
