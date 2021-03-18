@@ -12,6 +12,7 @@ export const ImageGrid = ({ images, handleDelete, handleDisplay }) => {
           handleDelete={handleDelete}
           id={image._id}
           handleDisplay={handleDisplay}
+          index={i}
         />
       ))}
     </StyledGrid>

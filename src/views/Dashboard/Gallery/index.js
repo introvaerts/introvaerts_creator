@@ -11,27 +11,26 @@ const Gallery = () => {
   const { id } = useParams();
   const [data, setData] = useState();
   const [imageDelete, setImageDelete] = useState('');
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [showConfirm, setShowConfirm] = useState([]);
 
   useEffect(() => {
     const fetchImages = async () => {
       const response = await Api.getGalleryById(id);
       setData(response.data);
+      const arr = new Array(response.data.images.length);
+      arr.fill("none")
+      setShowConfirm(arr);
     };
     fetchImages();
   }, [imageDelete]);
 
-  const confirmDelete = showConfirmDelete => {
-    if (showConfirmDelete) {
-      return 'block';
-    } else {
-      return 'none';
-    }
+  const confirmDelete = async (index) => {
+    const tentativeArray = showConfirm.fill("block", index, index + 1);
+    setShowConfirm(tentativeArray);
   };
 
-  const deleteImage = async imageId => {
-    setShowConfirmDelete(true);
-    confirmDelete(showConfirmDelete);
+  const deleteImage = async (imageId, index) => {
+    confirmDelete(index);
     /*     const really = window.confirm(
       'Do you really want to delete this image and its corresponding data?'
     );
@@ -54,7 +53,7 @@ const Gallery = () => {
         </StyledButton>
       </GalleryBox>
       <ImageGrid
-        handleDisplay={confirmDelete}
+        handleDisplay={showConfirm}
         images={data ? data.images : []}
         handleDelete={deleteImage}
       />
