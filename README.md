@@ -6,10 +6,9 @@ Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999)
 
 - [Description](#Description)
 - [Objectives](#Objectives)
-- [Workflow](#Workflow)
 - [Project Requirements](#Project-Requirements)
-- [Tools](#tools)
-- [Wireframe](#wireframe)
+- [Tech-Stack](#Tech-Stack)
+- [Component Tree](#component-tree)
 - [Resources](#Resources)
 
 #### Description
@@ -22,13 +21,6 @@ Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999)
 - Timeline: 1.March - 18.March.2021 (3 weeks-project)
 - [introvÆrts](https://introvaerts.com)
 
-#### Workflow
-
-- Write User Stories
-- Create Trelloboard for Project Management: translate each user story info defined tasks for Sprint 1, 2 and 3.
-- Create a Wire Frame and a Mockup.
-- Define the Architechture of the App (frontend)
-
 #### Project Requirements
 
 - Initiate 3 Repos on Github and set-up collaborators and set as an organization. [We recomend to follow this guide.](https://github.com/Elie-Soued/TodoList_React/blob/main/doc/git.md)
@@ -37,37 +29,37 @@ Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999)
 - - [introvÆrts Creator](https://github.com/introvaerts/introvaerts_creator)
 - Initiate/Create a new a React Project. The installations requires [Node.js](https://nodejs.org/en/) for further info: [Follow the steps.](https://reactjs.org/docs/create-a-new-react-app.html) more info [below](https://github.com/AvrilAvril/the-foo-dnetwork/blob/main/README.md#getting-started-with-create-react-app)
 
-### Tools
+### Tech-Stack
 
-- Frontend: HTML, CSS, JS, JSX, REACT,
-- Backend: [MongoDB](https://www.mongodb.com/3), [AWS](https://aws.amazon.com/),[Postman](https://www.postman.com/)
+- Frontend: HTML, CSS, JS, JSX, REACT,[Styled Components](https://styled-components.com/),[npmjs react iframe](https://www.npmjs.com/package/react-iframe)
+
+
+- Backend: [MongoDB](https://www.mongodb.com/3), [AWS](https://aws.amazon.com/),[Postman](https://www.postman.com/),[Nodejs](https://nodejs.org/en/),[nginx](https://nginx.org/en/),[expressjs](https://expressjs.com/)
 
 ## Get started with introvÆrts:
 
-### Admin:
+### Component Tree:
 
 ![inireframe_admin web](https://user-images.githubusercontent.com/74352389/110110135-afac0580-7dae-11eb-97bb-e8a3c88dc149.png)
 
 ## Core functionalities:
 
 - Sign In
-- Sign Out
-- Log In
+- Log Out
+- Sign Up
 - Create a portfolio on a subdomain
+- Preview
 
 ## Resources
 
 ### Design & Usage
 
-- [FORMAT]()
-- [Jira Clone](https://github.com/oldboyxx
-  jira_clone)
+- [FORMAT](https://www.format.com/)
+- [Jira Clone](https://github.com/oldboyxxjira_clone)
 
 ## Technical
 
 ### React
-
-- [Styled Components](https://styled-components.com/)
 - [building inline editable UI](https://blog.logrocket.com/the-complete-guide-to-building-inline-editable-ui-in-react/)
 - [How to Share React UI Components between Projects and Apps](https://blog.bitsrc.io/how-to-easily-share-react-components-between-projects-3dd42149c09)
 - [React file Upload](https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/)
@@ -75,80 +67,3 @@ Team: [Janis](https://github.com/widukin), [Diego](https://github.com/diegog999)
 - [React Router](https://reactrouter.com/web/example/url-params)
 - [Writing middleware for use in Express apps](https://expressjs.com/en/guide/writing-middleware.html#:~:text=Overview,the%20application%27s%20request%2Dresponse%20cycle.&text=Middleware%20functions%20can%20perform%20the,request%20and%20the%20response%20objects)
 
-## Legal Stuff
-
-### Imprint
-
-- [abcdinamo](https://abcdinamo.com/imprint)
-- [npmjs react iframe](https://www.npmjs.com/package/react-iframe)
-
-### Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-### Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
