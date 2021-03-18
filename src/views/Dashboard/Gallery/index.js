@@ -21,8 +21,13 @@ const Gallery = () => {
   }, [imageDelete]);
 
   const deleteImage = async imageId => {
-    await Api.deleteImageById(imageId);
-    setImageDelete(Date.now());
+    let really = window.confirm(
+      'Do you really want to delete this image and its corresponding data?'
+    );
+    if (really) {
+      await Api.deleteImageById(imageId);
+      setImageDelete(Date.now());
+    }
   };
 
   return (
