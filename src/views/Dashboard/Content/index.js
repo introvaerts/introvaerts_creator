@@ -176,7 +176,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
     } else {
       setIsAvailable(true);
     }
-  }, [debouncedSubdomainName, data?.subdomain?.name, publishedSubdomainName]);
+  }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
     try {
