@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import Headroom from 'react-headroom';
 // api
 import Api from '../../shared/utils/api';
 //global token
