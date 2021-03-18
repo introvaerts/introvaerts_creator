@@ -138,7 +138,9 @@ const Image = () => {
           type="file"
           handleChange={e => onSelectFile('image', e)}
         />
-        <ImagePreview id="image" src="" maxWidth="25" left="15" />
+        {imageFields.image ? (
+          <ImagePreview id="image" src="" maxWidth="25" left="15" />
+        ) : null}
       </SectionContainer>
       <SectionContainer borderBottom="yes" padding="2" align="center">
         <Button
