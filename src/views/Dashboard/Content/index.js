@@ -374,13 +374,19 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
             type="file"
             handleChange={e => onSelectFile('aboutImage', e)}
           />
-          <ImagePreview
-            id="imagePreview"
-            src={data?.subdomain?.about?.about_image_url}
-            width="15"
-            height="15"
-            left="74"
-          />
+          {data?.subdomain?.about?.about_image_url || userInput.image ? (
+            <ImagePreview
+              id="imagePreview"
+              src={
+                userInput.image
+                  ? userInput.image
+                  : data?.subdomain?.about?.about_image_url
+              }
+              width="15"
+              height="15"
+              left="74"
+            />
+          ) : null}
         </SectionContainer>
         {/* GALLERY */}
         <SectionContainer border="yes" padding="2">
