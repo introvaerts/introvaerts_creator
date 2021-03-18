@@ -12,10 +12,12 @@ import FormRow from '../../../shared/components/FormRow';
 import ImageRow from '../../../shared/components/ImageRow';
 import FormRowArea from '../../../shared/components/FormRowArea';
 import ImagePreview from '../../../shared/components/ImagePreview';
+import Loading from '../../../shared/components/Loading';
 
 const Image = () => {
   const { id } = useParams();
   const [imageFields, setImageFields] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     Api.getGalleryById(id).then(response =>
@@ -53,6 +55,7 @@ const Image = () => {
   };
 
   const uploadToS3 = async () => {
+    setLoading(true);
     const response = await Api.uploadImage(appendFormData());
     if (response.code === 201)
       window.location.href = `/dashboard/galleries/${id}`;
@@ -60,96 +63,102 @@ const Image = () => {
 
   return (
     <>
-      <SectionContainer border="yes" padding="2">
-        <h2>Caption</h2>
-        <FormRow
-          width="25"
-          marginLeft="55"
-          htmlFor="title"
-          label="Title"
-          type="text"
-          id="title"
-          name="title"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          width="25"
-          marginLeft="55"
-          htmlFor="year"
-          label="Year"
-          type="text"
-          id="year"
-          name="year"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          width="25"
-          marginLeft="55"
-          htmlFor="media"
-          label="Media"
-          type="text"
-          id="media"
-          name="media"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          width="25"
-          marginLeft="55"
-          htmlFor="dimensions"
-          label="Dimensions"
-          type="text"
-          id="dimensions"
-          name="dimensions"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <FormRow
-          width="25"
-          marginLeft="55"
-          htmlFor="alt_text"
-          label="Alt Text"
-          type="text"
-          id="alt_text"
-          name="alt_text"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <FormRowArea
-          width="25"
-          marginLeft="55"
-          htmlFor="description"
-          label="Description"
-          type="text"
-          id="description"
-          name="description"
-          required={false}
-          handleChange={handleUserInput}
-        />
-        <ImageRow
-          width="25"
-          marginLeft="55"
-          align="center"
-          label="Upload Image"
-          accept="image/*"
-          name="image"
-          type="file"
-          handleChange={e => onSelectFile('image', e)}
-        />
-        {imageFields.image ? (
-          <ImagePreview id="image" src="" maxWidth="25" left="15" />
-        ) : null}
-      </SectionContainer>
-      <SectionContainer borderBottom="yes" padding="2" align="center">
-        <Button
-          type="submit"
-          text="Upload"
-          placeholder="upload"
-          handleClick={uploadToS3}
-        />
-      </SectionContainer>
+      {!loading ? (
+        <>
+          <SectionContainer border="yes" padding="2">
+            <h2>Caption</h2>
+            <FormRow
+              width="25"
+              marginLeft="55"
+              htmlFor="title"
+              label="Title"
+              type="text"
+              id="title"
+              name="title"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="55"
+              htmlFor="year"
+              label="Year"
+              type="text"
+              id="year"
+              name="year"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="55"
+              htmlFor="media"
+              label="Media"
+              type="text"
+              id="media"
+              name="media"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="55"
+              htmlFor="dimensions"
+              label="Dimensions"
+              type="text"
+              id="dimensions"
+              name="dimensions"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="55"
+              htmlFor="alt_text"
+              label="Alt Text"
+              type="text"
+              id="alt_text"
+              name="alt_text"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRowArea
+              width="25"
+              marginLeft="55"
+              htmlFor="description"
+              label="Description"
+              type="text"
+              id="description"
+              name="description"
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <ImageRow
+              width="25"
+              marginLeft="55"
+              align="center"
+              label="Upload Image"
+              accept="image/*"
+              name="image"
+              type="file"
+              handleChange={e => onSelectFile('image', e)}
+            />
+            {imageFields.image ? (
+              <ImagePreview id="image" src="" maxWidth="25" left="15" />
+            ) : null}
+          </SectionContainer>
+          <SectionContainer borderBottom="yes" padding="2" align="center">
+            <Button
+              type="submit"
+              text="Upload"
+              placeholder="upload"
+              handleClick={uploadToS3}
+            />
+          </SectionContainer>
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

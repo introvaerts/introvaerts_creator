@@ -14,6 +14,7 @@ import { allowedNumberOfGalleries } from '../../../shared/config/app.settings';
 // time delay for firing API call
 import useDebounce from '../../../shared/utils/hooks/useDebounce';
 import ImagePreview from '../../../shared/components/ImagePreview';
+import Loading from '../../../shared/components/Loading';
 
 const Content = ({ subdomain, publishedSubdomainName }) => {
   // change name of subdomain to data for better code reading
@@ -40,6 +41,8 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
   // states for checking if subdomain name is availabe when stop typing
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   // costum hook return latest value (after 500ms) or previous value of subdomain_name (only have the API call fire when user stops typing)
   const debouncedSubdomainName = useDebounce(userInput.subdomain_name, 500);
@@ -173,6 +176,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
+    setLoading(true);
     try {
       if (userInput.image) {
         await Api.postAboutImage(appendFormData());
@@ -299,234 +303,238 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
 
   return (
     <>
-      <form method="POST" onSubmit={handleSubmit}>
-        {/* Subdomain */}
-        <SectionContainer border="yes" padding="2">
-          <h2>Subdomain</h2>
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="subdomain_name"
-            label="subdomain name"
-            type="text"
-            id="subdomain_name"
-            name="subdomain_name"
-            value={userInput.subdomain_name}
-            required={true}
-            handleChange={handleUserInput}
-            errorMessage={
-              errorMessages.searching ||
-              errorMessages.subdomainNameMatchRegex ||
-              errorMessages.subdomainNameAvailable
-            }
-          />
-        </SectionContainer>
-        {/* HEADER */}
-        <SectionContainer border="yes" padding="2">
-          <h2>Header</h2>
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="page_title"
-            label="page title"
-            type="text"
-            id="page_title"
-            name="page_title"
-            value={userInput.page_title}
-            required={true}
-            handleChange={handleUserInput}
-          />
-        </SectionContainer>
-        {/* ABOUT */}
-        <SectionContainer border="yes" padding="2">
-          <h2>About</h2>
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="tagline"
-            label="tagline"
-            type="text"
-            id="tagline"
-            name="tagline"
-            value={userInput.tagline}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRowArea
-            width="25"
-            marginLeft="33"
-            htmlFor="description"
-            label="description"
-            type="text"
-            id="description"
-            name="description"
-            value={userInput.description}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <ImageRow
-            width="25"
-            marginLeft="33"
-            align="center"
-            label="Upload Your Image"
-            accept="image/*"
-            name="aboutImage"
-            type="file"
-            handleChange={e => onSelectFile('aboutImage', e)}
-          />
-          {data?.subdomain?.about?.about_image_url || userInput.image ? (
-            <ImagePreview
-              id="imagePreview"
-              src={
-                userInput.image
-                  ? userInput.image
-                  : data?.subdomain?.about?.about_image_url
+      {!loading ? (
+        <form method="POST" onSubmit={handleSubmit}>
+          {/* Subdomain */}
+          <SectionContainer border="yes" padding="2">
+            <h2>Subdomain</h2>
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="subdomain_name"
+              label="subdomain name"
+              type="text"
+              id="subdomain_name"
+              name="subdomain_name"
+              value={userInput.subdomain_name}
+              required={true}
+              handleChange={handleUserInput}
+              errorMessage={
+                errorMessages.searching ||
+                errorMessages.subdomainNameMatchRegex ||
+                errorMessages.subdomainNameAvailable
               }
-              width="15"
-              height="15"
-              left="74"
             />
-          ) : null}
-        </SectionContainer>
-        {/* GALLERY */}
-        <SectionContainer border="yes" padding="2">
-          <h2 id="gallery" ref={targetRef}>
-            Gallery
-          </h2>
-          <GalleryRow
-            width="35"
-            htmlFor="galleryName"
-            label="gallery name"
-            type="text"
-            id="galleryName"
-            name="galleryName"
-            value={userInput.galleryName}
-            required={false}
-            handleChange={handleUserInput}
-            handleClick={createGallery}
-            galleries={userInput.galleries}
-            errorMessage={errorMessages.galleryName}
-          />
-        </SectionContainer>
-        {/* CONTACT */}
-        <SectionContainer border="yes" padding="2">
-          <h2>Contact</h2>
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="contact_tagline"
-            label="motivate your fellows to contact you"
-            type="text"
-            id="contact_tagline"
-            name="contact_tagline"
-            value={userInput.contact_tagline}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="first_name"
-            label="first name"
-            type="text"
-            id="first_name"
-            name="first_name"
-            value={userInput.first_name}
-            required={true}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="last_name"
-            label="last name"
-            type="text"
-            id="last_name"
-            name="last_name"
-            value={userInput.last_name}
-            required={true}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="business_email"
-            label="business_email"
-            type="email"
-            id="business_email"
-            name="business_email"
-            value={userInput.business_email}
-            pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-            title="Please put in a valid email address: accountname@domainname.domain"
-            required={true}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="phone_number"
-            label="phone_number"
-            type="tel"
-            id="phone_number"
-            name="phone_number"
-            value={userInput.phone_number}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="street_and_number"
-            label="street and number"
-            type="text"
-            id="street_and_number"
-            name="street_and_number"
-            value={userInput.street_and_number}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="postalcode"
-            label="postalcode"
-            type="text"
-            id="postalcode"
-            name="postalcode"
-            value={userInput.postalcode}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="city"
-            label="city"
-            type="text"
-            id="city"
-            name="city"
-            value={userInput.city}
-            required={false}
-            handleChange={handleUserInput}
-          />
-          <FormRow
-            width="25"
-            marginLeft="33"
-            htmlFor="country"
-            label="country"
-            type="text"
-            id="country"
-            name="country"
-            value={userInput.country}
-            required={false}
-            handleChange={handleUserInput}
-          />
-        </SectionContainer>
-        {/* SUBMIT */}
-        <SectionContainer borderBottom="yes" padding="2" align="center">
-          <Button type="submit" text="Submit" />
-        </SectionContainer>
-      </form>
+          </SectionContainer>
+          {/* HEADER */}
+          <SectionContainer border="yes" padding="2">
+            <h2>Header</h2>
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="page_title"
+              label="page title"
+              type="text"
+              id="page_title"
+              name="page_title"
+              value={userInput.page_title}
+              required={true}
+              handleChange={handleUserInput}
+            />
+          </SectionContainer>
+          {/* ABOUT */}
+          <SectionContainer border="yes" padding="2">
+            <h2>About</h2>
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="tagline"
+              label="tagline"
+              type="text"
+              id="tagline"
+              name="tagline"
+              value={userInput.tagline}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRowArea
+              width="25"
+              marginLeft="33"
+              htmlFor="description"
+              label="description"
+              type="text"
+              id="description"
+              name="description"
+              value={userInput.description}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <ImageRow
+              width="25"
+              marginLeft="33"
+              align="center"
+              label="Upload Your Image"
+              accept="image/*"
+              name="aboutImage"
+              type="file"
+              handleChange={e => onSelectFile('aboutImage', e)}
+            />
+            {data?.subdomain?.about?.about_image_url || userInput.image ? (
+              <ImagePreview
+                id="imagePreview"
+                src={
+                  userInput.image
+                    ? userInput.image
+                    : data?.subdomain?.about?.about_image_url
+                }
+                width="15"
+                height="15"
+                left="74"
+              />
+            ) : null}
+          </SectionContainer>
+          {/* GALLERY */}
+          <SectionContainer border="yes" padding="2">
+            <h2 id="gallery" ref={targetRef}>
+              Gallery
+            </h2>
+            <GalleryRow
+              width="35"
+              htmlFor="galleryName"
+              label="gallery name"
+              type="text"
+              id="galleryName"
+              name="galleryName"
+              value={userInput.galleryName}
+              required={false}
+              handleChange={handleUserInput}
+              handleClick={createGallery}
+              galleries={userInput.galleries}
+              errorMessage={errorMessages.galleryName}
+            />
+          </SectionContainer>
+          {/* CONTACT */}
+          <SectionContainer border="yes" padding="2">
+            <h2>Contact</h2>
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="contact_tagline"
+              label="motivate your fellows to contact you"
+              type="text"
+              id="contact_tagline"
+              name="contact_tagline"
+              value={userInput.contact_tagline}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="first_name"
+              label="first name"
+              type="text"
+              id="first_name"
+              name="first_name"
+              value={userInput.first_name}
+              required={true}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="last_name"
+              label="last name"
+              type="text"
+              id="last_name"
+              name="last_name"
+              value={userInput.last_name}
+              required={true}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="business_email"
+              label="business_email"
+              type="email"
+              id="business_email"
+              name="business_email"
+              value={userInput.business_email}
+              pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+              title="Please put in a valid email address: accountname@domainname.domain"
+              required={true}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="phone_number"
+              label="phone_number"
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              value={userInput.phone_number}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="street_and_number"
+              label="street and number"
+              type="text"
+              id="street_and_number"
+              name="street_and_number"
+              value={userInput.street_and_number}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="postalcode"
+              label="postalcode"
+              type="text"
+              id="postalcode"
+              name="postalcode"
+              value={userInput.postalcode}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="city"
+              label="city"
+              type="text"
+              id="city"
+              name="city"
+              value={userInput.city}
+              required={false}
+              handleChange={handleUserInput}
+            />
+            <FormRow
+              width="25"
+              marginLeft="33"
+              htmlFor="country"
+              label="country"
+              type="text"
+              id="country"
+              name="country"
+              value={userInput.country}
+              required={false}
+              handleChange={handleUserInput}
+            />
+          </SectionContainer>
+          {/* SUBMIT */}
+          <SectionContainer borderBottom="yes" padding="2" align="center">
+            <Button type="submit" text="Submit" />
+          </SectionContainer>
+        </form>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
