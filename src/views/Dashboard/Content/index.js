@@ -19,6 +19,10 @@ import Loading from '../../../shared/components/Loading';
 const Content = ({ subdomain, publishedSubdomainName }) => {
   // change name of subdomain to data for better code reading
   const data = subdomain;
+
+  //ref for Menu linking
+  const targetRef = useRef();
+
   const [errorMessages, setErrorMessages] = useState({});
   const [userInput, setUserInput] = useState({
     subdomain_name: '',
@@ -52,9 +56,9 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
     if (data.subdomain) {
       const { name, page_title } = data.subdomain;
       // gather gallery name and id
-      let galleries = [];
+      let galleriesArray = [];
       data.galleries.forEach(gallery => {
-        galleries.push({ name: gallery.name, id: gallery._id });
+        galleriesArray.push({ name: gallery.name, id: gallery._id });
       });
       // cut off -preview of preview subdomain name
       let alteredPreviewSubdomainName = name.replace('-preview', '');
@@ -64,7 +68,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
           ? alteredPreviewSubdomainName
           : '',
         page_title: page_title ? page_title : '',
-        galleries: galleries ? galleries : [],
+        galleries: galleriesArray ? galleriesArray : [],
       };
 
       // is there a about object inside subdomain?
@@ -119,7 +123,9 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (userInput.galleryName.length) createGallery();
+    if (userInput.galleryName.length) {
+      createGallery();
+    }
     editSubdomain();
   };
 
@@ -176,9 +182,9 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
   }, [debouncedSubdomainName]);
 
   const editSubdomain = async () => {
-    setLoading(true);
     try {
       if (userInput.image) {
+        setLoading(true);
         await Api.postAboutImage(appendFormData());
       }
       // check if there are any error messages and allow editSubdomain only if error=false
@@ -199,6 +205,7 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         );
         if (res.code === 204) {
           window.location.href = `/dashboard/preview`;
+          setLoading(false);
         }
       }
     } catch (e) {
@@ -288,7 +295,6 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         ...errorMessages,
         galleryName: `You can create ${allowedNumberOfGalleries} galleries only.`,
       });
-    } else {
     }
     //clear galleryName in userInput
     setUserInput(userInput => ({
@@ -296,10 +302,6 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
       galleryName: '',
     }));
   };
-
-  //ref for Menu linking
-  const targetRef = useRef();
-  console.log(targetRef);
 
   return (
     <>

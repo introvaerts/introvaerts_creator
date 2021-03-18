@@ -48,6 +48,7 @@ const GalleryRow = ({
           <StyledLabel htmlFor={htmlFor}>{label}</StyledLabel>
         </Row>
         <Button
+          type="button"
           text="+ Gallery"
           marginLeft="3"
           handleClick={handleClick}
