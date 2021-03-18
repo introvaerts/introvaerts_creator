@@ -109,7 +109,7 @@ const Dashboard = () => {
             </LinkBox>
             <Route path={`${url}/design`}>
               <Dropdown>
-                <h3></h3>
+                <h3> </h3>
                 <Link>
                   {' '}
                   <h3>Colours</h3>
@@ -128,7 +128,7 @@ const Dashboard = () => {
             </LinkBox>
             <Route path={`${url}/content`}>
               <Dropdown>
-                <h3></h3>
+                <h3> </h3>
                 {/* <HashLink smooth to="/dashboard/content#header">
                   <h3>Header</h3>
                 </HashLink> */}
@@ -152,7 +152,7 @@ const Dashboard = () => {
             </LinkBox>
             <Route path={`${url}/settings`}>
               <Dropdown>
-                <h3></h3>
+                <h3> </h3>
                 <Link>
                   <h3>User Profile</h3>
                 </Link>
