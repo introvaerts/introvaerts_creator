@@ -21,7 +21,7 @@ const Gallery = () => {
   }, [imageDelete]);
 
   const deleteImage = async imageId => {
-    let really = window.confirm(
+    const really = window.confirm(
       'Do you really want to delete this image and its corresponding data?'
     );
     if (really) {
