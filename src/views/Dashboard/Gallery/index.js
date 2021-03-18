@@ -18,7 +18,7 @@ const Gallery = () => {
       setData(response.data);
     };
     fetchImages();
-  }, [imageDelete]);
+  }, [imageDelete, id]);
 
   const deleteImage = async imageId => {
     const really = window.confirm(
