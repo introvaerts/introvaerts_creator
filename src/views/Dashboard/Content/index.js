@@ -205,7 +205,6 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         );
         if (res.code === 204) {
           window.location.href = `/dashboard/preview`;
-          setLoading(false);
         }
       }
     } catch (e) {
