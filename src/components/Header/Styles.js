@@ -11,7 +11,7 @@ export const MenuContainer = styled.div`
 export const MenuItem = styled.div`
   border-left: solid 1px ${colour.background2};
   padding-left: 1%;
-  padding-top: 3%;
+  padding-top: 3.6rem;
   margin-left: 6%;
   min-height: 3%;
 `;
