@@ -10,7 +10,7 @@ const Thumbnail = ({
   id,
   confirmDelete,
   cancelDelete,
-  display,
+  handleDisplay,
 }) => {
   return (
     <ImageContainer>
@@ -22,7 +22,7 @@ const Thumbnail = ({
       />
       <Icon handleClick={handleDelete} id={id} />
       {/* receive the result of the handleDelete */}
-      <ConfirmationContainer id={id} display={display}>
+      <ConfirmationContainer id={id} display={handleDisplay}>
         <p>
           Do you really want to delete this image and its corresponding data?
         </p>
