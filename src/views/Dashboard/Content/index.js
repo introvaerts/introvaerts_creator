@@ -277,7 +277,10 @@ const Content = ({ subdomain, publishedSubdomainName }) => {
         userInput.galleryName,
         data.subdomain._id
       );
-      userInput.galleries = [...userInput.galleries, response.data._id];
+      userInput.galleries = [
+        ...userInput.galleries,
+        { id: response.data._id, name: response.data.name },
+      ];
       setErrorMessages({
         ...errorMessages,
         galleryName: '',
