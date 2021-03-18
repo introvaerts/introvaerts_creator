@@ -197,11 +197,13 @@ const Dashboard = () => {
             }
           />
         </Route>
+        <Route path={`${path}/settings`}>
+          <Settings userEmail={userInfo ? userInfo.userEmail : null} />
+        </Route>
         <Route path={`${path}/galleries/:id/image-upload`} component={Image} />
         <Route path={`${path}/galleries/:id`}>
           <Gallery />
         </Route>
-        <Route path={`${path}/settings`} component={Settings} />
       </Switch>
       {/* </Router> */}
     </Offset>
