@@ -11,39 +11,35 @@ const Gallery = () => {
   const { id } = useParams();
   const [data, setData] = useState();
   const [imageDelete, setImageDelete] = useState('');
-  const [showConfirm, setShowConfirm] = useState([]);
+  const [showConfirm, setShowConfirm] = useState("none");
+  const [deleteId, setDeleteId] = useState();
 
   useEffect(() => {
     const fetchImages = async () => {
       const response = await Api.getGalleryById(id);
       setData(response.data);
-      const arr = new Array(response.data.images.length);
-      arr.fill("none")
-      setShowConfirm(arr);
     };
     fetchImages();
   }, [imageDelete]);
 
-  const confirmDelete = async (index) => {
-    const tentativeArray = showConfirm.fill("block", index, index + 1);
-    setShowConfirm(tentativeArray);
+  const confirmDeleteBox = async () => {
+    setShowConfirm(showConfirm === "none" ? "block" : "none");
   };
 
-  const deleteImage = async (imageId, index) => {
-    confirmDelete(index);
-    /*     const really = window.confirm(
-      'Do you really want to delete this image and its corresponding data?'
-    );
-    if (really) {
-      await Api.deleteImageById(imageId);
+  const deleteImage = async (imageId) => {
+    confirmDeleteBox();
+    setDeleteId(imageId)
+  };
+
+  const actuallyDelete = async (value) => {
+    if (value === "yes") {
+      await Api.deleteImageById(deleteId);
       setImageDelete(Date.now());
-    } */
-    /* if (confirmDelete === 'none') {
-      setConfirmDelete('block');
-      console.log('delete image');
-    } else setConfirmDelete('none'); */
-  };
-
+      confirmDeleteBox();
+    } else {
+      confirmDeleteBox();
+    } 
+  }
   return (
     <>
       <GalleryBox>
@@ -56,6 +52,7 @@ const Gallery = () => {
         handleDisplay={showConfirm}
         images={data ? data.images : []}
         handleDelete={deleteImage}
+        confirm={actuallyDelete}
       />
     </>
   );
