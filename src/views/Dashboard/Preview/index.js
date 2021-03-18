@@ -30,7 +30,7 @@ const Preview = ({ previewId, publishedId, refreshApp }) => {
       };
       fetchData();
     }
-  }, [publishedName]);
+  }, [publishedName, publishedId]);
 
   const handlePublish = async () => {
     const publishPreview = await Api.publishPreview(previewId);
